@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-tao.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo-tao.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS开发,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="定位定位功能 定位主要用于获取用户当前地理位置信息。 常用的定位技术：  GPS定位（全球定位系统：最精准的定位方式）；  Skyhook Wi-Fi定位（Wi-Fi路由器）；  因特网提供商定位技术（提供商中心站）；  多种定位方法混合使用； Core Location是iOS中实现定位功能的框架，提供了大量接口对定位功能进行配置及获取地理位置数据。 使用Core Location需要导入框架：">
+<meta name="keywords" content="iOS开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发 - 地图与定位">
+<meta property="og:url" content="http://github.com/misakatao/2018/10/23/iOS开发 - 地图与定位/index.html">
+<meta property="og:site_name" content="Misakatao">
+<meta property="og:description" content="定位定位功能 定位主要用于获取用户当前地理位置信息。 常用的定位技术：  GPS定位（全球定位系统：最精准的定位方式）；  Skyhook Wi-Fi定位（Wi-Fi路由器）；  因特网提供商定位技术（提供商中心站）；  多种定位方法混合使用； Core Location是iOS中实现定位功能的框架，提供了大量接口对定位功能进行配置及获取地理位置数据。 使用Core Location需要导入框架：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-53182d4851786b46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-f02c6a20a53a4059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-fc4b1da262464841.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-82886d7adec2a889.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-10-23T06:47:21.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发 - 地图与定位">
+<meta name="twitter:description" content="定位定位功能 定位主要用于获取用户当前地理位置信息。 常用的定位技术：  GPS定位（全球定位系统：最精准的定位方式）；  Skyhook Wi-Fi定位（Wi-Fi路由器）；  因特网提供商定位技术（提供商中心站）；  多种定位方法混合使用； Core Location是iOS中实现定位功能的框架，提供了大量接口对定位功能进行配置及获取地理位置数据。 使用Core Location需要导入框架：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1350692-53182d4851786b46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/iOS开发 - 地图与定位/">
+
+
+
+
+
+  <title>iOS开发 - 地图与定位 | Misakatao</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Misakatao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/iOS开发 - 地图与定位/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengtaoLiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misakatao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发 - 地图与定位</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T13:41:07+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/23/iOS开发 - 地图与定位/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/iOS开发 - 地图与定位/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><h6 id="定位功能"><a href="#定位功能" class="headerlink" title="定位功能"></a>定位功能</h6><ul>
+<li>定位主要用于获取用户当前地理位置信息。</li>
+<li>常用的定位技术：<br>  GPS定位（全球定位系统：最精准的定位方式）；<br>  Skyhook Wi-Fi定位（Wi-Fi路由器）；<br>  因特网提供商定位技术（提供商中心站）；<br>  多种定位方法混合使用；</li>
+<li>Core Location是iOS中实现定位功能的框架，提供了大量接口对定位功能进行配置及获取地理位置数据。</li>
+<li>使用Core Location需要导入框架：CoreLocation.framework。</li>
+<li>CoreLocation提供了CLLocationManager类来对定位功能进行管理，包括定位功能的配置、开始、停止定位等。</li>
+<li>CoreLocation也提供了CLLocationManagerDelegate委托协议来处理CLLocationManager在定位过程中触发的事件。</li>
+</ul>
+<a id="more"></a>
+<h6 id="CLLocationManager-工作流程"><a href="#CLLocationManager-工作流程" class="headerlink" title="CLLocationManager 工作流程"></a>CLLocationManager 工作流程</h6><p><img src="http://upload-images.jianshu.io/upload_images/1350692-53182d4851786b46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="926110847675.png"></p>
+<ul>
+<li>CLLocationManager 定位授权<br>iOS8以后，如果需要使用定位功能，需请求用户授权，在首次运行时会弹框提示，方法如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1、请求在使用期间授权定位，需在Info.plist文件中加入字段：NSLocationWhenInUseUsageDescription</span><br><span class="line">- (void)requestWhenInUseAuthorization;</span><br><span class="line"></span><br><span class="line">// 2、请求总是授权定位，需在Info.plist文件中加入字段：NSLocationAlwaysUsageDescription</span><br><span class="line">- (void)requestAlwaysAuthorization;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>CLLocationManager 常用属性</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">delegate：设置代理</span><br><span class="line"></span><br><span class="line">distanceFilter：设置定位频率，每隔多少米定位一次</span><br><span class="line"></span><br><span class="line">desiredAccuracy：设置定位精度（kCLLocationAccuracy）</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>CLLocationManager 常用方法</p>
+</li>
+<li><p>类方法</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">// 1、是否启用定位服务，通常如果用户没有启用定位服务可以提示用户打开定位服务 + (BOOL)locationServicesEnabled; // 2、定位服务授权状态，返回枚举类型： + (CLAuthorizationStatus)authorizationStatus;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实例化方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 1、开始定位追踪</span><br><span class="line">- (void)startUpdatingLocation;</span><br><span class="line">// 2、停止定位追踪</span><br><span class="line">- (void)stopUpdatingLocation;</span><br><span class="line">// 3、开始导航方向追踪</span><br><span class="line">- (void)startUpdatingHeading;</span><br><span class="line">// 4、停止导航方向追踪</span><br><span class="line">- (void)stopUpdatingHeading;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代理方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// 1、定位失败 - (void)locationManager:(CLLocationManager *)manager</span><br><span class="line">    didFailWithError:(NSError *)error;</span><br><span class="line"></span><br><span class="line">// 2、位置发生改变后执行（第一次定位到某个位置之后也会执行）</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager</span><br><span class="line">  didUpdateLocations:(NSArray *)locations;</span><br><span class="line"></span><br><span class="line">// 3、导航方向发生变化后执行</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager</span><br><span class="line">  didUpdateHeading:(CLHeading *)newHeading;</span><br><span class="line"></span><br><span class="line">// 4、进入某个区域之后执行</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager</span><br><span class="line">  didEnterRegion:(CLRegion *)region;</span><br><span class="line"></span><br><span class="line">// 5、走出某个区域之后执行</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager</span><br><span class="line">  didExitRegion:(CLRegion *)region;</span><br></pre></td></tr></table></figure>
+<h6 id="CLLocationManager-定位代码示例"><a href="#CLLocationManager-定位代码示例" class="headerlink" title="CLLocationManager 定位代码示例"></a>CLLocationManager 定位代码示例</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;ViewController.h&quot;</span><br><span class="line">// 定位框架</span><br><span class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</span><br><span class="line"></span><br><span class="line">#define NSLOG(OBJECT)  NSLog(@&quot;%@&quot;, OBJECT)</span><br><span class="line"></span><br><span class="line">@interfaceViewController () &lt;CLLocationManagerDelegate&gt;</span><br><span class="line">&#123;</span><br><span class="line">    CLLocationManager *_locationManager; /**&lt; 定位服务 */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    // 1、判断设备是否开启定位服务</span><br><span class="line">    if (![CLLocationManager locationServicesEnabled]) &#123;</span><br><span class="line">        // 弹框提示</span><br><span class="line">        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;您的设备暂未开启定位服务!&quot; preferredStyle:UIAlertControllerStyleAlert];</span><br><span class="line">        [alertController addAction:[UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:nil]];</span><br><span class="line">        [self presentViewController:alertController animated:YES completion:nil];</span><br><span class="line">        </span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    // 2、初始化定位服务</span><br><span class="line">    _locationManager = [[CLLocationManager alloc] init];</span><br><span class="line">    </span><br><span class="line">    // 3、请求定位授权</span><br><span class="line">    // 请求在使用期间授权（弹框提示用户是否允许在使用期间定位）,需添加NSLocationWhenInUseUsageDescription到info.plist</span><br><span class="line">    [_locationManager requestWhenInUseAuthorization];</span><br><span class="line">    // 请求在后台定位授权（弹框提示用户是否允许不在使用App时仍然定位）,需添加NSLocationAlwaysUsageDescription添加key到info.plist</span><br><span class="line">    [_locationManager requestAlwaysAuthorization];</span><br><span class="line">    </span><br><span class="line">    // 4、设置定位精度</span><br><span class="line">    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;</span><br><span class="line">    </span><br><span class="line">    // 5、设置定位频率，每隔多少米定位一次</span><br><span class="line">    _locationManager.distanceFilter = 10.0;</span><br><span class="line">    </span><br><span class="line">    // 6、设置代理 _locationManager.delegate = self;</span><br><span class="line">    </span><br><span class="line">    // 7、开始定位</span><br><span class="line">    // 注意：开始定位比较耗电，不需要定位的时候最好调用 [stopUpdatingLocation] 结束定位。</span><br><span class="line">    [_locationManager startUpdatingLocation];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#pragma mark - CLLocationManagerDelegate methods</span><br><span class="line"></span><br><span class="line">// 定位失败</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error &#123;</span><br><span class="line">    </span><br><span class="line">    NSLOG(error.localizedDescription);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 位置更新</span><br><span class="line">- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray&lt;CLLocation *&gt; *)locations &#123;</span><br><span class="line">    // 获取最新定位</span><br><span class="line">    CLLocation *location = locations.lastObject;</span><br><span class="line">    </span><br><span class="line">    // 打印位置信息</span><br><span class="line">    NSLog(@&quot;精度：%.2f, 纬度：%.2f&quot;, location.coordinate.latitude, location.coordinate.longitude);</span><br><span class="line">    // 停止定位</span><br><span class="line">    [_locationManager stopUpdatingLocation];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意： </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、定位频率和定位精度并不应当越精确越好，需要视实际情况而定，因为越精确越耗性能，也就越费电。</span><br><span class="line">2、定位成功后会根据设置情况频繁调用didUpdateLocations:方法，这个方法返回一组地理位置对象数组，每个元素是一个CLLocation，代表地理位置信息（包含经度、纬度、海报、行走速度等信息），之所以返回数组是因为有些时候一个位置点可能包含多个位置。</span><br><span class="line">3、使用完定位服务后如果不需要实时监控应该立即关闭定位服务以节省资源。</span><br><span class="line">4、除了提供定位功能，CLLocationManager还可以调用startMonitoringForRegion:方法对指定区域进行监控。</span><br></pre></td></tr></table></figure>
+<h3 id="地理编码"><a href="#地理编码" class="headerlink" title="地理编码"></a>地理编码</h3><pre><code>除了提供位置跟踪功能之外，在定位服务中还包含CLGeocoder 类用于处理地理编码和逆地理编码（又叫反地理编码）功能。
+
+地理编码：根据给定的位置（通常是地名）确定地理坐标(经、纬度)。
+
+逆地理编码：可以根据地理坐标（经、纬度）确定位置信息（街道、门牌等）。
+</code></pre><ul>
+<li>地理编码方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 1、地理编码 </span><br><span class="line">- (void)geocodeAddressString:(NSString *)addressString completionHandler:(CLGeocodeCompletionHandler)completionHandler;</span><br><span class="line"></span><br><span class="line">// 2、逆地理编码</span><br><span class="line">- (void)reverseGeocodeLocation:(CLLocation *)location completionHandler:(CLGeocodeCompletionHandler)completionHandler;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>地理编码示例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;ViewController.h&quot;</span><br><span class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</span><br><span class="line"></span><br><span class="line">@interface ViewController ()</span><br><span class="line">&#123;</span><br><span class="line">    CLGeocoder *_geocoder;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    _geocoder = [[CLGeocoder alloc] init];</span><br><span class="line">    </span><br><span class="line">    [self getCoordinateByAddress:@&quot;成都&quot;];</span><br><span class="line">    </span><br><span class="line">    [self getAddressByLatitude:39.54 longitude:116.28];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 根据地名确定地理坐标 </span><br><span class="line"></span><br><span class="line">- (void)getCoordinateByAddress:(NSString *)address &#123;</span><br><span class="line">    // 地里编码</span><br><span class="line">    [_geocoder geocodeAddressString:address completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) &#123;</span><br><span class="line">        // 取得第一个地标，地标中存储了详细的地址信息</span><br><span class="line">        // 注意：一个地名可能搜索出多个地址</span><br><span class="line">        CLPlacemark *placemark   = placemarks.firstObject;</span><br><span class="line">        // 位置 CLLocation *location     = placemark.location;</span><br><span class="line">        // 区域 CLRegion *region         = placemark.region;</span><br><span class="line">        // 详细地址信息字典</span><br><span class="line">        NSDictionary *addressDic = placemark.addressDictionary;</span><br><span class="line">        NSLog(@&quot;\n位置：%@\n区域：%@\n详细信息：%@\n&quot;, location, region, addressDic);</span><br><span class="line">        /*</span><br><span class="line">         NSString *name                  = placemark.name;//地名</span><br><span class="line">         NSString *thoroughfare          = placemark.thoroughfare;//街道</span><br><span class="line">         NSString *subThoroughfare       = placemark.subThoroughfare;//街道相关信息，例如门牌等</span><br><span class="line">         NSString *locality              = placemark.locality;// 城市</span><br><span class="line">         NSString *subLocality           = placemark.subLocality;// 城市相关信息，例如标志性建筑</span><br><span class="line">         NSString *administrativeArea    = placemark.administrativeArea;// 州</span><br><span class="line">         NSString *subAdministrativeArea = placemark.subAdministrativeArea;//其他行政区域信息</span><br><span class="line">         NSString *postalCode            = placemark.postalCode;//邮编</span><br><span class="line">         NSString *ISOcountryCode        = placemark.ISOcountryCode;//国家编码</span><br><span class="line">         NSString *country               = placemark.country;//国家</span><br><span class="line">         NSString *inlandWater           = placemark.inlandWater;//水源、湖泊</span><br><span class="line">         NSString *ocean                 = placemark.ocean;// 海洋</span><br><span class="line">         NSArray *areasOfInterest        = placemark.areasOfInterest;//关联的或利益相关的地标</span><br><span class="line">         */</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark - 根据坐标取得地名 </span><br><span class="line"></span><br><span class="line">- (void)getAddressByLatitude:(CLLocationDegrees)latitude longitude:(CLLocationDegrees)longitude &#123;</span><br><span class="line">    // 反地理编码</span><br><span class="line">    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];</span><br><span class="line">    </span><br><span class="line">    [_geocoder reverseGeocodeLocation:location completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) &#123;</span><br><span class="line">        if (error) &#123;</span><br><span class="line">            NSLog(@&quot;%@&quot;, error.localizedDescription);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            CLPlacemark *placemark=[placemarks firstObject];</span><br><span class="line">            NSLog(@&quot;详细信息:%@&quot;,placemark.addressDictionary);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：地理编码和逆地理编码不可同时执行；</li>
+</ul>
+<h3 id="地图"><a href="#地图" class="headerlink" title="地图"></a>地图</h3><ul>
+<li><p>iOS从6.0开始地图数据不再由谷歌驱动，而是改用自家地图，当然在国内它的数据是由高德地图提供的。这样一来，如果在iOS6.0之前进行地图开发的话使用方法会有所不同，基于目前的情况其实使用iOS6.0之前版本的系统基本已经寥寥无几了，所有在接下来的内容中不会再针对iOS5及之前版本的地图开发进行介绍。</p>
+</li>
+<li><p>在iOS中进行地图开发主要有两种方式，一种是直接利用MapKit框架进行地图开发，利用这种方式可以对地图进行精准的控制；另一种方式是直接调用苹果官方自带的地图应用，主要用于一些简单的地图应用（例如：进行导航覆盖物填充等），无法进行精确的控制。当然，本节重点内容还是前者，后面的内容也会稍加提示。</p>
+</li>
+<li><p>Map Kit框架中 MKMapView类 提供了系统自带的地图界面效果，配合Core Location的使用可以展示多样化的信息。</p>
+</li>
+<li><p>使用Map Kit需要导入框架：MapKit.framework</p>
+</li>
+</ul>
+<h6 id="MKMapView-常用属性"><a href="#MKMapView-常用属性" class="headerlink" title="MKMapView 常用属性"></a>MKMapView 常用属性</h6><ul>
+<li><p>showsUserLocation：设置是否显示用户位置</p>
+</li>
+<li><p>userTrackingMode：设置跟踪类型，枚举类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MKUserTrackingModeNone：不进行用户位置跟踪</span><br><span class="line"></span><br><span class="line">MKUserTrackingModeFollow：跟踪用户位置</span><br><span class="line"></span><br><span class="line">MKUserTrackingModeFollowWithHeading：跟踪用户位置并且跟踪用户前进方向</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>showsTraffic：设置是否显示交通（ios9新特性）</p>
+</li>
+<li><p>showsScale：设置是否显示比例（ios9新特性）</p>
+</li>
+<li><p>showsCompass：设置是否显示指南针（ios9新特性）</p>
+</li>
+<li><p>userLocation：用户位置信息，只读属性</p>
+</li>
+<li><p>userLocation.title：设置用户位置信息标题</p>
+</li>
+<li><p>userLocation.subtitle：设置用户位置信息子标题</p>
+</li>
+<li><p>annotations：当前地图中的所有大头针，只读属性</p>
+</li>
+<li><p>mapType：设置地图类型</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MKMapTypeStandard：标准地图，一般情况下使用此地图即可满足</span><br><span class="line"></span><br><span class="line">MKMapTypeSatellite：卫星地图</span><br><span class="line"></span><br><span class="line">MKMapTypeHybrid：混合地图，加载最慢比较消耗资源</span><br><span class="line"></span><br><span class="line">MKMapTypeSatelliteFlyover：iOS9新特性，卫星地图，支持城市观光</span><br><span class="line"></span><br><span class="line">MKMapTypeHybridFlyover：iOS9新特性，混合地图，支持城市观光</span><br></pre></td></tr></table></figure>
+<h6 id="MKMapView-常用方法"><a href="#MKMapView-常用方法" class="headerlink" title="MKMapView 常用方法"></a>MKMapView 常用方法</h6><ul>
+<li>初始化方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- (instancetype)initWithFrame:(CGRect)frame;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实例化方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 1、添加大头针，对应的有添加大头针数组</span><br><span class="line"> - (void)addAnnotation:(id &lt;MKAnnotation&gt;)annotation;</span><br><span class="line"></span><br><span class="line">// 2、删除大头针，对应的有删除大头针数组 </span><br><span class="line">- (void)removeAnnotation:(id &lt;MKAnnotation&gt;)annotation;</span><br><span class="line"></span><br><span class="line">// 3、设置地图显示区域，用于控制当前屏幕显示地图范围 </span><br><span class="line">- (void)setRegion:(MKCoordinateRegion)region animated:(BOOL)animated; </span><br><span class="line"></span><br><span class="line">// 4、设置地图中心点位置 </span><br><span class="line">- (void)setCenterCoordinate:(CLLocationCoordinate2D)coordinate animated:(BOOL)animated;</span><br><span class="line"></span><br><span class="line"> // 5、将地理坐标（经纬度）转化为数学坐标（UIKit坐标）CGPoint </span><br><span class="line">- (CGPoint)convertCoordinate:(CLLocationCoordinate2D)coordinate toPointToView:(nullable UIView *)view; </span><br><span class="line"></span><br><span class="line">// 6、将数学坐标CGPoint转换为地理坐标 </span><br><span class="line">- (CLLocationCoordinate2D)convertPoint:(CGPoint)point toCoordinateFromView:(nullable UIView *)view; </span><br><span class="line"></span><br><span class="line">// 7、从缓存池中取出大头针，类似于UITableView中取出UITableViewCell，为了进行性能优化而设计 </span><br><span class="line">- (nullable MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier; </span><br><span class="line"></span><br><span class="line">// 8、选中指定的大头针</span><br><span class="line">- (void)selectAnnotation:(id &lt;MKAnnotation&gt;)annotation animated:(BOOL)animated; </span><br><span class="line"></span><br><span class="line">// 9、取消选中指定的大头针</span><br><span class="line">- (void)deselectAnnotation:(nullable id &lt;MKAnnotation&gt;)annotation animated:(BOOL)animated;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代理方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 1、用户位置发生改变时触发（第一次定位到用户位置也会触发该方法） </span><br><span class="line">- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation; </span><br><span class="line"></span><br><span class="line">// 2、地图加载完成后触发 </span><br><span class="line">- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView; </span><br><span class="line"></span><br><span class="line">// 3、显示大头针时触发，返回大头针视图，通常自定义大头针可以通过此方法进行 </span><br><span class="line">- (nullable MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id &lt;MKAnnotation&gt;)annotation; </span><br><span class="line"></span><br><span class="line">// 4、点击选中某个大头针时触发 </span><br><span class="line">- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view; </span><br><span class="line"></span><br><span class="line">// 5、取消选中大头针时触发 </span><br><span class="line">- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view; </span><br><span class="line"></span><br><span class="line">// 6、渲染地图覆盖物时触发 </span><br><span class="line">- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id &lt;MKOverlay&gt;)overlay</span><br></pre></td></tr></table></figure>
+<h6 id="用户位置跟踪"><a href="#用户位置跟踪" class="headerlink" title="用户位置跟踪"></a>用户位置跟踪</h6><ul>
+<li><p>在很多带有地图的应用中默认打开地图都会显示用户当前位置，同时将当前位置标记出来放到屏幕中点方便用户对周围情况进行查看。如果在iOS6或者iOS7中实现这个功能只需要添加地图控件、设置用户跟踪模式、在didUpdateUserLocation:代理方法中设置地图中心区域及显示范围。但是在iOS8中用法稍有不同：</p>
+<pre><code>由于在地图中进行用户位置跟踪需要使用定位功能，而定位功能在iOS8中设计发生了变化，因此必须按照前面定位章节中提到的内容进行配置和请求。
+
+iOS8中不需要进行中心点的指定，默认会将当前位置设置中心点并自动设置显示区域范围。
+</code></pre></li>
+<li><p>了解以上两点，要进行用户位置跟踪其实就相当简单了，值得一提的是didUpdateUserLocation:这个代理方法。这个方法只有在定位到当前位置之后就会调用，以后每当用户位置发生改变就会触发，调用频率相当频繁。</p>
+</li>
+</ul>
+<h6 id="大头针"><a href="#大头针" class="headerlink" title="大头针"></a>大头针</h6><ul>
+<li>在iOS开发中经常会标记某个位置，需要使用地图标注，也就是大家俗称的“大头针”。只要一个NSObject类实现MKAnnotation协议就可以作为一个大头针，通常会重写协议中coordinate（标记位置）、title（标题）、subtitle（子标题）三个属性，然后在程序中创建大头针对象并调用addAnnotation:方法添加大头针即可（之所以iOS没有定义一个基类实现这个协议供开发者使用，多数原因应该是MKAnnotation是一个模型对象，对于多数应用模型会稍有不同，例如后面的内容中会给大头针模型对象添加其他属性）。下面代码示例中，实现通过长按手势，添加大头针逻辑。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1350692-f02c6a20a53a4059.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="926141006362.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)respondsToGesture:(UILongPressGestureRecognizer *)gesture &#123; // 当长按手势开始时，添加一个标注数据源if (gesture.state == UIGestureRecognizerStateBegan) &#123; // 获取用户长按手势在地图上的点CGPoint point = [gesture locationInView:self.mapView]; // 将地图上的点转化为经纬度 CLLocationCoordinate2D coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView]; // 创建一个标注数据源，这里使用系统标注数据源：MKPointAnnotation,如果要自定义,必须遵守&lt;MKAnnotation&gt;协议 MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init]; // 配置标注数据源 annotation.coordinate = coordinate;</span><br><span class="line">        annotation.title = @&quot;标注位置&quot;;</span><br><span class="line">        annotation.subtitle = [NSString stringWithFormat:@&quot;经度：%.2f, 纬度：%.2f&quot;, coordinate.longitude, coordinate.latitude]; // 在地图上添加标注 [self.mapView addAnnotation:annotation];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MKAnnotationView 标注视图<br>在一些应用中系统默认的大头针样式可能无法满足实际的需求，此时就需要修改大头针视图默认样式。根据前面MapKit的代理方法不难发现viewForAnnotation:方法可以返回一个大头针视图，只要实现这个方法并在这个方法中定义一个大头针视MKAnnotationView对象并设置相关属性就可以改变默认大头针的样式</li>
+</ul>
+<p>MKPinAnnotationView<br>    MKPinAnnotationView为MKAnnotationView子类，其特有属性如下：</p>
+<pre><code>pinTintColor：设置大头针前景色（iOS9新特性）
+
+animatesDrop：设置大头针凋零效果
+</code></pre><ul>
+<li><p>MKAnnotationView 常用属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">image：设置大头针图片</span><br><span class="line">selected：是否被选中状态</span><br><span class="line">annotation：大头针模型信息，包括标题、子标题、地理位置</span><br><span class="line">calloutOffset：点击大头针时弹出详情信息视图的偏移量</span><br><span class="line">leftCalloutAccessoryView：弹出详情左侧视图</span><br><span class="line">rightCalloutAccessoryView：弹出详情右侧视图</span><br><span class="line">canShowCallout：点击大头针是否显示标题、子标题内容等，注意如果在viewForAnnotation:方法中重新定义大头针默认情况是无法交互的，需要设其值为true。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、这个代理方法的调用时机：每当有大头针显示到系统可视界面中时就会调用此方法返回一个大头针视图放到界面中，同时当前系统位置标注（也就是地图中蓝色的位置点）也是一个大头针，也会调用此方法，因此处理大头针视图时需要区别对待。</span><br><span class="line">    2、类似于UITableView的代理方法，此方法调用频繁，开发过程中需要重复利用MapKit的缓存池将大头针视图缓存起来重复利用。</span><br><span class="line">    3、自定义大头针默认情况下不允许交互，如果交互需要设置canShowCallout = true。</span><br><span class="line">    4、如果代理方法返回nil则会使用默认大头针视图，需要根据情况设置。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下面例子进行了标注视图的自定义，这里设置了大头针的弹出视图、大头针颜色以及偏移量等信息。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id&lt;MKAnnotation&gt;)annotation &#123;</span><br><span class="line">    // MKPinAnnotationView：MKAnnotationView子类，可设置大头针颜色pinTintColor（iOS9）</span><br><span class="line">    // 由于当前位置的标注也是一个大头针，所以此时需要判断，此代理方法返回nil使用默认大头针视图</span><br><span class="line">    if ([annotation isKindOfClass:[MKUserLocation class]]) &#123;</span><br><span class="line">        return nil;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    static NSString * kMKPinAnnotationViewIdentifier = @&quot;identifier&quot;;</span><br><span class="line">    // 大头针重用</span><br><span class="line">    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:kMKPinAnnotationViewIdentifier];</span><br><span class="line">    if (!annotationView) &#123;</span><br><span class="line">        // 如果缓存池中不存在则新建</span><br><span class="line">        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kMKPinAnnotationViewIdentifier];</span><br><span class="line">    &#125;</span><br><span class="line">    // 修改大头针视图</span><br><span class="line">    // 重新设置此类大头针视图的大头针模型(因为有可能是从缓存池中取出来的，位置是放到缓存池时的位置)</span><br><span class="line">    annotationView.annotation = annotation;</span><br><span class="line">    // 设置大头针图片</span><br><span class="line">    annotationView.image = [UIImage imageNamed:@&quot;pin&quot;];</span><br><span class="line">    // 设置大头针凋零效果</span><br><span class="line">    annotationView.animatesDrop = YES;</span><br><span class="line">    // 允许用户交互点击(弹框显示标注详情)</span><br><span class="line">    annotationView.canShowCallout = YES;</span><br><span class="line">    // 定义详情视图偏移量</span><br><span class="line">    annotationView.calloutOffset = CGPointMake(0, 1);</span><br><span class="line">    // 设置大头针颜色</span><br><span class="line">    annotationView.pinTintColor = [UIColor blueColor];</span><br><span class="line">    // 自定义大头针详情右侧视图</span><br><span class="line">    UIButton *navigationBtn = [UIButton buttonWithType:UIButtonTypeCustom];</span><br><span class="line">    navigationBtn.bounds = CGRectMake(0, 0, 100, 60);</span><br><span class="line">    navigationBtn.backgroundColor = [UIColor grayColor];</span><br><span class="line">    [navigationBtn setTitle:@&quot;导航&quot; forState:UIControlStateNormal];</span><br><span class="line">    annotationView.rightCalloutAccessoryView = navigationBtn;</span><br><span class="line">    </span><br><span class="line">    return annotationView;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h3><ul>
+<li><p>在自定义标注视图上添加导航按钮（这里需说明：如果添加在标注视图上的控件继承于UIControl，无需添加事件），在点击导航按钮时会自动触发calloutAccessoryControlTapped:方法，如下将实现地图导航路线绘制关键代码。</p>
+</li>
+<li><p>效果展示</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1350692-fc4b1da262464841.gif?imageMogr2/auto-orient/strip" alt="926181326921.gif"></p>
+<ul>
+<li>代码示例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control &#123;</span><br><span class="line">    // 导航</span><br><span class="line">    // 异常处理，如果标注数据源标题为空，则直接retun。</span><br><span class="line">    if ([view.annotation.title isKindOfClass:[NSNull class]]) &#123;</span><br><span class="line">        return;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    // 创建两个PlaceMark</span><br><span class="line">    // MKPlacemark，定位框架中地标类，封装了详细的地理信息</span><br><span class="line">    MKPlacemark *currentPlaceMark = [[MKPlacemark alloc] initWithCoordinate:mapView.userLocation.coordinate addressDictionary:nil];</span><br><span class="line">    MKPlacemark *destinationPlaceMark = [[MKPlacemark alloc] initWithCoordinate:((MKPointAnnotation *)view.annotation).coordinate addressDictionary:nil];</span><br><span class="line">    // 创建两个MapItem</span><br><span class="line">    MKMapItem *currentItem = [[MKMapItem alloc] initWithPlacemark:currentPlaceMark];</span><br><span class="line">    MKMapItem *destinationItem = [[MKMapItem alloc] initWithPlacemark:destinationPlaceMark];</span><br><span class="line">    // 创建导航请求</span><br><span class="line">    MKDirectionsRequest *directionRequest = [[MKDirectionsRequest alloc] init];</span><br><span class="line">    // 配置导航请求</span><br><span class="line">    // 1、起点</span><br><span class="line">    directionRequest.source = currentItem;</span><br><span class="line">    // 2、终点</span><br><span class="line">    directionRequest.destination = destinationItem;</span><br><span class="line">    // 发送导航请求</span><br><span class="line">    MKDirections *derections = [[MKDirections alloc] initWithRequest:directionRequest];</span><br><span class="line">    // 获取导航路线</span><br><span class="line">    [derections calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) &#123;</span><br><span class="line">        // 添加一条路线（这里不会显示,需要渲染路线）</span><br><span class="line">        // MKRoute  路径信息</span><br><span class="line">        // polyLine 路线</span><br><span class="line">        [_mapView addOverlay:((MKRoute *)response.routes[0]).polyline];</span><br><span class="line">        </span><br><span class="line">    &#125;];</span><br><span class="line">    </span><br><span class="line">    // 设置交通类型</span><br><span class="line">    directionRequest.transportType = MKDirectionsTransportTypeAutomobile;</span><br><span class="line">    // 计算被请求的交通时间信息</span><br><span class="line">    [directions calculateETAWithCompletionHandler:^(MKETAResponse * _Nullable response, NSError * _Nullable error) &#123;</span><br><span class="line">        NSLog(@&quot;预计进行时间：%.2f&quot;, response.expectedTravelTime);</span><br><span class="line">    &#125;];</span><br><span class="line">    // 值得一提的是，即使实现了上述逻辑，导航路线也并不会被显示出来，此时需要实现如下方法，对路线进行渲染。</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 路线渲染</span><br><span class="line">- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id&lt;MKOverlay&gt;)overlay &#123;</span><br><span class="line">    // 初始化路线渲染器</span><br><span class="line">    MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];</span><br><span class="line">    // 设置路线宽度</span><br><span class="line">    renderer.lineWidth = 2.0;</span><br><span class="line">    // 设置路线颜色</span><br><span class="line">    renderer.strokeColor = [UIColor redColor];</span><br><span class="line">    return renderer;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="系统自带地图导航"><a href="#系统自带地图导航" class="headerlink" title="系统自带地图导航"></a>系统自带地图导航</h3><ul>
+<li>要使用地图导航功能在自带地图应用中相当简单，只要设置参数配置导航模式即可。</li>
+<li>效果展示</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1350692-82886d7adec2a889.gif?imageMogr2/auto-orient/strip" alt="926181116920.gif"></p>
+<ul>
+<li>代码示例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#import &quot;ViewController.h&quot;</span><br><span class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</span><br><span class="line">#import &lt;MapKit/MapKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface ViewController ()</span><br><span class="line">&#123;</span><br><span class="line">    CLGeocoder *_geocoder;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    _geocoder=[[CLGeocoder alloc]init];</span><br><span class="line">    </span><br><span class="line">    [self startNavigation];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)startNavigation &#123;</span><br><span class="line">    //根据“成都市”地理编码</span><br><span class="line">    [_geocoder geocodeAddressString:@&quot;成都市&quot; completionHandler:^(NSArray *placemarks, NSError *error) &#123;</span><br><span class="line">        //获取第一个地标</span><br><span class="line">        CLPlacemark *clPlacemark1 = [placemarks firstObject];</span><br><span class="line">        </span><br><span class="line">        MKPlacemark *mkPlacemark1 = [[MKPlacemark alloc]initWithPlacemark:clPlacemark1];</span><br><span class="line">        //注意地理编码一次只能定位到一个位置，不能同时定位，所在放到第一个位置定位完成回调函数中再次定位</span><br><span class="line">        [_geocoder geocodeAddressString:@&quot;重庆市&quot; completionHandler:^(NSArray *placemarks, NSError *error) &#123;</span><br><span class="line">            // 获取第一个地标</span><br><span class="line">            CLPlacemark *clPlacemark2 = [placemarks firstObject];</span><br><span class="line">            </span><br><span class="line">            MKPlacemark *mkPlacemark2 = [[MKPlacemark alloc]initWithPlacemark:clPlacemark2];</span><br><span class="line">            NSDictionary *options = @&#123;MKLaunchOptionsMapTypeKey : @(MKMapTypeStandard),</span><br><span class="line">                                      MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving&#125;;</span><br><span class="line">            // MKMapItem *mapItem1 =[MKMapItem mapItemForCurrentLocation];</span><br><span class="line">            //当前位置</span><br><span class="line">            MKMapItem *mapItem1=[[MKMapItem alloc]initWithPlacemark:mkPlacemark1];</span><br><span class="line">            </span><br><span class="line">            MKMapItem *mapItem2=[[MKMapItem alloc]initWithPlacemark:mkPlacemark2];</span><br><span class="line">            // 打开导航地图</span><br><span class="line">            [MKMapItem openMapsWithItems:@[mapItem1, mapItem2] launchOptions:options];</span><br><span class="line">            </span><br><span class="line">        &#125;];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<h6 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h6><ul>
+<li>由于定位和地图框架中用到了诸多类，有些初学者容易混淆，下面简单对比一下。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CLLocation：用于表示位置信息，包含地理坐标、海拔等信息，包含在CoreLoaction框架中。</span><br><span class="line"></span><br><span class="line">MKUserLocation：一个特殊的大头针，表示用户当前位置。</span><br><span class="line"></span><br><span class="line">CLPlacemark：定位框架中地标类，封装了详细的地理信息。</span><br><span class="line"></span><br><span class="line">MKPlacemark：类似于CLPlacemark，只是它在MapKit框架中，可以根据CLPlacemark创建MKPlacemark。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS开发/" rel="tag"># iOS开发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="prev" title="iOS开发：排序算法在OC中的实现">
+                iOS开发：排序算法在OC中的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/10/23/iOS开发 - 地图与定位/" data-title="iOS开发 - 地图与定位" data-url="http://github.com/misakatao/2018/10/23/iOS开发 - 地图与定位/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ShengtaoLiu</p>
+              <p class="site-description motion-element" itemprop="description">Write the Code, Change the World.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/misakatao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:misakatao@yahoo.co.jp.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/misaka_tao" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/misakatao" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/98a0127b88fa" target="_blank" title="Jianshu">
+                      
+                        <i class="fa fa-fw fa-jianshu"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定位"><span class="nav-number">1.</span> <span class="nav-text">定位</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定位功能"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">定位功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CLLocationManager-工作流程"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">CLLocationManager 工作流程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#CLLocationManager-定位代码示例"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">CLLocationManager 定位代码示例</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#地理编码"><span class="nav-number">2.</span> <span class="nav-text">地理编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地图"><span class="nav-number">3.</span> <span class="nav-text">地图</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#MKMapView-常用属性"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">MKMapView 常用属性</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#MKMapView-常用方法"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">MKMapView 常用方法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用户位置跟踪"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">用户位置跟踪</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#大头针"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">大头针</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航"><span class="nav-number">4.</span> <span class="nav-text">导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统自带地图导航"><span class="nav-number">5.</span> <span class="nav-text">系统自带地图导航</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#特别说明"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">特别说明</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengtaoLiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"droidlover"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

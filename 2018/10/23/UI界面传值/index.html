@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-tao.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo-tao.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="UI,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="传值需求 将用户信息 userInfo 作为传值对象进行传递。  场景一 主页传值到详情页 现在模拟传递用户名：userName。  属性传值 属性传值一般用于从主页传值到详情页。 传值步骤：">
+<meta name="keywords" content="UI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UI 界面传值">
+<meta property="og:url" content="http://github.com/misakatao/2018/10/23/UI界面传值/index.html">
+<meta property="og:site_name" content="Misakatao">
+<meta property="og:description" content="传值需求 将用户信息 userInfo 作为传值对象进行传递。  场景一 主页传值到详情页 现在模拟传递用户名：userName。  属性传值 属性传值一般用于从主页传值到详情页。 传值步骤：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-23T06:46:00.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UI 界面传值">
+<meta name="twitter:description" content="传值需求 将用户信息 userInfo 作为传值对象进行传递。  场景一 主页传值到详情页 现在模拟传递用户名：userName。  属性传值 属性传值一般用于从主页传值到详情页。 传值步骤：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/UI界面传值/">
+
+
+
+
+
+  <title>UI 界面传值 | Misakatao</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Misakatao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/UI界面传值/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengtaoLiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misakatao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">UI 界面传值</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T13:41:07+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/23/UI界面传值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/UI界面传值/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="传值需求"><a href="#传值需求" class="headerlink" title="传值需求"></a>传值需求</h2><ul>
+<li>将用户信息 userInfo 作为传值对象进行传递。</li>
+</ul>
+<h3 id="场景一-主页传值到详情页"><a href="#场景一-主页传值到详情页" class="headerlink" title="场景一 主页传值到详情页"></a>场景一 主页传值到详情页</h3><ul>
+<li>现在模拟传递用户名：userName。</li>
+</ul>
+<h6 id="属性传值"><a href="#属性传值" class="headerlink" title="属性传值"></a>属性传值</h6><ol>
+<li>属性传值一般用于从主页传值到详情页。</li>
+<li>传值步骤：</li>
+</ol>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">steps 1：在DetailViewController.h文件中将需要获取的值声明成属性。</span><br><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">@interface DetailViewController : UIViewController</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong)NSString *userInfo; /**&lt; 用户信息 */</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">steps 2：在HomeViewController.m文件中导入头文件“DetailViewController.h”，然后在界面跳转逻辑处理方法中初始化DetailViewController，并通过点语法给属性userInfo赋需要传递的值。</span><br><span class="line">- (void)respondsToButton:(UIButton *)sender &#123;</span><br><span class="line"></span><br><span class="line">    // 初始化详情视图控制器n</span><br><span class="line">    DetailViewController *detailVc = [[DetailViewController alloc] init];</span><br><span class="line"></span><br><span class="line">    // 属性传值：赋值</span><br><span class="line">    NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line">    detailVc.userInfo = userInfo;</span><br><span class="line"></span><br><span class="line">    // 模态切换(界面跳转)</span><br><span class="line">    [self presentViewController:detailVc animated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">steps 3：在DetailViewController.m文件viewDidLoad方法中获取userName的值，此时获取到的值就是从主页传过来的值。</span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    NSLog(@&quot;%@&quot;, userInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="init传值"><a href="#init传值" class="headerlink" title="init传值"></a>init传值</h6><ol>
+<li>init方法传值与属性传值类似，一般用于从主页传值到详情页。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">steps 1：在DetailViewController.h文件中声明init方法。</span><br><span class="line">- (instancetype)initWithUserInfo:(NSDictionary *)userInfo; /**&lt; init传值方法声明 */</span><br><span class="line">steps 2：在HomeViewController.m文件中导入头文件“DetailViewController.h”，然后在界面跳转逻辑处理方法中通过initWithUserInfo:方法初始化DetailViewController并赋值。</span><br><span class="line">- (void)respondsToButton:(UIButton *)sender &#123;</span><br><span class="line"></span><br><span class="line">    NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line"></span><br><span class="line">    // 初始化详情视图控制器</span><br><span class="line">    DetailViewController *detailVc = [[DetailViewController alloc] initWithUserInfo:userInfo];</span><br><span class="line"></span><br><span class="line">    // 模态切换（界面跳转）</span><br><span class="line">    [self presentViewController:detailVc animated:YES completion:nil];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">steps 3：在DetailViewController.m文件中重写init方法，即实现initWithUserInfo:方法，在这个方法中获取userName的值，此时获取到的值就是从主页传过来的值。</span><br><span class="line">- (instancetype)initWithUserInfo:(NSDictionary *)userInfo &#123;</span><br><span class="line">    if (self = [super init]) &#123;</span><br><span class="line">        NSLog(@&quot;%@&quot;, userInfo);</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="场景二-详情页传值到主页"><a href="#场景二-详情页传值到主页" class="headerlink" title="场景二 详情页传值到主页"></a>场景二 详情页传值到主页</h3><h6 id="Block块传值"><a href="#Block块传值" class="headerlink" title="Block块传值"></a>Block块传值</h6><ul>
+<li>block在传值中主要用于回调，现模拟从详情视图控制器传值到主页视图控制器。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">steps 1：在 DetailViewController.h文件中声明block类型、属性以及block回调方法。</span><br><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line">// 1 声明block类型</span><br><span class="line"></span><br><span class="line">typedef void(^CallBackBlock)(NSString *context);</span><br><span class="line"></span><br><span class="line">@interface DetailViewController : UIViewController</span><br><span class="line"></span><br><span class="line">// 2 声明block属性</span><br><span class="line"></span><br><span class="line">@property (nonatomic, copy) CallBackBlock callBackBlock;</span><br><span class="line"></span><br><span class="line">/ 3 声明block传值方法</span><br><span class="line">- (void)getsUserInfoWithBlocks:(CallBackBlock)callBackBlock;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">steps 2：在 DetailViewController.m文件中，实现如下操作：</span><br><span class="line">// 4 赋值属性block</span><br><span class="line">- (void)getsUserInfoWithBlocks:(CallBackBlock)callBackBlock &#123;</span><br><span class="line">    self.callBackBlock = callBackBlock;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 处理按钮点击</span><br><span class="line">- (void)respondsToButtonClick:(UIButton *)sender &#123;</span><br><span class="line">    // 5 传值</span><br><span class="line">    if (self.callBack) &#123;</span><br><span class="line"></span><br><span class="line">        NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line">        self.callBackBlock(userInfo);</span><br><span class="line"></span><br><span class="line">        [self dismissViewControllerAnimated:YES completion:nil];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">steps 3：在 ViewController.m文件实现如下操作：</span><br><span class="line">- (void)respondsToButtonClick:(UIButton *)sender &#123;</span><br><span class="line">    DetailViewController *detailVc = [[DetailViewController alloc] init];</span><br><span class="line"></span><br><span class="line">    // 6 调用block，取值</span><br><span class="line">    [detailVc getsUserInfoWithBlocks:^(NSDictionary *userInfo) &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, userInfo);</span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">    // 模态切换（界面跳转）</span><br><span class="line">    [self presentViewController:detailVc animated:YES completion:nil];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Tips：<br>1、为block取别名，可在参数列表中将需要传递的参数写成形参；<br>2、设置block属性注意使用copy关键字；<br>3、设置一个方法持有当前block；<br>4、在合适的地方进行调用类似于代理；<br>5、在创建该对象的地方进行block方面的调用；</li>
+</ul>
+<h6 id="协议传值"><a href="#协议传值" class="headerlink" title="协议传值"></a>协议传值</h6><ol>
+<li>协议传值又称代理传值，可直接将需要传递的值从委托方传送至代理人，协议传值可用于从下一个视图控制器传值到上一个视图控制器（详情页传值到主页），现假定主页是详情页的代理。</li>
+</ol>
+<ul>
+<li>传值步骤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">steps 1：在DetailViewController.h文件中声明协议，并且设置代理属性。</span><br><span class="line">#import &lt;UIKit/UIKit.h&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// @class 意在告诉编译器，“DetailViewController”为一个类。</span><br><span class="line"></span><br><span class="line">@class DetailViewController;</span><br><span class="line"></span><br><span class="line">// @protocol 声明协议</span><br><span class="line">// 协议命名规范：类名 + delegate</span><br><span class="line"></span><br><span class="line">@protocol DetailViewControllerDelegate &lt;NSObject&gt;</span><br><span class="line"></span><br><span class="line">// @optional：声明可选协议方法</span><br><span class="line">// 协议方法的声明模仿苹果官方声明方式，将类实例以及传递信息一并暴露在参数中</span><br><span class="line"></span><br><span class="line">@optional</span><br><span class="line"></span><br><span class="line">- (void)detailViewController:(DetailViewController *)detailViewController goBackWithUserInfo:(NSDictionary *)userInfo;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@interface DetailViewController : UIViewController</span><br><span class="line"></span><br><span class="line">// 声明代理属性，注意关键字使用 weak || assign，可避免保留环</span><br><span class="line">@property (nonatomic, weak) id &lt;DetailViewControllerDelegate&gt; delegate;</span><br><span class="line">@end</span><br><span class="line">steps 2：在DetailViewController.m文件处理返回按钮方法中调用协议方法传值。</span><br><span class="line">- (void)respondsToButton:(UIButton *)sender &#123;</span><br><span class="line"></span><br><span class="line">    // 首先判断代理人是否存在并且是否遵守协议并且实现了协议方法</span><br><span class="line"></span><br><span class="line">    if (_delegate &amp;&amp; [_delegate respondsToSelector:@selector(detailViewController:goBackWithUserInfo:)]) &#123;</span><br><span class="line"></span><br><span class="line">        // 如果满足判断条件，则让代理执行协议方法，此处让代理人执行协议方法，在代理人那个控制器中的协议方法会被执行；</span><br><span class="line"></span><br><span class="line">        // 通常经协议传值在此处调用方法时，直接给参数赋值即可，在代理人控制器实现的协议方法中，可直接获取此处设置的值；</span><br><span class="line"></span><br><span class="line">        NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line"></span><br><span class="line">        [_delegate detailViewController:self goBackWithUserInfo:userInfo];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">steps 3：在HomeViewController.m文件处理界面跳转按钮方法中初始化详情视图控制器，设置详情视图控制器协议代理为self（主页），并且遵守&lt;DetailViewControllerDelegate&gt;协议。</span><br><span class="line">- (void)respondsToButton:(UIButton *)sender &#123;</span><br><span class="line">    // 初始化详情视图控制器</span><br><span class="line">    DetailViewController *detailVc = [[DetailViewController alloc] init];</span><br><span class="line"></span><br><span class="line">    // 设置代理，并且遵守&lt;DetailViewControllerDelegate&gt;</span><br><span class="line">    detailVc.delegate = self;</span><br><span class="line"></span><br><span class="line">    // 模态切换（界面跳转）</span><br><span class="line">    [self presentViewController:detailVc animated:YES completion:nil];</span><br><span class="line">&#125;</span><br><span class="line">steps 4：在HomeViewController.m中实现&lt;DetailViewControllerDelegate&gt;协议方法，获取值。</span><br><span class="line">#pragma mark *** DetailViewControllerDelegate ***</span><br><span class="line">// 实现协议方法，获取值</span><br><span class="line">- (void)detailViewController:(DetailViewController *)detailViewController goBackWithUserInfo:(NSDictionary *)userInfo &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, userInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="场景三-多界面传值"><a href="#场景三-多界面传值" class="headerlink" title="场景三 多界面传值"></a>场景三 多界面传值</h3><h6 id="通知传值"><a href="#通知传值" class="headerlink" title="通知传值"></a>通知传值</h6><ol>
+<li>通知传值适用于任意控制器（界面），不管两个控制器之间是否有关联，只需满足一个条件，在传值的时候必须保证通知已经被设定，即已添加通知（观察者observer）。现假设从详情界面传值到主界面，即从下一个界面传值到上一个界面，具体实现方式如下。</li>
+</ol>
+<ul>
+<li>传值步骤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">steps 1：注册通知：为保证在传值时通知已经被设定，因此需要在HomeViewController.m文件中注册通知。</span><br><span class="line">#import &quot;HomeViewController.h&quot;</span><br><span class="line">#import &quot;DetailViewController.h&quot;</span><br><span class="line"></span><br><span class="line">@interface HomeViewController ()</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation HomeViewController</span><br><span class="line"></span><br><span class="line">- (instancetype)init &#123;</span><br><span class="line">    self = [super init];</span><br><span class="line">    if (self) &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     *  注册通知</span><br><span class="line">     *</span><br><span class="line">     *  @param observer 观察者对象</span><br><span class="line">     *  @param selector 触发方法，即当收到通知之后执行的方法</span><br><span class="line">     *  @param name     通知代号，即通知标识，发送通知时的标识必须和注册通知时的标识一致</span><br><span class="line">     *  @param object   是否传值，在注册通知的时候无需值，因此此处可填nil</span><br><span class="line">     *</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(respondsToNotification:) name:@&quot;notification_name&quot; object:nil];</span><br><span class="line">    &#125;</span><br><span class="line">    return self;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#pragma mark *** responds notification ***</span><br><span class="line"></span><br><span class="line">// 处理通知，当接收到通知的时候该方法会自动调用</span><br><span class="line">// 在此处获取从发送通知的控制器传过来的值</span><br><span class="line">- (void)respondsToNotification:(NSNotification *)info &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">steps 2：发送通知：在DetailViewController.m文件处理返回按钮方法中，发送通知，传值到主界面，发送通知时的标识必须与注册通知时的标识一致。</span><br><span class="line">- (void)respondsToButton:(UIButton *)sender &#123;</span><br><span class="line"></span><br><span class="line">    // 发送通知：通知标识必须与注册通知时的标识一致</span><br><span class="line">    // 将需要传递的信息以字典形式赋给 userInfo 参数</span><br><span class="line">    NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line">    [[NSNotificationCenter defaultCenter] postNotificationName:@&quot;notification_name&quot; object:nil userInfo:userInfo];</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">steps 3：处理通知：在HomeViewController.m文件处理通知方法中，获取值。</span><br><span class="line">#pragma mark *** responds notification ***</span><br><span class="line"></span><br><span class="line">// 处理通知，在此处获取从发送通知的控制器传过来的值</span><br><span class="line">// 注意：info参数包含两个属性，可通过点语法访问。</span><br><span class="line">// 1、name：为对应通知的标识</span><br><span class="line">// 2、userInfo：为传递的信息</span><br><span class="line">- (void)respondsToNotification:(NSNotification *)info &#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, info.userInfo); </span><br><span class="line">&#125;</span><br><span class="line">steps 4：移除通知：通知在界面被释放的时候一定记得移除，否则可能会导致程序的奔溃。移除通知在注册通知控制器中的[dealloc]方法中实现。</span><br><span class="line">- (void)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    // 移除通知</span><br><span class="line">    [[NSNotificationCenter defaultCenter] removeObserver:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意<br>1、通知传值的使用会贯穿如下4个步骤：注册通知 -&gt; 发送通知 -&gt; 处理通知 -&gt; 移除通知<br>2、通知必须先注册再使用，通知必须在不需要的时候调用remove方法移除。</li>
+</ul>
+<h6 id="单例传值"><a href="#单例传值" class="headerlink" title="单例传值"></a>单例传值</h6><ol>
+<li>单例贯穿整个应用程序声明周期，利用单例传值适用于任何控制器，使用前提是在获取值的时候必须保证单例属性有值，否则获取值为nil，此处模拟从主页视图控制器传值到详情视图控制器。</li>
+</ol>
+<ul>
+<li>传值步骤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">steps 1：创建单例，继承于NSObject，任意命名，必须符合规范。此处创建单例类名为Singleton。</span><br><span class="line">steps 2：在Singleton.h中声明传值属性，并且声明单例类便利构造器。</span><br><span class="line">@interface Singleton : NSObject</span><br><span class="line"></span><br><span class="line">@property (nonatomic, strong) NSDictionary *userInfo; /**&lt; 单例属性 */</span><br><span class="line"></span><br><span class="line">+ (instancetype)defaultSingleton; /**&lt; 单例便利构造器 */</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line">steps 3：在Singleton.m文件中实现遍历构造器方法。</span><br><span class="line">#import &quot;Singleton.h&quot;</span><br><span class="line"></span><br><span class="line">static Singleton *singleton = nil;</span><br><span class="line"></span><br><span class="line">@implementation Singleton</span><br><span class="line"></span><br><span class="line">+ (instancetype)defaultSingleton &#123;</span><br><span class="line"></span><br><span class="line">    // GCD创建单例，效率更高，性能更好，消耗更低。</span><br><span class="line">    static dispatch_once_t onceToken;</span><br><span class="line">    dispatch_once(&amp;onceToken, ^&#123;</span><br><span class="line">        singleton = [[Singleton alloc] init];</span><br><span class="line">    &#125;);</span><br><span class="line">    return singleton;</span><br><span class="line">&#125;</span><br><span class="line">@end</span><br><span class="line">steps 4：在HomeViewController.m文件中获取单例实例，并且赋值单例属性，赋值位置可根据实际情况进行调整。</span><br><span class="line">// 单例属性赋值</span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    // 获取单例实例，首先需导入Singleton.h</span><br><span class="line">    Singleton *singleton = [Singleton defaultSingleton];</span><br><span class="line"></span><br><span class="line">    // 单例属性赋值</span><br><span class="line">    NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line">    singleton.userInfo = userInfo;</span><br><span class="line">&#125;</span><br><span class="line">steps 5：在DetailViewController.m文件中获取单例属性，取值位置可根据实际情况进行调整。</span><br><span class="line">// 获取单例属性</span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line"></span><br><span class="line">    // 获取单例实例，首先需导入Singleton.h</span><br><span class="line">    Singleton *singleton = [Singleton defaultSingleton];</span><br><span class="line"></span><br><span class="line">    // 获取单例属性值</span><br><span class="line">    NSLog(@&quot;%@&quot;, singleton.userInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="NSUserDefaults传值"><a href="#NSUserDefaults传值" class="headerlink" title="NSUserDefaults传值"></a>NSUserDefaults传值</h6><ol>
+<li>NSUserDefaults系统单例传值和自定义单例传值基本一致，首先需保证NSUserDefaults对应key中有值，此处模拟主页视图控制器传值到详情视图控制器</li>
+</ol>
+<ul>
+<li>传值步骤</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">steps 1：在HomeViewController.m中获取NSUserDefaults实例，并且存值。</span><br><span class="line">- (void)saveValueInUserDefaults &#123;</span><br><span class="line"></span><br><span class="line">    // 获取NSUserDefaults实例</span><br><span class="line">    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    // 存值</span><br><span class="line">    NSDictionary *userInfo = @&#123;@&quot;name&quot;:@&quot;Charles&quot;, @&quot;age&quot;:@(22)&#125;;</span><br><span class="line">    [defaults setObject:userInfo forKey:@&quot;userInfo&quot;];</span><br><span class="line"></span><br><span class="line">    // 同步数据</span><br><span class="line">    [defaults synchronize];</span><br><span class="line">&#125;</span><br><span class="line">steps 2：在DetailViewController.m中获取值</span><br><span class="line">- (void)getValueInUserDefaults &#123;</span><br><span class="line"></span><br><span class="line">    // 获取NSUserDefaults实例</span><br><span class="line">    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];</span><br><span class="line"></span><br><span class="line">    // 根据key获取值</span><br><span class="line">    NSDictionary *userInfo = [defaults objectForKey:@&quot;userInfo&quot;];</span><br><span class="line"></span><br><span class="line">    NSLog(@&quot;%@&quot;, userInfo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/UI/" rel="tag"># UI</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="next" title="iOS开发：排序算法在OC中的实现">
+                <i class="fa fa-chevron-left"></i> iOS开发：排序算法在OC中的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/" rel="prev" title="iOS开发：采用URI方式跳转到各类地图进行导航">
+                iOS开发：采用URI方式跳转到各类地图进行导航 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/10/23/UI界面传值/" data-title="UI 界面传值" data-url="http://github.com/misakatao/2018/10/23/UI界面传值/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ShengtaoLiu</p>
+              <p class="site-description motion-element" itemprop="description">Write the Code, Change the World.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/misakatao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:misakatao@yahoo.co.jp.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/misaka_tao" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/misakatao" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/98a0127b88fa" target="_blank" title="Jianshu">
+                      
+                        <i class="fa fa-fw fa-jianshu"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#传值需求"><span class="nav-number">1.</span> <span class="nav-text">传值需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景一-主页传值到详情页"><span class="nav-number">1.1.</span> <span class="nav-text">场景一 主页传值到详情页</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#属性传值"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">属性传值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#init传值"><span class="nav-number">1.1.0.0.2.</span> <span class="nav-text">init传值</span></a></li></ol></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#场景二-详情页传值到主页"><span class="nav-number">1.2.</span> <span class="nav-text">场景二 详情页传值到主页</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Block块传值"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">Block块传值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#协议传值"><span class="nav-number">1.2.0.0.2.</span> <span class="nav-text">协议传值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景三-多界面传值"><span class="nav-number">1.3.</span> <span class="nav-text">场景三 多界面传值</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#通知传值"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">通知传值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#单例传值"><span class="nav-number">1.3.0.0.2.</span> <span class="nav-text">单例传值</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#NSUserDefaults传值"><span class="nav-number">1.3.0.0.3.</span> <span class="nav-text">NSUserDefaults传值</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengtaoLiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"droidlover"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

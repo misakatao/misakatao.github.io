@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="iOS,">
+  <meta name="keywords" content="iOS开发,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="最近在做导航，所以把自己找到的资料总结一下！ 无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。 还有一种方式就是是以URI跳转的方式(在iOS">
-<meta name="keywords" content="iOS">
+<meta name="keywords" content="iOS开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发：采用URI方式跳转到各类地图进行导航">
 <meta property="og:url" content="http://github.com/misakatao/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/index.html">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-41f2d2b9512f660c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-10-23T06:25:36.551Z">
+<meta property="og:updated_time" content="2018-10-23T06:47:08.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发：采用URI方式跳转到各类地图进行导航">
 <meta name="twitter:description" content="最近在做导航，所以把自己找到的资料总结一下！ 无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。 还有一种方式就是是以URI跳转的方式(在iOS">
@@ -306,6 +306,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -346,9 +368,10 @@
         <ul>
 <li>最近在做导航，所以把自己找到的资料总结一下！</li>
 <li>无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。</li>
-<li>还有一种方式就是是以URI跳转的方式(在<a href="http://lib.csdn.net/base/1" target="_blank" rel="noopener">iOS</a>中就是以URL Scheme的方式)，直接跳到对应的地图APP中，直接利用对方的功能来导航。缺点是用户没有安装对应的APP就不能使用其进行导航。 点击导航按钮会出现如下的弹窗， 当然手机上未安装的地图 其名称就不会出现在弹窗上。<br><img src="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1439521824220516.png"></li>
+<li>还有一种方式就是是以URI跳转的方式(在<a href="http://lib.csdn.net/base/1" target="_blank" rel="noopener">iOS</a>中就是以URL Scheme的方式)，直接跳到对应的地图APP中，直接利用对方的功能来导航。缺点是用户没有安装对应的APP就不能使用其进行导航。 点击导航按钮会出现如下的弹窗， 当然手机上未安装的地图 其名称就不会出现在弹窗上。</li>
 </ul>
 <a id="more"></a>
+<p><img src="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1439521824220516.png"></p>
 <ul>
 <li>在 iOS9之后 若想用URI方式跳转到百度地图、高德地图、腾讯地图、谷歌地图，需要你在info.plist加入这些东西。（ps:LSApplicationQueriesSchemes，短的自己手打吧，另外注意类型！）<br><img src="http://upload-images.jianshu.io/upload_images/1350692-41f2d2b9512f660c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20160422164514276.png"></li>
 </ul>
@@ -417,7 +440,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag"># iOS</a>
+            <a href="/tags/iOS开发/" rel="tag"># iOS开发</a>
           
         </div>
       
@@ -430,8 +453,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="next" title="iOS开发：排序算法在OC中的实现">
-                <i class="fa fa-chevron-left"></i> iOS开发：排序算法在OC中的实现
+              <a href="/2018/10/23/UI界面传值/" rel="next" title="UI 界面传值">
+                <i class="fa fa-chevron-left"></i> UI 界面传值
               </a>
             
           </div>
@@ -439,6 +462,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/23/iOS开发：导航栏小技巧/" rel="prev" title="iOS开发：导航栏小技巧">
+                iOS开发：导航栏小技巧 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -521,12 +548,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
             
 
             
@@ -534,7 +570,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
