@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo,Github Pages,">
+  <meta name="keywords" content="Vultr,SS,">
 
 
 
@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
-<meta name="keywords" content="Hexo,Github Pages">
+<meta name="description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
+<meta name="keywords" content="Vultr,SS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+Github Pages 搭建博客">
-<meta property="og:url" content="http://github.com/misakatao/2018/10/23/Hexo+Github Pages 搭建博客/index.html">
+<meta property="og:title" content="Vultr 搭建 SS">
+<meta property="og:url" content="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/index.html">
 <meta property="og:site_name" content="MisakaTao">
-<meta property="og:description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
+<meta property="og:description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-23T06:56:10.134Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1350692-028db7b4056cd686.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-23T07:20:17.346Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo+Github Pages 搭建博客">
-<meta name="twitter:description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
+<meta name="twitter:title" content="Vultr 搭建 SS">
+<meta name="twitter:description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/Hexo+Github Pages 搭建博客/">
+  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
 
 
 
 
 
-  <title>Hexo+Github Pages 搭建博客 | MisakaTao</title>
+  <title>Vultr 搭建 SS | MisakaTao</title>
   
 
 
@@ -263,7 +266,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/Hexo+Github Pages 搭建博客/">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ShengtaoLiu">
@@ -280,7 +283,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo+Github Pages 搭建博客</h1>
+          <h1 class="post-title" itemprop="name headline">Vultr 搭建 SS</h1>
         
 
         <div class="post-meta">
@@ -292,7 +295,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T13:41:07+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T14:24:07+08:00">
                 2018-10-23
               </time>
             
@@ -315,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/VPN/" itemprop="url" rel="index">
+                    <span itemprop="name">VPN</span>
                   </a>
                 </span>
 
@@ -333,8 +336,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/23/Hexo+Github Pages 搭建博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/Hexo+Github Pages 搭建博客/" itemprop="commentCount"></span>
+                <a href="/2018/10/23/Vultr 搭建 SS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/Vultr 搭建 SS/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -362,44 +365,33 @@
       
 
       
-        <p>博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。</p>
-<p>ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。</p>
-<a id="more"></a>
-<p>警告警告：<br>由于xiaopingblog.cn这个域名没续费，已经被人整成视频网站了，请访问我的github原始地址。<a href="http://biggercoffee.github.io，如果之前有访问过&#39;xiaopingblog.cn&#39;这个域名，那么访问&#39;http://biggercoffee.github.io&#39;的时候会自动跳转到&#39;视频网站&#39;里，清理一下缓存即可。" target="_blank" rel="noopener">http://biggercoffee.github.io，如果之前有访问过&#39;xiaopingblog.cn&#39;这个域名，那么访问&#39;http://biggercoffee.github.io&#39;的时候会自动跳转到&#39;视频网站&#39;里，清理一下缓存即可。</a></p>
-<p>首先简单描述一下搭建的大体流程吧（其实挺简单的，只是体力活费时而已）：</p>
-<p>拥有一个github pages<br>在本地电脑里配置hexo的环境。（ hexo与github pages绑定，写博文修改博文等，生成静态博客并push to github。)<br>绑定自己的域名（也可以不用绑定，github pages有二级域名，只不过绑定了一个属于自己的域名更有逼格点儿。）<br>Github Pages （第一步）<br>Github Pages免费的静态站点，其特点：免费托管、自带主题、支持自制页面等。</p>
-<p>创建Github Pages比较简单，只要你有一个github账号在创建一个仓库就行了，但是这个仓库是有规则的，其格式必须为：yourusername.github.io。然后根据提示一直下一步即可，非常简单。<br>image<br>作为一个开发者，要是连一个github账号都没有，那你可以洗洗睡了。</p>
-<p>而仓库命名格式中的yourusername是你的github用户名。笔者的github用户名是biggercoffee。所以仓库命名格式则是biggercoffee.github.io</p>
-<p>由于笔者有biggercoffee.github.io这个仓库，所以我上述效果图提示已存在。纯属作为演示。</p>
-<p>Hexo （第二步）<br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>安装<br>Hexo的安装网上有很多教程，但很多都很蛋疼且过期技术，所以最好的还是参考Hexo官方的安装教程来一步一步走。在此笔者也不写详细教程了，因为可能不出2个月就坑了小伙伴们。中文版Hexo文档点此进行传送。。。</p>
-<p>本地环境说白了就是要有Git和Node.js环境即可。详情参见官网文档为准，也最好参考官网，避免入坑。</p>
-<p>建站<br>Hexo安装好了之后，就开始进行建站。打开终端cd到桌面并使用如下命令即可建好</p>
-<p>hexo init yourname<br>cd yourname<br>npm install</p>
-<p>其中yourname是你的文件夹名字可随意取（本文章假设yourname的文件夹名称是Hexo）。<br>建站好了之后需要了解更多的信息和其他步骤请参考官网的这篇文档。<a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/setup.html</a></p>
-<p>这里需要特别提一下，官方的文档里并没讲解如何配置与Github pages进行关联，在此特意说一下配置信息。进入到你的站点（使用hexo init yourname命令时，这里的yourname文件夹目录，刚假设yourname是Hexo，所以我们进入Hexo目录），然后以文本编辑器打开_config.yml文件，并滚动到最下面添加如下配置信息（注意最下边有deploy和type字段，覆盖这两个字段或者删除这两个字段然后复制下面的四个字段也行。）：</p>
-<p>deploy:<br>type: git<br>repo: <a href="https://github.com/biggercoffee/biggercoffee.github.io.git">https://github.com/biggercoffee/biggercoffee.github.io.git</a><br>branch: master</p>
-<p>把其中repo字段的值替换成你的github pages提交代码的git地址。</p>
-<p>别告诉我你不知道你的github pages的git提交地址。。。<br>好吧，我还是附上一张截图吧，进入到你的github刚创建好的那个github pages仓库就能看到了。</p>
-<p>image<br>好吧，到此你使用终端，然后进入到你的站点文件夹使用hexo s命令，如果成功会打印类似Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>. Press Ctrl+C to stop的一句话，再打开你的浏览器输入localhost:4000地址见证神奇的一刻吧。</p>
-<p>发布<br>当然这只是本地跑起来了，而你的github pages服务器上并没有，所以你就需要在你的站点里使用终端命令进行发布：</p>
-<p>hexo clean<br>hexo g<br>hexo d</p>
-<p>命令详解，第一条是清楚缓存，第二条命令是生成本地发布文件夹，第三条命令才是最后的发布到github pages上。更多的hexo命令操作请参考官方文档即可。不过一般用来用去无非就是创建页面、发布这么几条命令而已。Hexo官方命令参考文档</p>
-<p>其实学习一个新东西有事没事多去官方看文档，比在网上查资料要来的更靠谱的多。</p>
-<p>HEXO主题<br>如果你到了这里没有任何问题，那么恭喜你已经成功了，不过这才刚刚开始。<br>当你成功的看到自己博客搭建好的那一刻又是激动又是失望，激动的是博客总算折腾出来了，失望的是，为何如此的丑。。。说实话Hexo默认的主题自我感觉还过得去，如果你想换风格,Hexo的主题网上随便一搜也有很多。在此笔者使用的博客主题是Next（国人写的）。<a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>Next文档已经写得很详细了（上述链接里有文档地址），笔者在此也没啥要写的。只不过弱弱的吐槽一下，配置这东西需要注册的账号挺多的。。。但扩展性很强，需要什么功能自己去配置一下即可。</p>
-<p>域名绑定（第三步，可选）<br>笔者是在万网买的域名（<a href="http://xiaopingblog.cn/）。" target="_blank" rel="noopener">http://xiaopingblog.cn/）。</a> 域名买好之后提交实名认证等，这些操作就不在赘述。域名购买地址<a href="https://wanwang.aliyun.com/。" target="_blank" rel="noopener">https://wanwang.aliyun.com/。</a></p>
-<p>这里需要特别提一下的就是万网如何与github pages进行绑定，首先假设你有一个域名并且是可用状态。修改你域名的DNS地址为 f1g1ns1.dnspod.net和f1g1ns2.dnspod.net<br>image<br>然后在你的本地站点目录里的source目录下添加一个CNAME文件，不带后缀，效果如下<br>image<br>以文本编辑器打开CNAME，里面添加你的域名信息（不加http://） 如下图<br>image<br>填写完了之后再重新部署到github pages上（部署简写命令hexo d -g)</p>
-<p>下一步注册DNSpod，然后添加域名，添加记录即可。</p>
-<p>添加域名填写你的域名即可，老规矩不用添加http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github pages的地址）。<br>image<br>那么现在把你本地的Hexo生成一下在提交到Github pages上吧（生成和提交简写命令hexo d -g），然后打开你的浏览器输入你购买的域名尝试吧。笔者的博客域名：<a href="http://xiaopingblog.cn/" target="_blank" rel="noopener">http://xiaopingblog.cn/</a> 大家尽情的去蹂躏吧。</p>
-<p>ps:万网DNS地址更换貌似需要一段时间才能生效，如果不能访问请晚点或者隔天再访问域名，如果还是不行可能就是出问题了。反正笔者当时运气好，修改了万网DNS之后即时生效。</p>
-<p>笔者分享<br>分享一些笔者用Hexo写文章的tips</p>
-<p>文章管理<br>一般笔者写文章、修改文章是在本地可视化写文章，然后在使用命令提交上去。笔者使用的是一个hexo可视化文章管理的插件（hey），地址：<a href="https://github.com/nihgwu/hexo-hey">https://github.com/nihgwu/hexo-hey</a> 。</p>
-<p>当然也有一个Hexo的admin插件，但是那个插件不支持图片拖拽进来，所以笔者推荐使用hey。安装和使用详情，参见笔者给出的github地址。</p>
-<p>shell脚本自动化（可忽略，只是一个想法）<br>开启Hexo的本地服务或者提交到github pages这些都是一些终端里的Hexo命令，所以笔者写了一些shell脚本，来简化这些操作。所以基本就是用hey可视化写文章，写好了之后，然后点击一键部署的shell脚本，然后就自动发布了（当然这也纯属鸡助，看个人。）。由于shell脚本比较简单，随意网上搜索资料一大堆。再加上笔者自己写的脚本代码也没上传，在此插入一个一键部署的shell脚本代码</p>
-<p>cd Desktop/Hexo<br>hexo clean<br>hexo g<br>hexo d<br>cd到自己的站点目录，然后直接使用hexo命令即可。shell脚本自动化操作就是封装了这些命令而已，在此也只是提供这么一个想法，既然我们都是coder，何不善用自己已有的知识尼。</p>
-<p>写到最后<br>github pages虽然免费，但毕竟是国外的服务器，国内访问可以稍微缓慢，如果是土豪，可去买一个支持Node.js的国内云空间即可。总之github pages + hexo搭建博客还是挺能折腾人的。但毕竟免费，而且身为技术人员不就是该具备折腾的精神吗？（博客地址点此）</p>
-<p>反馈问题<br>具反馈hexo d部署的时候出现了not found问题，如果遇上这问题先输入npm install hexo-deployer-git –save命令，然后在运行hexo d部署尝试。（在这里感谢@LeoLeoHan给出的解决方案）</p>
+        <p>以下教程基于 vultr VPS，系统是 ubuntu14.04</p>
+<h2 id="一、搭建-SS"><a href="#一、搭建-SS" class="headerlink" title="一、搭建 SS"></a>一、搭建 SS</h2><p>要使用 SS 需要购买国外的 VPS，这里推荐 <a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.vultr.com%2F" target="_blank" rel="noopener">vultr</a> 和 <a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.linode.com%2F" target="_blank" rel="noopener">linode</a>。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 <strong>ubuntu14.04</strong>。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x shadowsocks.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
+<p>安装过程中会要求你输入SS密码、端口号(默认8989)和选择加密算法，选择 <strong>aes-256-cfb</strong> (输入7)就可以了，如图，这样手机上也能使用SS。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>等待片刻会显示 SS 的一些信息(如图红色区域)，这些信息我们需要输入到 shadowsocks 中来连接 VPS，所以最好保存下来。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1350692-028db7b4056cd686.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>安装的SS在服务器根目录，卸载命令为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shadowsocks.sh uninstall</span><br></pre></td></tr></table></figure>
+<h2 id="二、替换内核"><a href="#二、替换内核" class="headerlink" title="二、替换内核"></a>二、替换内核</h2><p>首先安装3.13.0-24-generic内核文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install linux-image-extra-3.13.0-24-generic</span><br></pre></td></tr></table></figure></p>
+<p>然后查看当前安装的内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l|grep linux-image</span><br></pre></td></tr></table></figure></p>
+<p>接着卸载上一步看到的其他内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge linux-image-3.13.0-xx-generic linux-image-extra-3.13.0-xx-generic</span><br></pre></td></tr></table></figure></p>
+<p>这里xx替换为上一步看到的其他内核。<br>接着更新grub系统引导文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure></p>
+<p>重启系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure></p>
+<p>重启后查看内核，显示3.13.0-24-generic就表示成功了！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、安装锐速"><a href="#三、安装锐速" class="headerlink" title="三、安装锐速"></a>三、安装锐速</h2><p>由于目前锐速(serverspeeder)不再免费，这里使用91提供的破解版。它是<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2F91yun%2Fserverspeeder" target="_blank" rel="noopener">开源的</a>，所以不用担心有任何其他的目的。<br>安装锐速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh &amp;&amp; bash serverspeeder-all.sh</span><br></pre></td></tr></table></figure>
+<p>等待片刻就安装好了。<br>关于锐速的其他一些命令<br>卸载锐速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chattr -i /serverspeeder/etc/apx* &amp;&amp; /serverspeeder/bin/serverSpeeder.sh uninstall -f</span><br></pre></td></tr></table></figure>
+<p>查看锐速的启动状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service serverSpeeder status</span><br></pre></td></tr></table></figure>
+<p>开启/暂停/重启锐速</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service serverSpeeder start | stop | restart</span><br></pre></td></tr></table></figure>
+<p>这里还有91提供的锐速破解版支持的<a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.91yun.co%2Fserverspeeder91yun" target="_blank" rel="noopener">内核列表</a></p>
+<h2 id="四、配置-shadowsocks"><a href="#四、配置-shadowsocks" class="headerlink" title="四、配置 shadowsocks"></a>四、配置 shadowsocks</h2><p>下载 github 上的 <a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fshadowsocks%2Fshadowsocks-windows%2Freleases" target="_blank" rel="noopener">shadowsocks-windows</a>，打开后输入<strong>服务器地址、服务器端口和密码</strong>，加密算法选择 <strong>aes-256-cfb</strong>，确定后托盘纸飞机图标右键<strong>启用系统代理</strong>就可以翻墙啦！<br>安卓可以下载 <a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fshadowsocks%2Fshadowsocks-android%2Freleases" target="_blank" rel="noopener">shadowsocks-android</a>，配置一下就可以了！<br>iOS 商店搜索 Wingy ，配置一下就可以了！</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>以上安装的是Python版的SS，默认创建的是单用户配置。若要创建多用户配置可参考 <a href="https://link.jianshu.com?t=https%3A%2F%2Fteddysun.com%2F392.html" target="_blank" rel="noopener">Shadowsocks-go一键安装脚本</a> 或者 <a href="https://link.jianshu.com?t=https%3A%2F%2Fteddysun.com%2F342.html" target="_blank" rel="noopener">Shadowsocks Python版一键安装脚本</a></p>
 
       
     </div>
@@ -417,9 +409,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+            <a href="/tags/Vultr/" rel="tag"># Vultr</a>
           
-            <a href="/tags/Github-Pages/" rel="tag"># Github Pages</a>
+            <a href="/tags/SS/" rel="tag"># SS</a>
           
         </div>
       
@@ -432,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="next" title="iOS开发：排序算法在OC中的实现">
-                <i class="fa fa-chevron-left"></i> iOS开发：排序算法在OC中的实现
+              <a href="/2018/10/23/UI 触摸与手势/" rel="next" title="UI 触摸与手势">
+                <i class="fa fa-chevron-left"></i> UI 触摸与手势
               </a>
             
           </div>
@@ -441,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/23/UI 界面传值/" rel="prev" title="UI 界面传值">
-                UI 界面传值 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -475,7 +463,7 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2018/10/23/Hexo+Github Pages 搭建博客/" data-title="Hexo+Github Pages 搭建博客" data-url="http://github.com/misakatao/2018/10/23/Hexo+Github Pages 搭建博客/">
+      <div class="ds-thread" data-thread-key="2018/10/23/Vultr 搭建 SS/" data-title="Vultr 搭建 SS" data-url="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
       </div>
     </div>
 
@@ -502,8 +490,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -597,6 +594,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、搭建-SS"><span class="nav-number">1.</span> <span class="nav-text">一、搭建 SS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、替换内核"><span class="nav-number">2.</span> <span class="nav-text">二、替换内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、安装锐速"><span class="nav-number">3.</span> <span class="nav-text">三、安装锐速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置-shadowsocks"><span class="nav-number">4.</span> <span class="nav-text">四、配置 shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
