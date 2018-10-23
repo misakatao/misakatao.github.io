@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-tao.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo-tao.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近在做导航，所以把自己找到的资料总结一下！ 无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。 还有一种方式就是是以URI跳转的方式(在iOS">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发：采用URI方式跳转到各类地图进行导航">
+<meta property="og:url" content="http://github.com/misakatao/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/index.html">
+<meta property="og:site_name" content="Misakatao">
+<meta property="og:description" content="最近在做导航，所以把自己找到的资料总结一下！ 无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。 还有一种方式就是是以URI跳转的方式(在iOS">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1350692-41f2d2b9512f660c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-23T06:25:36.551Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发：采用URI方式跳转到各类地图进行导航">
+<meta name="twitter:description" content="最近在做导航，所以把自己找到的资料总结一下！ 无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。 还有一种方式就是是以URI跳转的方式(在iOS">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/">
+
+
+
+
+
+  <title>iOS开发：采用URI方式跳转到各类地图进行导航 | Misakatao</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Misakatao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengtaoLiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Misakatao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS开发：采用URI方式跳转到各类地图进行导航</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T14:24:07+08:00">
+                2018-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>最近在做导航，所以把自己找到的资料总结一下！</li>
+<li>无论是百度地图、高德地图、谷歌地图还是腾讯地图它们都有自己的SDK，我们只需要在自己的工程中导入SDK并查看相应的官方文档，基本上就可以实现导航。但是这样每个地图的SDK都导入不但麻烦而且占用APP的内存。最关键的是我们上传到AppStore的包文件是有限制的。所以我的原则是能不导入的SDK 就不导入。</li>
+<li>还有一种方式就是是以URI跳转的方式(在<a href="http://lib.csdn.net/base/1" target="_blank" rel="noopener">iOS</a>中就是以URL Scheme的方式)，直接跳到对应的地图APP中，直接利用对方的功能来导航。缺点是用户没有安装对应的APP就不能使用其进行导航。 点击导航按钮会出现如下的弹窗， 当然手机上未安装的地图 其名称就不会出现在弹窗上。<br><img src="http://upload-images.jianshu.io/upload_images/1350692-3f8c2a9707a10266.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1439521824220516.png"></li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>在 iOS9之后 若想用URI方式跳转到百度地图、高德地图、腾讯地图、谷歌地图，需要你在info.plist加入这些东西。（ps:LSApplicationQueriesSchemes，短的自己手打吧，另外注意类型！）<br><img src="http://upload-images.jianshu.io/upload_images/1350692-41f2d2b9512f660c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20160422164514276.png"></li>
+</ul>
+<p>以下出行的默认方式都是驾车</p>
+<h2 id="一、百度地图"><a href="#一、百度地图" class="headerlink" title="一、百度地图"></a>一、百度地图</h2><ol>
+<li>说到百度地图，就不得不说它很坑爹。因为百度地图获取的经纬度，是在GCJ-02(火星坐标)进行偏移得到的经纬度，而高德、谷歌、腾讯都是使用GCJ-02坐标体系得到的经纬度。这样使用百度地图获取到的经纬度在高德、谷歌、腾讯上导航都会出现很大的偏差。所以自己做的APP中需要地图功能最好不要导入百度地图的SDK（使用上面三个中任何一个地图获取到的经纬度都可以很容易的转换成百度地图需要的经纬度），如果你是像我这样中途接手的项目，百度地图的相应功能已经做好了，那你可以用下面的方式换算一下经纬度（最下方）。</li>
+<li><p>代码如下 ：需传入<strong>起点和终点</strong>的经纬度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;baidumap://map/&quot;]]) &#123;</span><br><span class="line">        UIAlertAction *baiduMapAction = [UIAlertAction actionWithTitle:@&quot;百度地图&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            NSString *baiduParameterFormat = @&quot;baidumap://map/direction?origin=latlng:%f,%f|name:我的位置&amp;destination=latlng:%f,%f|name:终点&amp;mode=driving&quot;;</span><br><span class="line">            NSString *urlString = [[NSString stringWithFormat:</span><br><span class="line">                                    baiduParameterFormat,</span><br><span class="line">                                    userLocation.location.coordinate.latitude,</span><br><span class="line">                                    userLocation.location.coordinate.longitude,</span><br><span class="line">                                    self.destinationCoordinate.latitude,</span><br><span class="line">                                    self.destinationCoordinate.longitude]</span><br><span class="line">                                   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];</span><br><span class="line">        &#125;];</span><br><span class="line">        [actionSheet addAction:baiduMapAction];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>各个参数代表的含义可参考<a href="http://lbsyun.baidu.com/index.php?title=uri/api/ios" target="_blank" rel="noopener">百度地图官方文档</a>。</p>
+</li>
+</ol>
+<h2 id="二、高德地图"><a href="#二、高德地图" class="headerlink" title="二、高德地图"></a>二、高德地图</h2><ol>
+<li><p>只需传入<strong>终点</strong>经纬度 高德地图能够跳转回你的APP，前提是backScheme=%@（你的APP的URL）要填写。代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;iosamap://map/&quot;]]) &#123;</span><br><span class="line">        UIAlertAction *gaodeMapAction = [UIAlertAction actionWithTitle:@&quot;高德地图&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            NSString *gaodeParameterFormat = @&quot;iosamap://navi?sourceApplication=%@&amp;backScheme=%@&amp;poiname=%@&amp;lat=%f&amp;lon=%f&amp;dev=1&amp;style=2&quot;;</span><br><span class="line">            NSString *urlString = [[NSString stringWithFormat:</span><br><span class="line">                                    gaodeParameterFormat,</span><br><span class="line">                                    @&quot;yourAppName&quot;,</span><br><span class="line">                                    @&quot;yourAppUrlSchema&quot;,</span><br><span class="line">                                    @&quot;终点&quot;,</span><br><span class="line">                                    self.destinationCoordinate.latitude,</span><br><span class="line">                                    self.destinationCoordinate.longitude]</span><br><span class="line">                                   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];</span><br><span class="line">        &#125;];</span><br><span class="line">        [actionSheet addAction:gaodeMapAction];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>各个参数的含义可参考<a href="http://lbs.amap.com/api/uri-api/guide/ios-uri-explain/navi/" target="_blank" rel="noopener">高德地图官方文档</a></p>
+</li>
+</ol>
+<h2 id="三、苹果地图"><a href="#三、苹果地图" class="headerlink" title="三、苹果地图"></a>三、苹果地图</h2><ol>
+<li><p>需传入<strong>起点和终点</strong>的经纬度，并导入头文件#import MapKit/MKMapItem.h&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[actionSheet addAction:[UIAlertAction actionWithTitle:@&quot;苹果地图&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">        //起点</span><br><span class="line">        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];</span><br><span class="line">        CLLocationCoordinate2D desCorrdinate = CLLocationCoordinate2DMake(self.destinationCoordinate.latitude, self.destinationCoordinate.longitude);</span><br><span class="line">        //终点</span><br><span class="line">        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:desCorrdinate addressDictionary:nil]];</span><br><span class="line">        //默认驾车</span><br><span class="line">        [MKMapItem openMapsWithItems:@[currentLocation, toLocation]</span><br><span class="line">                       launchOptions:@&#123;MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,</span><br><span class="line">                                       MKLaunchOptionsMapTypeKey:[NSNumber numberWithInteger:MKMapTypeStandard],</span><br><span class="line">                                       MKLaunchOptionsShowsTrafficKey:[NSNumber numberWithBool:YES]&#125;];</span><br><span class="line">    &#125;]];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>各个参数的含义可参考<a href="https://developer.apple.com/library/ios/documentation/MapKit/Reference/MKMapItem_class/index.html" target="_blank" rel="noopener">苹果地图官方文档</a></p>
+</li>
+</ol>
+<h2 id="四、谷歌地图"><a href="#四、谷歌地图" class="headerlink" title="四、谷歌地图"></a>四、谷歌地图</h2><ol>
+<li><p>只需传入<strong>终点</strong>的经纬度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;comgooglemaps://map/&quot;]]) &#123;</span><br><span class="line">        [actionSheet addAction:[UIAlertAction actionWithTitle:@&quot;苹果地图&quot;style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            NSString *urlString = [[NSString stringWithFormat:@&quot;comgooglemaps://?x-source=%@&amp;x-success=%@&amp;saddr=&amp;daddr=%f,%f&amp;directionsmode=driving&quot;,</span><br><span class="line">                                    appName,</span><br><span class="line">                                    urlScheme,</span><br><span class="line">                                    coordinate.latitude,</span><br><span class="line">                                    coordinate.longitude]</span><br><span class="line">                                   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];</span><br><span class="line">        &#125;]];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>各个参数的含义可参考<a href="https://developers.google.com/maps/documentation/ios/urlscheme" target="_blank" rel="noopener">谷歌地图官方文档</a></p>
+</li>
+</ol>
+<h2 id="五、腾讯地图"><a href="#五、腾讯地图" class="headerlink" title="五、腾讯地图"></a>五、腾讯地图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@&quot;qqmap://map/&quot;]]) &#123;        </span><br><span class="line">        [actionSheet addAction:[UIAlertAction actionWithTitle:@&quot;腾讯地图&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) &#123;</span><br><span class="line">            NSString *QQParameterFormat = @&quot;qqmap://map/routeplan?type=drive&amp;fromcoord=%f, %f&amp;tocoord=%f,%f&amp;coord_type=1&amp;policy=0&amp;refer=%@&quot;;</span><br><span class="line">            NSString *urlString = [[NSString stringWithFormat:</span><br><span class="line">                                    QQParameterFormat,</span><br><span class="line">                                    userLocation.location.coordinate.latitude,</span><br><span class="line">                                    userLocation.location.coordinate.longitude,</span><br><span class="line">                                    self.destinationCoordinate.latitude,</span><br><span class="line">                                    self.destinationCoordinate.longitude,</span><br><span class="line">                                    @&quot;yourAppName&quot;]</span><br><span class="line">                                   stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];</span><br><span class="line">            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];</span><br><span class="line">        &#125;]];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>各个参数的含义可参考<a href="http://lbs.qq.com/uri_v1/guide-route.html" target="_blank" rel="noopener">腾讯地图官方文档</a></li>
+</ul>
+<h3 id="GCJ-02坐标转换成BD-09坐标-和逆转换"><a href="#GCJ-02坐标转换成BD-09坐标-和逆转换" class="headerlink" title="GCJ-02坐标转换成BD-09坐标 和逆转换"></a>GCJ-02坐标转换成BD-09坐标 和逆转换</h3><ul>
+<li>GCJ-02坐标转换为BD-09坐标</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/** *  将GCJ-02坐标转换为BD-09坐标 即将高德地图上获取的坐标转换成百度坐标 */</span><br><span class="line">- (CLLocationCoordinate2D)gcj02CoordianteToBD09:(CLLocationCoordinate2D)gdCoordinate</span><br><span class="line">&#123;</span><br><span class="line">    double x_PI = M_PI * 3000.0 /180.0;</span><br><span class="line">    </span><br><span class="line">    double gd_lat = gdCoordinate.latitude;</span><br><span class="line">    </span><br><span class="line">    double gd_lon = gdCoordinate.longitude;</span><br><span class="line">    </span><br><span class="line">    double z = sqrt(gd_lat * gd_lat + gd_lon * gd_lon) + 0.00002 * sin(gd_lat * x_PI);</span><br><span class="line">    </span><br><span class="line">    double theta = atan2(gd_lat, gd_lon) + 0.000003 * cos(gd_lon * x_PI);</span><br><span class="line">    </span><br><span class="line">    return CLLocationCoordinate2DMake(z * sin(theta) + 0.006, z * cos(theta) + 0.0065);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>BD-09坐标转换为GCJ-02坐标</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/** *  将BD-09坐标转换为GCJ-02坐标 即将百度地图上获取的坐标转换成高德地图的坐标 */</span><br><span class="line">- (CLLocationCoordinate2D)bd09CoordinateToGCJ02:(CLLocationCoordinate2D)bdCoordinate</span><br><span class="line">&#123;</span><br><span class="line">    double x_PI = M_PI * 3000.0 /180.0;</span><br><span class="line">    </span><br><span class="line">    double bd_lat = bdCoordinate.latitude - 0.006;</span><br><span class="line">    </span><br><span class="line">    double bd_lon = bdCoordinate.longitude - 0.0065;</span><br><span class="line">    </span><br><span class="line">    double z = sqrt(bd_lat * bd_lat + bd_lon * bd_lon) - 0.00002 * sin(bd_lat * x_PI);</span><br><span class="line">    </span><br><span class="line">    double theta = atan2(bd_lat, bd_lon) - 0.000003 * cos(bd_lon * x_PI);</span><br><span class="line">    </span><br><span class="line">    return CLLocationCoordinate2DMake(z * sin(theta), z * cos(theta));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="地图坐标系转换"><a href="#地图坐标系转换" class="headerlink" title="地图坐标系转换"></a>地图坐标系转换</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</span><br><span class="line">/*</span><br><span class="line"> 从 CLLocationManager 取出来的经纬度放到 mapView 上显示，是错误的!</span><br><span class="line"> 从 CLLocationManager 取出来的经纬度去 Google Maps API 做逆地址解析，当然是错的！</span><br><span class="line"> 从 MKMapView 取出来的经纬度去 Google Maps API 做逆地址解析终于对了。去百度地图API做逆地址解析，依旧是错的！</span><br><span class="line"> 从上面两处取的经纬度放到百度地图上显示都是错的！错的！的！</span><br><span class="line"> </span><br><span class="line"> 分为 地球坐标，火星坐标（iOS mapView 高德 ， 国内google ,搜搜、阿里云 都是火星坐标），百度坐标(百度地图数据主要都是四维图新提供的)</span><br><span class="line"> </span><br><span class="line"> 火星坐标: MKMapView</span><br><span class="line"> 地球坐标: CLLocationManager</span><br><span class="line"> </span><br><span class="line"> 当用到CLLocationManager 得到的数据转化为火星坐标, MKMapView不用处理</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> API                坐标系</span><br><span class="line"> 百度地图API         百度坐标</span><br><span class="line"> 腾讯搜搜地图API      火星坐标</span><br><span class="line"> 搜狐搜狗地图API      搜狗坐标</span><br><span class="line"> 阿里云地图API       火星坐标</span><br><span class="line"> 图吧MapBar地图API   图吧坐标</span><br><span class="line"> 高德MapABC地图API   火星坐标</span><br><span class="line"> 灵图51ditu地图API   火星坐标</span><br><span class="line"> */</span><br><span class="line">@interface CLLocation (Location)</span><br><span class="line"></span><br><span class="line">//从地图坐标转化到火星坐标</span><br><span class="line">- (CLLocation *)locationMarsFromEarth;</span><br><span class="line"></span><br><span class="line">//从火星坐标转化到百度坐标</span><br><span class="line">- (CLLocation *)locationBaiduFromMars;</span><br><span class="line"></span><br><span class="line">//从百度坐标到火星坐标</span><br><span class="line">- (CLLocation *)locationMarsFromBaidu;</span><br><span class="line"></span><br><span class="line">//从火星坐标到地图坐标</span><br><span class="line">- (CLLocation *)locationEarthFromMars;</span><br><span class="line"></span><br><span class="line">//从百度坐标到地图坐标</span><br><span class="line">- (CLLocation *)locationEarthFromBaidu;</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">#import &quot;CLLocation+Location.h&quot;</span><br><span class="line"></span><br><span class="line">void transform_earth_from_mars(double lat, double lng, double* tarLat, double* tarLng);</span><br><span class="line">void transform_mars_from_baidu(double lat, double lng, double* tarLat, double* tarLng);</span><br><span class="line">void transform_baidu_from_mars(double lat, double lng, double* tarLat, double* tarLng);</span><br><span class="line"></span><br><span class="line">@implementation CLLocation (Location)</span><br><span class="line"></span><br><span class="line">- (CLLocation*)locationMarsFromEarth</span><br><span class="line">&#123;</span><br><span class="line">    double lat = 0.0;</span><br><span class="line">    double lng = 0.0;</span><br><span class="line">    transform_earth_from_mars(self.coordinate.latitude, self.coordinate.longitude, &amp;lat, &amp;lng);</span><br><span class="line">    return [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat+self.coordinate.latitude, lng+self.coordinate.longitude)</span><br><span class="line">                                         altitude:self.altitude</span><br><span class="line">                               horizontalAccuracy:self.horizontalAccuracy</span><br><span class="line">                                 verticalAccuracy:self.verticalAccuracy</span><br><span class="line">                                           course:self.course</span><br><span class="line">                                            speed:self.speed</span><br><span class="line">                                        timestamp:self.timestamp];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CLLocation*)locationEarthFromMars</span><br><span class="line">&#123;</span><br><span class="line">    double lat = 0.0;</span><br><span class="line">    double lng = 0.0;</span><br><span class="line">    transform_earth_from_mars(self.coordinate.latitude, self.coordinate.longitude, &amp;lat, &amp;lng);</span><br><span class="line">    return [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.coordinate.latitude-lat, self.coordinate.longitude-lng)</span><br><span class="line">                                         altitude:self.altitude</span><br><span class="line">                               horizontalAccuracy:self.horizontalAccuracy</span><br><span class="line">                                 verticalAccuracy:self.verticalAccuracy</span><br><span class="line">                                           course:self.course</span><br><span class="line">                                            speed:self.speed</span><br><span class="line">                                        timestamp:self.timestamp];</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CLLocation*)locationBaiduFromMars</span><br><span class="line">&#123;</span><br><span class="line">    double lat = 0.0;</span><br><span class="line">    double lng = 0.0;</span><br><span class="line">    transform_mars_from_baidu(self.coordinate.latitude, self.coordinate.longitude, &amp;lat, &amp;lng);</span><br><span class="line">    return [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng)</span><br><span class="line">                                         altitude:self.altitude</span><br><span class="line">                               horizontalAccuracy:self.horizontalAccuracy</span><br><span class="line">                                 verticalAccuracy:self.verticalAccuracy</span><br><span class="line">                                           course:self.course</span><br><span class="line">                                            speed:self.speed</span><br><span class="line">                                        timestamp:self.timestamp];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (CLLocation*)locationMarsFromBaidu</span><br><span class="line">&#123;</span><br><span class="line">    double lat = 0.0;</span><br><span class="line">    double lng = 0.0;</span><br><span class="line">    transform_baidu_from_mars(self.coordinate.latitude, self.coordinate.longitude, &amp;lat, &amp;lng);</span><br><span class="line">    return [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(lat, lng)</span><br><span class="line">                                         altitude:self.altitude</span><br><span class="line">                               horizontalAccuracy:self.horizontalAccuracy</span><br><span class="line">                                 verticalAccuracy:self.verticalAccuracy</span><br><span class="line">                                           course:self.course</span><br><span class="line">                                            speed:self.speed</span><br><span class="line">                                        timestamp:self.timestamp];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(CLLocation*)locationEarthFromBaidu</span><br><span class="line">&#123;</span><br><span class="line">    double lat = 0.0;</span><br><span class="line">    double lng = 0.0;</span><br><span class="line">    CLLocation *Mars = [self locationMarsFromBaidu];</span><br><span class="line">    </span><br><span class="line">    transform_earth_from_mars(Mars.coordinate.latitude, Mars.coordinate.longitude, &amp;lat, &amp;lng);</span><br><span class="line">    return [[CLLocation alloc] initWithCoordinate:CLLocationCoordinate2DMake(Mars.coordinate.latitude-lat, Mars.coordinate.longitude-lng)</span><br><span class="line">                                         altitude:self.altitude</span><br><span class="line">                               horizontalAccuracy:self.horizontalAccuracy</span><br><span class="line">                                 verticalAccuracy:self.verticalAccuracy</span><br><span class="line">                                           course:self.course</span><br><span class="line">                                            speed:self.speed</span><br><span class="line">                                        timestamp:self.timestamp];</span><br><span class="line">    return nil;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// --- transform_earth_from_mars ---</span><br><span class="line">// 参考来源：https://on4wp7.codeplex.com/SourceControl/changeset/view/21483#353936</span><br><span class="line">// Krasovsky 1940</span><br><span class="line">//</span><br><span class="line">// a = 6378245.0, 1/f = 298.3</span><br><span class="line">// b = a * (1 - f)</span><br><span class="line">// ee = (a^2 - b^2) / a^2;</span><br><span class="line">const double a = 6378245.0;</span><br><span class="line">const double ee = 0.00669342162296594323;</span><br><span class="line"></span><br><span class="line">bool transform_sino_out_china(double lat, double lon)</span><br><span class="line">&#123;</span><br><span class="line">    if (lon &lt; 72.004 || lon &gt; 137.8347)</span><br><span class="line">        return true;</span><br><span class="line">    if (lat &lt; 0.8293 || lat &gt; 55.8271)</span><br><span class="line">        return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double transform_earth_from_mars_lat(double x, double y)</span><br><span class="line">&#123;</span><br><span class="line">    double ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x));</span><br><span class="line">    ret += (20.0 * sin(6.0 * x * M_PI) + 20.0 * sin(2.0 * x * M_PI)) * 2.0 / 3.0;</span><br><span class="line">    ret += (20.0 * sin(y * M_PI) + 40.0 * sin(y / 3.0 * M_PI)) * 2.0 / 3.0;</span><br><span class="line">    ret += (160.0 * sin(y / 12.0 * M_PI) + 320 * sin(y * M_PI / 30.0)) * 2.0 / 3.0;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">double transform_earth_from_mars_lng(double x, double y)</span><br><span class="line">&#123;</span><br><span class="line">    double ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * sqrt(fabs(x));</span><br><span class="line">    ret += (20.0 * sin(6.0 * x * M_PI) + 20.0 * sin(2.0 * x * M_PI)) * 2.0 / 3.0;</span><br><span class="line">    ret += (20.0 * sin(x * M_PI) + 40.0 * sin(x / 3.0 * M_PI)) * 2.0 / 3.0;</span><br><span class="line">    ret += (150.0 * sin(x / 12.0 * M_PI) + 300.0 * sin(x / 30.0 * M_PI)) * 2.0 / 3.0;</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void transform_earth_from_mars(double lat, double lng, double* tarLat, double* tarLng)</span><br><span class="line">&#123;</span><br><span class="line">    if (transform_sino_out_china(lat, lng))</span><br><span class="line">    &#123;</span><br><span class="line">        *tarLat = lat;</span><br><span class="line">        *tarLng = lng;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    double dLat = transform_earth_from_mars_lat(lng - 105.0, lat - 35.0);</span><br><span class="line">    double dLon = transform_earth_from_mars_lng(lng - 105.0, lat - 35.0);</span><br><span class="line">    double radLat = lat / 180.0 * M_PI;</span><br><span class="line">    double magic = sin(radLat);</span><br><span class="line">    magic = 1 - ee * magic * magic;</span><br><span class="line">    double sqrtMagic = sqrt(magic);</span><br><span class="line">    dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * M_PI);</span><br><span class="line">    dLon = (dLon * 180.0) / (a / sqrtMagic * cos(radLat) * M_PI);</span><br><span class="line">    *tarLat = dLat;</span><br><span class="line">    *tarLng = dLon;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// --- transform_earth_from_mars end ---</span><br><span class="line">// --- transform_mars_vs_bear_paw ---</span><br><span class="line">// 参考来源：http://blog.woodbunny.com/post-68.html</span><br><span class="line">const double x_pi = M_PI * 3000.0 / 180.0;</span><br><span class="line"></span><br><span class="line">void transform_mars_from_baidu(double gg_lat, double gg_lon, double *bd_lat, double *bd_lon)</span><br><span class="line">&#123;</span><br><span class="line">    double x = gg_lon, y = gg_lat;</span><br><span class="line">    double z = sqrt(x * x + y * y) + 0.00002 * sin(y * x_pi);</span><br><span class="line">    double theta = atan2(y, x) + 0.000003 * cos(x * x_pi);</span><br><span class="line">    *bd_lon = z * cos(theta) + 0.0065;</span><br><span class="line">    *bd_lat = z * sin(theta) + 0.006;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void transform_baidu_from_mars(double bd_lat, double bd_lon, double *gg_lat, double *gg_lon)</span><br><span class="line">&#123;</span><br><span class="line">    double x = bd_lon - 0.0065, y = bd_lat - 0.006;</span><br><span class="line">    double z = sqrt(x * x + y * y) - 0.00002 * sin(y * x_pi);</span><br><span class="line">    double theta = atan2(y, x) - 0.000003 * cos(x * x_pi);</span><br><span class="line">    *gg_lon = z * cos(theta);</span><br><span class="line">    *gg_lat = z * sin(theta);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Tips:无论导入的是百度SDK还是高德SDK，他们内部都封装了将目标经纬度转换为高德坐标系或百度坐标系(文档上的接口可能被弃用没有及时更新，是不是很坑爹)，但是没有将高德或百度坐标转换为别的坐标系下的坐标的接口。</li>
+<li>设置URL Scheme：<a href="http://blog.csdn.net/wm9028/article/details/49995329" target="_blank" rel="noopener">http://blog.csdn.net/wm9028/article/details/49995329</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="next" title="iOS开发：排序算法在OC中的实现">
+                <i class="fa fa-chevron-left"></i> iOS开发：排序算法在OC中的实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/" data-title="iOS开发：采用URI方式跳转到各类地图进行导航" data-url="http://github.com/misakatao/2018/10/23/iOS开发：采用URI方式跳转到各类地图进行导航/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ShengtaoLiu</p>
+              <p class="site-description motion-element" itemprop="description">Write the Code, Change the World.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/misakatao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:misakatao@yahoo.co.jp.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/misaka_tao" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/misakatao" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/98a0127b88fa" target="_blank" title="Jianshu">
+                      
+                        <i class="fa fa-fw fa-jianshu"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、百度地图"><span class="nav-number">1.</span> <span class="nav-text">一、百度地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、高德地图"><span class="nav-number">2.</span> <span class="nav-text">二、高德地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、苹果地图"><span class="nav-number">3.</span> <span class="nav-text">三、苹果地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、谷歌地图"><span class="nav-number">4.</span> <span class="nav-text">四、谷歌地图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、腾讯地图"><span class="nav-number">5.</span> <span class="nav-text">五、腾讯地图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCJ-02坐标转换成BD-09坐标-和逆转换"><span class="nav-number">5.1.</span> <span class="nav-text">GCJ-02坐标转换成BD-09坐标 和逆转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#地图坐标系转换"><span class="nav-number">6.</span> <span class="nav-text">地图坐标系转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengtaoLiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"droidlover"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
