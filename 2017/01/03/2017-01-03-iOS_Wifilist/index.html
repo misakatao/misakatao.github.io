@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -79,16 +79,24 @@
 
 
 
-<meta name="description" content="Write the Code, Change the World.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Misakatao">
-<meta property="og:url" content="http://github.com/misakatao/index.html">
+<meta name="description" content="对于大家来说，Wifi 应该是一个很熟悉的词了，我们每天都可能在使用 Wifi 热点。Wifi 除了能给我们提供热点之外同时还有定位的作用， 现在移动设备的对用户的隐私保护是越来越严格了，就如定位功能，必须要经过设备用户的授权才能使用 Location 给这台设备定位。这些严格的隐私政策对用户起到到保护作用，但对开发人员却是一种阻碍，在产品强需求的情况下用户是会授权的，如地图类应用，但是另外一">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wifi 定位原理及 iOS Wifi 列表获取">
+<meta property="og:url" content="http://github.com/misakatao/2017/01/03/2017-01-03-iOS_Wifilist/index.html">
 <meta property="og:site_name" content="Misakatao">
-<meta property="og:description" content="Write the Code, Change the World.">
+<meta property="og:description" content="对于大家来说，Wifi 应该是一个很熟悉的词了，我们每天都可能在使用 Wifi 热点。Wifi 除了能给我们提供热点之外同时还有定位的作用， 现在移动设备的对用户的隐私保护是越来越严格了，就如定位功能，必须要经过设备用户的授权才能使用 Location 给这台设备定位。这些严格的隐私政策对用户起到到保护作用，但对开发人员却是一种阻碍，在产品强需求的情况下用户是会授权的，如地图类应用，但是另外一">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://github.com/images/posts/Wifilist/PastedGraphic.png">
+<meta property="og:image" content="http://github.com/images/posts/Wifilist/infoplist.png">
+<meta property="og:image" content="http://github.com/images/posts/Wifilist/entitlement.png">
+<meta property="og:image" content="http://github.com/images/posts/Wifilist/WLAN.png">
+<meta property="og:image" content="http://github.com/images/posts/Wifilist/systemVersion.png">
+<meta property="og:updated_time" content="2018-10-23T03:04:15.366Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Misakatao">
-<meta name="twitter:description" content="Write the Code, Change the World.">
+<meta name="twitter:title" content="Wifi 定位原理及 iOS Wifi 列表获取">
+<meta name="twitter:description" content="对于大家来说，Wifi 应该是一个很熟悉的词了，我们每天都可能在使用 Wifi 热点。Wifi 除了能给我们提供热点之外同时还有定位的作用， 现在移动设备的对用户的隐私保护是越来越严格了，就如定位功能，必须要经过设备用户的授权才能使用 Location 给这台设备定位。这些严格的隐私政策对用户起到到保护作用，但对开发人员却是一种阻碍，在产品强需求的情况下用户是会授权的，如地图类应用，但是另外一">
+<meta name="twitter:image" content="http://github.com/images/posts/Wifilist/PastedGraphic.png">
 
 
 
@@ -118,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://github.com/misakatao/">
+  <link rel="canonical" href="http://github.com/misakatao/2017/01/03/2017-01-03-iOS_Wifilist/">
 
 
 
 
 
-  <title>Misakatao</title>
+  <title>Wifi 定位原理及 iOS Wifi 列表获取 | Misakatao</title>
   
 
 
@@ -143,8 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -257,293 +264,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/2018-10-23-排序算法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ShengtaoLiu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misakatao">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/23/2018-10-23-排序算法/" itemprop="url">iOS开发：排序算法在OC中的实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T13:43:39+08:00">
-                2018-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/objc/" itemprop="url" rel="index">
-                    <span itemprop="name">objc</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
-<li>选择排序</li>
-<li>冒泡排序</li>
-<li>插入排序</li>
-<li>快速排序</li>
-<li>双路快速排序</li>
-<li>三路快速排序</li>
-<li>堆排序</li>
-<li>总结与收获</li>
-<li>参考与阅读</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/10/23/2018-10-23-排序算法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2017/09/05/jekyll_tutorials2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ShengtaoLiu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Misakatao">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/05/jekyll_tutorials2/" itemprop="url">Jekyll搭建个人博客(二)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-05T00:00:00+08:00">
-                2017-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>抱歉，太久没有更新博客了，很多网友问的问题也没能及时回答。具体原因就不说了，今后我会继续维护博客，有问题的朋友直接提问就行，我会尽快解答，希望大家多多支持。</p>
-<p>在此之前我有写过一篇<a href="http://baixin.io/2016/10/jekyll_tutorials1/" target="_blank" rel="noopener">如何使用我博客模板的文章</a> 请先看这篇基础集成，这篇文章主要讲的是如何使用和修改我的博客主题，文章内容含以下几点：</p>
-<ul>
-<li>修改博客基础信息</li>
-<li>发布文章</li>
-<li>修改博客样式</li>
-</ul>
-<p>博客模板根目录下的基本结构为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml </span><br><span class="line">├── _includes    </span><br><span class="line">├── _layouts</span><br><span class="line">├── _posts</span><br><span class="line">├── _site</span><br><span class="line">├── 404.html</span><br><span class="line">├── about.md</span><br><span class="line">├── archive.html</span><br><span class="line">├── CNAME</span><br><span class="line">├── css</span><br><span class="line">├── feed.xml</span><br><span class="line">├── Gemfile</span><br><span class="line">├── Gemfile.lock</span><br><span class="line">├── images</span><br><span class="line">├── index.html</span><br><span class="line">├── js</span><br><span class="line">├── Rakefile</span><br><span class="line">├── README.md</span><br><span class="line">└── tags.html</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -573,9 +296,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/03/2017-01-03-iOS_Wifilist/" itemprop="url">Wifi 定位原理及 iOS Wifi 列表获取</a></h1>
+          <h1 class="post-title" itemprop="name headline">Wifi 定位原理及 iOS Wifi 列表获取</h1>
         
 
         <div class="post-meta">
@@ -625,9 +346,7 @@
       
 
       
-        
-          
-            <p>　　对于大家来说，Wifi 应该是一个很熟悉的词了，我们每天都可能在使用 Wifi 热点。Wifi 除了能给我们提供热点之外同时还有定位的作用， 现在移动设备的对用户的隐私保护是越来越严格了，就如定位功能，必须要经过设备用户的授权才能使用 Location 给这台设备定位。这些严格的隐私政策对用户起到到保护作用，但对开发人员却是一种阻碍，在产品强需求的情况下用户是会授权的，如地图类应用，但是另外一些没有对定位强需求的产品，用户可能就不会给你授权了，这是我们可以考虑下 Wifi 定位了。</p>
+        <p>　　对于大家来说，Wifi 应该是一个很熟悉的词了，我们每天都可能在使用 Wifi 热点。Wifi 除了能给我们提供热点之外同时还有定位的作用， 现在移动设备的对用户的隐私保护是越来越严格了，就如定位功能，必须要经过设备用户的授权才能使用 Location 给这台设备定位。这些严格的隐私政策对用户起到到保护作用，但对开发人员却是一种阻碍，在产品强需求的情况下用户是会授权的，如地图类应用，但是另外一些没有对定位强需求的产品，用户可能就不会给你授权了，这是我们可以考虑下 Wifi 定位了。</p>
 <h3 id="Wifi-定位原理"><a href="#Wifi-定位原理" class="headerlink" title="Wifi 定位原理"></a>Wifi 定位原理</h3><p>　　当我们使用手机扫面 Wifi 的时候，其实就可以定位到这台手机的位置信息了。每个 Wifi 路由开启后，都会不停的往四周发射信号，我们把 Wifi 路由想象成太阳以某种频度不停的往周围发射电磁波，电磁波会因距离的削弱，同时也会因为物体阻挡而削弱。例子就是我们在离 Wifi 路由器同样远的位置，有些地方信号强度高有些地方信号强度低。路由同时也叫 Wifi 热点（或者 Wifi AP：Access Point）。每一个 Wifi 路由器都会有一个 BSSID，很多人都管这个 BSSID 叫 MAC 地址（其实 BSSID 并不是 MAC 地址），BSSID 设定了一般就不会在变也不会重复，也就意味着是全球唯一的，这是路由制造的规则，既然有规则那么就会有不遵守规则的人，文章结尾会介绍不遵守规则的人是如何害人害己的。</p>
 <p>　　刚才提到的 BSSID，在 Wifi 路由器的发射中是可以检测到的，同时 Wifi 路由信号还伴随着，SSID(路由器的名称：如XX的Wifi)、signalStrength（手机接收到Wifi的信号强度）及其它信息。看到这里你应该知道如何使用Wifi定位的了，条件：唯一不变的BSSID 和 手机到路由器的信号强度。思路：Wifi 信号是有范围的，我们假设这个范围就是10米为半径的一个圆(实际情况根据Wifi路由厂商和路由器周围环境而定)，我们去采集一些Wifi热点回来，某家水果店的 Wifi、某家餐馆的 Wifi 等等，我们自己去采集的我们肯定知道他们的具体位置，及刚才提到的 Wifi 中的信息：BSSID、SSID、signalStrength，再把他们存入数据库，采集的人可以很多：专业采集人员、出租车司机、快递员等等，他们经常穿梭于大街小巷，其实我们每个人都是Wifi数据库的采集人员，我们的手机厂商每天都在默默的采集着我们的位置信息，iPhone手机系统设置里就可以看到你今天去哪了，你的Wifi连接过哪些设备也是知道的。时间越久Wifi数据库信息越丰富，最终会发现每个BSSID会对应多个SSID和signalStrength，因为SSID是可以修改的，signalStrength是由于在这个Wifi热点的周围不同位置采集的，所以信号强度也不同。采集的信号强度越多，给BSSID也就是这个Wifi热点的定位就越精准。</p>
 <p>　　现在如果我去一个陌生的地方，我打开手机扫描周围的 Wifi 刚好扫描到了一个或几个，我把这个 Wifi 信息（BSSID）传给服务器，服务器通过这个 BSSID 去数据库查找，就能直接匹配到对应的位置，返回给我。如果匹配不到则表示这里没人来采集过 Wifi 信息，或者是这个 Wifi 热点是最近布置的，采集人员还没来得及采集。服务器可以把这些未采集到的先分类后期统一规划。</p>
@@ -694,8 +413,6 @@
 <p>参考资源：<a href="http://stackoverflow.com/questions/31704292/nehotspothelper-networkextension-api-ios9-0" target="_blank" rel="noopener">NEHotspotHelper NetworkExtension API iOS9.0</a></p>
 <p><br><br>转载请注明：<a href="http://baixin" target="_blank" rel="noopener">潘柏信的博客</a> » <a href="http://baixin.io/2017/01/iOS_Wifilist/" target="_blank" rel="noopener">Wifi 定位原理及 iOS Wifi 列表获取</a>  </p>
 
-          
-        
       
     </div>
     
@@ -710,14 +427,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/05/jekyll_tutorials2/" rel="prev" title="Jekyll搭建个人博客(二)">
+                Jekyll搭建个人博客(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -727,10 +466,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -738,6 +478,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -758,8 +502,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -841,6 +594,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wifi-定位原理"><span class="nav-number">1.</span> <span class="nav-text">Wifi 定位原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS-申请获取-Wifi-列表权限"><span class="nav-number">2.</span> <span class="nav-text">iOS 申请获取 Wifi 列表权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、向-Apple-申请开发-Network-Extension-权限"><span class="nav-number">3.</span> <span class="nav-text">1、向 Apple 申请开发 Network Extension 权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、申请包含-Network-Extension-的描述文件"><span class="nav-number">4.</span> <span class="nav-text">2、申请包含 Network Extension 的描述文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、配置-Info-plist"><span class="nav-number">5.</span> <span class="nav-text">3、配置 Info.plist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、配置-entitlements"><span class="nav-number">6.</span> <span class="nav-text">4、配置 entitlements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、iOS-获取-Wifi-列表代码实现"><span class="nav-number">7.</span> <span class="nav-text">5、iOS 获取 Wifi 列表代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、获取Wifi列表回调"><span class="nav-number">8.</span> <span class="nav-text">6、获取Wifi列表回调</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">9.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">10.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -981,6 +750,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
