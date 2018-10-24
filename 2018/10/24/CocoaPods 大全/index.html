@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-tao.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo-tao.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CocoaPods,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC]">
+<meta name="keywords" content="CocoaPods">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocoaPods 大全">
+<meta property="og:url" content="http://github.com/misakatao/2018/10/24/CocoaPods 大全/index.html">
+<meta property="og:site_name" content="MisakaTao">
+<meta property="og:description" content="[TOC]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-24T04:05:45.967Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CocoaPods 大全">
+<meta name="twitter:description" content="[TOC]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/misakatao/2018/10/24/CocoaPods 大全/">
+
+
+
+
+
+  <title>CocoaPods 大全 | MisakaTao</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MisakaTao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/24/CocoaPods 大全/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengtaoLiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MisakaTao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CocoaPods 大全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T10:24:07+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/24/CocoaPods 大全/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/24/CocoaPods 大全/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<a id="more"></a>
+<h3 id="一、CocoaPods-简介"><a href="#一、CocoaPods-简介" class="headerlink" title="一、CocoaPods 简介"></a>一、CocoaPods 简介</h3><p>CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。</p>
+<h3 id="二、CocoaPods-安装"><a href="#二、CocoaPods-安装" class="headerlink" title="二、CocoaPods 安装"></a>二、CocoaPods 安装</h3><p>下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行；</p>
+<p>因为 Mac 电脑自带 Ruby 环境，我们就只需打开终端开始动手。然而又因为默认情况下我们 MacOS 系统自带的 Ruby 环境版本比较低（大概是 2.0.0 或者其他较高版本），但是现在安装 CocoaPods 需要 2.2.2 版本及以上的，所以我们不管三七二十一先直接先升级 Ruby。</p>
+<h5 id="1、查看当前Ruby版本"><a href="#1、查看当前Ruby版本" class="headerlink" title="1、查看当前Ruby版本"></a>1、查看当前Ruby版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ruby -v</span><br></pre></td></tr></table></figure>
+<h5 id="2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）"><a href="#2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）" class="headerlink" title="2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）"></a>2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -L get.rvm.io | bash -s stable </span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> source ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<h5 id="3、查看rvm版本"><a href="#3、查看rvm版本" class="headerlink" title="3、查看rvm版本"></a>3、查看rvm版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rvm -v</span><br></pre></td></tr></table></figure>
+<p>显示如下(或者是其他版本)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm 1.29.3 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]</span><br></pre></td></tr></table></figure>
+<h5 id="4、列出ruby可安装的版本信息"><a href="#4、列出ruby可安装的版本信息" class="headerlink" title="4、列出ruby可安装的版本信息"></a>4、列出ruby可安装的版本信息</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rvm list known</span><br></pre></td></tr></table></figure>
+<p>显示如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> MRI Rubies</span><br><span class="line">[ruby-]1.8.6[-p420]</span><br><span class="line">[ruby-]1.8.7[-head] # security released on head</span><br><span class="line">[ruby-]1.9.1[-p431]</span><br><span class="line">[ruby-]1.9.2[-p330]</span><br><span class="line">[ruby-]1.9.3[-p551]</span><br><span class="line">[ruby-]2.0.0[-p648]</span><br><span class="line">[ruby-]2.1[.10]</span><br><span class="line">[ruby-]2.2[.10]</span><br><span class="line">[ruby-]2.3[.7]</span><br><span class="line">[ruby-]2.4[.4]</span><br><span class="line">[ruby-]2.5[.1]  // 重点在这里 重点在这里 重点在这里</span><br><span class="line">[ruby-]2.6[.0-preview2]   // 测试版</span><br><span class="line">ruby-head</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+<h5 id="5、安装一个ruby版本（这里我选择的是2-5-1版本，当然你也可以选择其他的）"><a href="#5、安装一个ruby版本（这里我选择的是2-5-1版本，当然你也可以选择其他的）" class="headerlink" title="5、安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）"></a>5、安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rvm install 2.5.1</span><br><span class="line"><span class="meta">#</span> 注意:安装过程中需要两次按下 Enter 键, 第二次按下后需要输入电脑访问密码(不可见, 只管输入就行);</span><br><span class="line"><span class="meta">#</span> 如果你电脑没有安装 Xcode 和 Command Line Tools for Xcode 以及 Homebrew 会自动下载安装, 建议提前安装这三者.</span><br></pre></td></tr></table></figure>
+<h5 id="6、设置为默认版本"><a href="#6、设置为默认版本" class="headerlink" title="6、设置为默认版本"></a>6、设置为默认版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rvm use 2.5.1 --default</span><br></pre></td></tr></table></figure>
+<h5 id="7、更换源"><a href="#7、更换源" class="headerlink" title="7、更换源"></a>7、更换源</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo gem update --system</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> gem sources --remove https://rubygems.org/</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> gem sources --add https://gems.ruby-china.org/</span><br></pre></td></tr></table></figure>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 更换流程：</span><br><span class="line">&gt; 1、删除原有的镜像源：$ gem sources --remove https://gems.ruby-china.org/</span><br><span class="line">&gt; 2、添加最新的镜像源：$ gem sources --add https://gems.ruby-china.com/</span><br><span class="line">&gt; 3、查看镜像源：$ gem sources -l</span><br><span class="line">&gt; 确保只有 https://gems.ruby-china.com/</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看"><a href="#8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看" class="headerlink" title="8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看"></a>8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gem sources -l</span><br></pre></td></tr></table></figure>
+<p>如果是以下结果说明正确，如果有其他的请自行百度解决</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*** CURRENT SOURCES ***</span><br><span class="line"></span><br><span class="line">https://gems.ruby-china.com/</span><br></pre></td></tr></table></figure>
+<h5 id="9、这时候才正式开始安装CocoaPods"><a href="#9、这时候才正式开始安装CocoaPods" class="headerlink" title="9、这时候才正式开始安装CocoaPods"></a>9、这时候才正式开始安装CocoaPods</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo gem install cocoapods # Mac OS X 10.11前 输入这一条</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo gem install -n /usr/local/bin cocoapods # Mac OS X 10.11后 输入这一条</span><br></pre></td></tr></table></figure>
+<p>使用如下命令查看 CocoaPods 版本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> gem list --local | grep cocoapods</span><br><span class="line">cocoapods (1.3.1)</span><br><span class="line">cocoapods-core (1.3.1)</span><br><span class="line">cocoapods-deintegrate (1.0.1)</span><br><span class="line">cocoapods-downloader (1.1.3)</span><br><span class="line">cocoapods-plugins (1.0.0)</span><br><span class="line">cocoapods-search (1.0.0)</span><br><span class="line">cocoapods-stats (1.0.0)</span><br><span class="line">cocoapods-trunk (1.3.0)</span><br><span class="line">cocoapods-try (1.1.0)</span><br></pre></td></tr></table></figure>
+<p>可以看到<code>cocoapods</code>版本为<code>1.3.1</code>，同时也可以看到其它部分版本。</p>
+<blockquote>
+<p>默认安装的CocoaPods为正式版，使用<code>gem install cocoapods --pre</code>命令安装测试版CocoaPods，使用<code>gem install cocoapods -v x.y.z</code> 命令安装指定版本CocoaPods。</p>
+</blockquote>
+<h5 id="10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）"><a href="#10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）" class="headerlink" title="10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）"></a>10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo xcode-select -switch /Applications/Xcode.app/Contents/Developer</span><br></pre></td></tr></table></figure>
+<h5 id="11、安装本地库"><a href="#11、安装本地库" class="headerlink" title="11、安装本地库"></a>11、安装本地库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod setup</span><br></pre></td></tr></table></figure>
+<h5 id="12、执行以上命令后"><a href="#12、执行以上命令后" class="headerlink" title="12、执行以上命令后"></a>12、执行以上命令后</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Setting up CocoaPods master repo</span><br><span class="line"><span class="meta">  $</span> /usr/bin/git clone https://github.com/CocoaPods/Specs.git master --progress</span><br><span class="line">  Cloning into 'master'...</span><br><span class="line">  remote: Counting objects: 1879515, done.        </span><br><span class="line">  remote: Compressing objects: 100% (321/321), done.        </span><br><span class="line">  Receiving objects:  21% (404525/1879515), 73.70 MiB | 22.00 KiB/</span><br></pre></td></tr></table></figure>
+<p>然后就是漫长的等待，当然，网络好的情况下会更快</p>
+<h6 id="以下一段忽略，直接看-第-13-步"><a href="#以下一段忽略，直接看-第-13-步" class="headerlink" title="以下一段忽略，直接看  第 13 步:"></a>以下一段忽略，直接看  第 13 步:</h6><p>要查看文件下载进度的可以另外打开一个终端窗口(快捷键:选中终端按下 Command+N 组合键)，输入以下两行命令回车执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd ~/.cocoapods</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> du -sh *</span><br></pre></td></tr></table></figure>
+<p>执行 <code>du -sh *</code> 之后会显示已下载的文件大小，可以多次执行来监看下载进度，如果之前还有文件大小，后来变成0了，可能是网络问题，下载已经中断了,需要结束命令并从新执行 <code>pod setup</code> </p>
+<h5 id="13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）"><a href="#13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）" class="headerlink" title="13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）"></a>13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod search AFNetworking</span><br></pre></td></tr></table></figure>
+<h3 id="三、创建-Pod-库"><a href="#三、创建-Pod-库" class="headerlink" title="三、创建  Pod 库"></a>三、创建  Pod 库</h3><h5 id="1、创建pod步骤如下："><a href="#1、创建pod步骤如下：" class="headerlink" title="1、创建pod步骤如下："></a>1、创建pod步骤如下：</h5><ol>
+<li>使用 <code>pod lib create NAME</code> 命令为pod创建目录结构和相关模版文件。</li>
+<li>更新 pod 的元数据(metadata)，如版本信息、source、license 等。</li>
+<li>添加代码。包括添加代码到 pod 和 example project。</li>
+<li>使 pod 公开可用。</li>
+</ol>
+<blockquote>
+<p><code>pod lib create NAME</code> 使用默认模版，如果想使用其他模版，可以添加 –template-url=URL 参数。</p>
+</blockquote>
+<p>输入上面命令后，终端会询问你以下问题：</p>
+<blockquote>
+<ol>
+<li><p>What platform do you want to use?? [ iOS / macOS ]，选择iOS，直接回车默认选择第一个。</p>
+</li>
+<li><p>What language do you want to use?? [ Swift / ObjC ]，选择Swift。CocoaPods会把你的库设置为framework。</p>
+</li>
+<li><p>Would you like to include a demo application with your library? [ Yes / No ]，选择Yes。如果你想要包含一个示例工程，或计划在app中测试你的库，这里需要选择Yes，以便模板文件为你的库创建Xcode工程。也就是如果你计划为pod添加截图，这里需要选择Yes。</p>
+</li>
+<li><p>Which testing frameworks will you use? [ Quick / None ]，选择Quick。提交库到CocoaPods前应当进行测试。CocoaPods推荐使用其附带的测试framework，而非Apple的XCTest。在Objective-C中，可以选择Specta/Expecta或Kiwi，其区别如下：</p>
+<ul>
+<li>Specta/Expecta：通过不同podspecs的模块化方法。</li>
+<li>Kiwi：是对Stubs/Mocks/Expections的一种一体化方法。</li>
+</ul>
+<p>CocoaPods已经在MyLib-Tests.pch文件中添加了所有必要的包含和设置，因此不必将它们包含在每个文件中。</p>
+</li>
+<li><p>Would you like to do view based testing? [ Yes / No ]，选择Yes。根据你建立的仓库，你可能会发现基于快照的测试是验证视图不同部分不同操作的最佳方法，这里建议使用<code>FBSnapShotTestCase</code>。如果你使用的是Specta/Expecta，那么其会包含一个pod来改进语法。</p>
+</li>
+<li><p>What is your class prefix? 如果你选择的语言是ObjC，其最后会要求提供类前缀。</p>
+</li>
+</ol>
+</blockquote>
+<p>在开始下一步工作前，先查看下 pod 目录结构：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd ~/Desktop</span><br><span class="line"><span class="meta">$</span> tree PodDemo -L 2</span><br><span class="line">PodDemo</span><br><span class="line">├── PodDemo</span><br><span class="line">│   ├── Assets		# 资源文件</span><br><span class="line">│   └── Classes		# 类文件</span><br><span class="line">├── PodDemo.podspec</span><br><span class="line">├── Example		# demo和测试包</span><br><span class="line">│   ├── PodDemo</span><br><span class="line">│   ├── PodDemo.xcodeproj</span><br><span class="line">│   ├── PodDemo.xcworkspace</span><br><span class="line">│   ├── Podfile		# demo app的依赖文件</span><br><span class="line">│   ├── Podfile.lock</span><br><span class="line">│   ├── Pods</span><br><span class="line">│   └── Tests</span><br><span class="line">├── LICENSE		# 开源协议，默认MIT License</span><br><span class="line">├── README.md		# markdown格式的README</span><br><span class="line">└── _Pods.xcodeproj -&gt; Example/Pods/Pods.xcodeproj	#为项目提供Carthage支持的符号链接(symlink)。</span><br><span class="line"></span><br><span class="line">10 directories, 5 files</span><br></pre></td></tr></table></figure>
+<p>使用<code>pod lib create NAME</code>命令创建pod时，会使用git进行版本管理。还会生成以下文件：</p>
+<blockquote>
+<ul>
+<li>.travis.yml ：持续集成服务Travis CI配置文件。</li>
+<li>BlinkLabel.podspec ：仓库的Podspec。Podspec或Spec用来描述pod库的版本信息，包括源代码网址，应当使用的文件，以及其他metadata。随着版本迭代，一个pod会有很多spec。你可以手动创建podspec，也可以使用<code>pod spec create NAME</code>命令创建，还可以使用<code>pod lib create NAME</code>命令一次创建整个目录结构。</li>
+</ul>
+</blockquote>
+<h5 id="2、验证本地-pod"><a href="#2、验证本地-pod" class="headerlink" title="2、验证本地 pod"></a>2、验证本地 pod</h5><p>在 Xcode 中打开 <code>PodDemo.podspec</code> 文件，可以看到 CocoaPods 已经使用模板填充了其内容。使用 <code>pod lib lint NAME</code> 命令可以验证 .podspec 文件是否符合规范。</p>
+<p>在命令行输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd ~/Desktop/PodDemo</span><br><span class="line"><span class="meta">$</span> pod lib lint PodDemo.podspec</span><br></pre></td></tr></table></figure>
+<p>运行以下命令，推送本地仓库到 GitHub：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> git add .</span><br><span class="line"><span class="meta">$</span> git commit -m "Initial Commit"</span><br><span class="line"><span class="meta">$</span> git remote add origin https://github.com/xxx/PodDemo</span><br><span class="line"><span class="meta">$</span> git push -u origin master:master</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果你对分布式版本控制系统git还不熟悉，可以查看<a href="https://github.com/pro648/tips/wiki/%E6%95%99%E4%BD%A0%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0Git">教你系统学习Git</a>一文。</p>
+</blockquote>
+<p>到目前为止，如果操作正确，其应当通过验证：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod lib lint PodDemo.podspec</span><br><span class="line"></span><br><span class="line"><span class="meta"> -&gt;</span> PodDemo (0.1.0)</span><br><span class="line"></span><br><span class="line">PodDemo passed validation.</span><br></pre></td></tr></table></figure>
+<h5 id="3、提交-Pod-到-Specs-仓库"><a href="#3、提交-Pod-到-Specs-仓库" class="headerlink" title="3、提交 Pod 到 Specs 仓库"></a>3、提交 Pod 到 Specs 仓库</h5><p>现在，你的本地计算机上运行了功能完备的 pod，你还可以将其提交到公开的 <a href="https://github.com/CocoaPods/Specs">Specs</a> 仓库，以便他人使用。</p>
+<p>Specs 是托管在 GitHub 上的公共仓库，其索引了所有公开 pod。你的源代码并不一定要托管在 GitHub。例如，将源代码托管在码云。</p>
+<p>提交 pod 到 Specs 仓库步骤如下：</p>
+<ul>
+<li><ol>
+<li>为最近一次提交添加标签。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> $ git tag -a 0.1.0 -m "version 0.1.0"</span><br><span class="line"><span class="meta">&gt;</span> $ git push origin 0.1.0</span><br><span class="line"><span class="meta">&gt;</span> Counting objects: 1, done.</span><br><span class="line"><span class="meta">&gt;</span> Writing objects: 100% (1/1), 161 bytes | 161.00 KiB/s, done.</span><br><span class="line"><span class="meta">&gt;</span> Total 1 (delta 0), reused 0 (delta 0)</span><br><span class="line"><span class="meta">&gt;</span> To https://github.com/pro648/BlinkLabel</span><br><span class="line"><span class="meta">&gt;</span>  * [new tag]         0.1.0 -&gt; 0.1.0</span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><ol start="2">
+<li>使用 <code>pod spec lint NAME</code> 命令验证源代码与 .podspec 文件配置是否正确。</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod spec lint PodDemo.podspec</span><br><span class="line"></span><br><span class="line"><span class="meta"> -&gt;</span> PodDemo (0.1.0)</span><br><span class="line"></span><br><span class="line">Analyzed 1 podspec.</span><br><span class="line"></span><br><span class="line">PodDemo.podspec passed validation.</span><br></pre></td></tr></table></figure>
+<p>进行以上操作前，要确保对 PodDemo 的本地更改已添加到 git，并推送到了远程仓库。</p>
+<blockquote>
+<p><code>pod lib lint NAME</code> 命令与 <code>pod spec lint NAME</code> 区别如下：</p>
+<ul>
+<li><code>pod lib lint NAME</code>：只在本地 lint 你的 pod，确保用于创建pod配置信息正确，但其不足以验证pod，只有 <code>pod spec lint NAME</code> 可以验证 pod。</li>
+<li><code>pod spec lint NAME</code>：会在本地和远程验证 pod。如代码托管在 GitHub，其会进行 lint。如果 <code>pod spec lint NAME</code> 没有返回错误，就可以推送 pod 到 CocoaPods。</li>
+</ul>
+</blockquote>
+<ul>
+<li>3.使用 <code>pod trunk push NAME</code> 命令提交 spec 到 Specs 仓库。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod trunk push PodDemo.podspec</span><br></pre></td></tr></table></figure>
+<p>如果这是你第一次提交 spec 到 Specs 仓库，其会出现以下提示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[!] You need to register a session first.</span><br></pre></td></tr></table></figure>
+<p>这时可以通过以下命令注册账号：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod trunk register YOU_EMAIL@example.com 'NAME' --description='macbook'</span><br></pre></td></tr></table></figure>
+<p>Trunk 会向你的邮箱发送邮件，你必须点击邮件中的链接进行验证。</p>
+<p>如果你在 .podspec 文件中添加了不应出现的内容，如密码、身份信息。可以使用 <code>pod trunk delete NAME VERSION</code> 删除指定版本pod，一般不应删除其他用户依赖的版本，删除后的版本将无法再次添加到 Specs。如果你只是学习如何添加 pod 到 CocoaPods，或确定没有用户使用你的 pod，可以使用 <code>pod trunk deprecate NAME</code> 命令将pod标记为不推荐使用，这样其他用户将无法搜索到你的 pod。更多相关内容，可以查看 CocoaPods 的 <a href="https://github.com/CocoaPods/Specs/pull/12199">Pull Request FAQ #12199</a>。</p>
+<h3 id="四、-使用私有pod"><a href="#四、-使用私有pod" class="headerlink" title="四、 使用私有pod"></a>四、 使用私有pod</h3><p>除了将 pod 推送到 Specs，还可以创建私有 pod，便于项目管理。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pod repo push YourSpecs PodDemo.podspec</span><br></pre></td></tr></table></figure>
+<p>使用私有 pod 时，其 Podfile 文件如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pod <span class="string">'PodDemo'</span>, <span class="symbol">:path</span> =&gt; <span class="string">'~/Desktop/PodDemo/'</span></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">pod <span class="string">'PodDemo'</span>, <span class="symbol">:podspec</span> =&gt; <span class="string">'https://github.com/xxx/PodDemo/PodDemo.podspec'</span></span><br></pre></td></tr></table></figure>
+<p>如果使用了多个私有pod，可以修改Podfile文件pod source如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用默认 source 时，可以不写 Specs source。如果指定了私有.podspec，则必须写明所有 source，否则，将查找不到其他开源pod。</span></span><br><span class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></span><br><span class="line">source <span class="string">'https://github.com/xxx/YourSpecs.git'</span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>创建 pod 供他人使用会非常有趣，也是回馈开源社区的好方法。这篇文章向你展示了哪些类型代码适合创建 pod，如何创建 pod，如何将 pod 添加到 Specs 以便其他用户可以使用。另外，你还可以查看 <a href="https://guides.cocoapods.org/making/quality-indexes.html" target="_blank" rel="noopener">Quality Indexes</a>，了解哪些因素会影响 pod 的质量指标。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://code.tutsplus.com/tutorials/creating-your-first-cocoapod--cms-24332" target="_blank" rel="noopener">Creating Your First CocoaPod</a></li>
+<li><a href="https://guides.cocoapods.org/making/making-a-cocoapod.html" target="_blank" rel="noopener">Making a CocoaPod</a></li>
+<li><a href="https://stackoverflow.com/questions/32304421/whats-the-difference-between-pod-spec-lint-and-pod-lib-lint" target="_blank" rel="noopener">What’s the difference between ‘pod spec lint’ and ‘pod lib lint’?</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/issues/7057">‘pod spec lint’ fails with Swift 4</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CocoaPods/" rel="tag"># CocoaPods</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/23/Vultr 搭建 SS/" rel="next" title="Vultr 搭建 SS">
+                <i class="fa fa-chevron-left"></i> Vultr 搭建 SS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/10/24/CocoaPods 大全/" data-title="CocoaPods 大全" data-url="http://github.com/misakatao/2018/10/24/CocoaPods 大全/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ShengtaoLiu</p>
+              <p class="site-description motion-element" itemprop="description">Write the Code, Change the World.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/misakatao" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:misakatao@yahoo.co.jp.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/misaka_tao" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://instagram.com/misakatao" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/98a0127b88fa" target="_blank" title="Jianshu">
+                      
+                        <i class="fa fa-fw fa-jianshu"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、CocoaPods-简介"><span class="nav-number">1.</span> <span class="nav-text">一、CocoaPods 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、CocoaPods-安装"><span class="nav-number">2.</span> <span class="nav-text">二、CocoaPods 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、查看当前Ruby版本"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、查看当前Ruby版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、查看rvm版本"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、查看rvm版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、列出ruby可安装的版本信息"><span class="nav-number">2.0.4.</span> <span class="nav-text">4、列出ruby可安装的版本信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、安装一个ruby版本（这里我选择的是2-5-1版本，当然你也可以选择其他的）"><span class="nav-number">2.0.5.</span> <span class="nav-text">5、安装一个ruby版本（这里我选择的是2.5.1版本，当然你也可以选择其他的）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、设置为默认版本"><span class="nav-number">2.0.6.</span> <span class="nav-text">6、设置为默认版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7、更换源"><span class="nav-number">2.0.7.</span> <span class="nav-text">7、更换源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看"><span class="nav-number">2.0.8.</span> <span class="nav-text">8、为了验证你的Ruby镜像是并且仅是ruby-china，执行以下命令查看</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9、这时候才正式开始安装CocoaPods"><span class="nav-number">2.0.9.</span> <span class="nav-text">9、这时候才正式开始安装CocoaPods</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）"><span class="nav-number">2.0.10.</span> <span class="nav-text">10、如果安装了多个Xcode使用下面的命令选择（一般需要选择最近的Xcode版本）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11、安装本地库"><span class="nav-number">2.0.11.</span> <span class="nav-text">11、安装本地库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12、执行以上命令后"><span class="nav-number">2.0.12.</span> <span class="nav-text">12、执行以上命令后</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#以下一段忽略，直接看-第-13-步"><span class="nav-number">2.0.12.1.</span> <span class="nav-text">以下一段忽略，直接看  第 13 步:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）"><span class="nav-number">2.0.13.</span> <span class="nav-text">13、下载安装完成之后可执行下列命令检查是否可用（第一次使用可能要等一会）</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#三、创建-Pod-库"><span class="nav-number">3.</span> <span class="nav-text">三、创建  Pod 库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、创建pod步骤如下："><span class="nav-number">3.0.1.</span> <span class="nav-text">1、创建pod步骤如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、验证本地-pod"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、验证本地 pod</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、提交-Pod-到-Specs-仓库"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、提交 Pod 到 Specs 仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、-使用私有pod"><span class="nav-number">4.</span> <span class="nav-text">四、 使用私有pod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengtaoLiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"droidlover"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
