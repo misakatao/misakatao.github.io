@@ -79,18 +79,22 @@
 
 
 
-<meta name="description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
+<meta name="description" content="搭建个人博客的方法搭建个人博客，一般有三种方法：   Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低；  静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案；  自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。">
 <meta name="keywords" content="Hexo,Github Pages">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo+Github Pages 搭建博客">
 <meta property="og:url" content="http://github.com/misakatao/2018/10/23/Hexo+Github Pages 搭建博客/index.html">
 <meta property="og:site_name" content="MisakaTao">
-<meta property="og:description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
+<meta property="og:description" content="搭建个人博客的方法搭建个人博客，一般有三种方法：   Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低；  静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案；  自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-23T06:56:10.134Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwlec4513zj31kw0vlth4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg">
+<meta property="og:updated_time" content="2018-10-26T02:16:20.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github Pages 搭建博客">
-<meta name="twitter:description" content="博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。 ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。">
+<meta name="twitter:description" content="搭建个人博客的方法搭建个人博客，一般有三种方法：   Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低；  静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案；  自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
 
 
 
@@ -362,44 +366,136 @@
       
 
       
-        <p>博客搭建好之后，貌似很久没有写文章了，现在就来分享一下我搭建博客的艰苦行程和一些莫名其妙的坑。</p>
-<p>ps:本博客是在MAC环境下进行搭建的，并且对github pages和一些shell脚本知识有所了解。</p>
+        <h4 id="搭建个人博客的方法"><a href="#搭建个人博客的方法" class="headerlink" title="搭建个人博客的方法"></a>搭建个人博客的方法</h4><p>搭建个人博客，一般有三种方法： </p>
+<ul>
+<li>Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低； </li>
+<li>静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案； </li>
+<li>自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。</li>
+</ul>
 <a id="more"></a>
-<p>警告警告：<br>由于xiaopingblog.cn这个域名没续费，已经被人整成视频网站了，请访问我的github原始地址。<a href="http://biggercoffee.github.io，如果之前有访问过&#39;xiaopingblog.cn&#39;这个域名，那么访问&#39;http://biggercoffee.github.io&#39;的时候会自动跳转到&#39;视频网站&#39;里，清理一下缓存即可。" target="_blank" rel="noopener">http://biggercoffee.github.io，如果之前有访问过&#39;xiaopingblog.cn&#39;这个域名，那么访问&#39;http://biggercoffee.github.io&#39;的时候会自动跳转到&#39;视频网站&#39;里，清理一下缓存即可。</a></p>
-<p>首先简单描述一下搭建的大体流程吧（其实挺简单的，只是体力活费时而已）：</p>
-<p>拥有一个github pages<br>在本地电脑里配置hexo的环境。（ hexo与github pages绑定，写博文修改博文等，生成静态博客并push to github。)<br>绑定自己的域名（也可以不用绑定，github pages有二级域名，只不过绑定了一个属于自己的域名更有逼格点儿。）<br>Github Pages （第一步）<br>Github Pages免费的静态站点，其特点：免费托管、自带主题、支持自制页面等。</p>
-<p>创建Github Pages比较简单，只要你有一个github账号在创建一个仓库就行了，但是这个仓库是有规则的，其格式必须为：yourusername.github.io。然后根据提示一直下一步即可，非常简单。<br>image<br>作为一个开发者，要是连一个github账号都没有，那你可以洗洗睡了。</p>
-<p>而仓库命名格式中的yourusername是你的github用户名。笔者的github用户名是biggercoffee。所以仓库命名格式则是biggercoffee.github.io</p>
-<p>由于笔者有biggercoffee.github.io这个仓库，所以我上述效果图提示已存在。纯属作为演示。</p>
-<p>Hexo （第二步）<br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>安装<br>Hexo的安装网上有很多教程，但很多都很蛋疼且过期技术，所以最好的还是参考Hexo官方的安装教程来一步一步走。在此笔者也不写详细教程了，因为可能不出2个月就坑了小伙伴们。中文版Hexo文档点此进行传送。。。</p>
-<p>本地环境说白了就是要有Git和Node.js环境即可。详情参见官网文档为准，也最好参考官网，避免入坑。</p>
-<p>建站<br>Hexo安装好了之后，就开始进行建站。打开终端cd到桌面并使用如下命令即可建好</p>
-<p>hexo init yourname<br>cd yourname<br>npm install</p>
-<p>其中yourname是你的文件夹名字可随意取（本文章假设yourname的文件夹名称是Hexo）。<br>建站好了之后需要了解更多的信息和其他步骤请参考官网的这篇文档。<a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/setup.html</a></p>
-<p>这里需要特别提一下，官方的文档里并没讲解如何配置与Github pages进行关联，在此特意说一下配置信息。进入到你的站点（使用hexo init yourname命令时，这里的yourname文件夹目录，刚假设yourname是Hexo，所以我们进入Hexo目录），然后以文本编辑器打开_config.yml文件，并滚动到最下面添加如下配置信息（注意最下边有deploy和type字段，覆盖这两个字段或者删除这两个字段然后复制下面的四个字段也行。）：</p>
-<p>deploy:<br>type: git<br>repo: <a href="https://github.com/biggercoffee/biggercoffee.github.io.git">https://github.com/biggercoffee/biggercoffee.github.io.git</a><br>branch: master</p>
-<p>把其中repo字段的值替换成你的github pages提交代码的git地址。</p>
-<p>别告诉我你不知道你的github pages的git提交地址。。。<br>好吧，我还是附上一张截图吧，进入到你的github刚创建好的那个github pages仓库就能看到了。</p>
-<p>image<br>好吧，到此你使用终端，然后进入到你的站点文件夹使用hexo s命令，如果成功会打印类似Hexo is running at <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a>. Press Ctrl+C to stop的一句话，再打开你的浏览器输入localhost:4000地址见证神奇的一刻吧。</p>
-<p>发布<br>当然这只是本地跑起来了，而你的github pages服务器上并没有，所以你就需要在你的站点里使用终端命令进行发布：</p>
-<p>hexo clean<br>hexo g<br>hexo d</p>
-<p>命令详解，第一条是清楚缓存，第二条命令是生成本地发布文件夹，第三条命令才是最后的发布到github pages上。更多的hexo命令操作请参考官方文档即可。不过一般用来用去无非就是创建页面、发布这么几条命令而已。Hexo官方命令参考文档</p>
-<p>其实学习一个新东西有事没事多去官方看文档，比在网上查资料要来的更靠谱的多。</p>
-<p>HEXO主题<br>如果你到了这里没有任何问题，那么恭喜你已经成功了，不过这才刚刚开始。<br>当你成功的看到自己博客搭建好的那一刻又是激动又是失望，激动的是博客总算折腾出来了，失望的是，为何如此的丑。。。说实话Hexo默认的主题自我感觉还过得去，如果你想换风格,Hexo的主题网上随便一搜也有很多。在此笔者使用的博客主题是Next（国人写的）。<a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>Next文档已经写得很详细了（上述链接里有文档地址），笔者在此也没啥要写的。只不过弱弱的吐槽一下，配置这东西需要注册的账号挺多的。。。但扩展性很强，需要什么功能自己去配置一下即可。</p>
-<p>域名绑定（第三步，可选）<br>笔者是在万网买的域名（<a href="http://xiaopingblog.cn/）。" target="_blank" rel="noopener">http://xiaopingblog.cn/）。</a> 域名买好之后提交实名认证等，这些操作就不在赘述。域名购买地址<a href="https://wanwang.aliyun.com/。" target="_blank" rel="noopener">https://wanwang.aliyun.com/。</a></p>
-<p>这里需要特别提一下的就是万网如何与github pages进行绑定，首先假设你有一个域名并且是可用状态。修改你域名的DNS地址为 f1g1ns1.dnspod.net和f1g1ns2.dnspod.net<br>image<br>然后在你的本地站点目录里的source目录下添加一个CNAME文件，不带后缀，效果如下<br>image<br>以文本编辑器打开CNAME，里面添加你的域名信息（不加http://） 如下图<br>image<br>填写完了之后再重新部署到github pages上（部署简写命令hexo d -g)</p>
-<p>下一步注册DNSpod，然后添加域名，添加记录即可。</p>
-<p>添加域名填写你的域名即可，老规矩不用添加http://，然后在点击你的域名点进去在添加记录即可（其中记录中CHAME的值是你的github pages的地址）。<br>image<br>那么现在把你本地的Hexo生成一下在提交到Github pages上吧（生成和提交简写命令hexo d -g），然后打开你的浏览器输入你购买的域名尝试吧。笔者的博客域名：<a href="http://xiaopingblog.cn/" target="_blank" rel="noopener">http://xiaopingblog.cn/</a> 大家尽情的去蹂躏吧。</p>
-<p>ps:万网DNS地址更换貌似需要一段时间才能生效，如果不能访问请晚点或者隔天再访问域名，如果还是不行可能就是出问题了。反正笔者当时运气好，修改了万网DNS之后即时生效。</p>
-<p>笔者分享<br>分享一些笔者用Hexo写文章的tips</p>
-<p>文章管理<br>一般笔者写文章、修改文章是在本地可视化写文章，然后在使用命令提交上去。笔者使用的是一个hexo可视化文章管理的插件（hey），地址：<a href="https://github.com/nihgwu/hexo-hey">https://github.com/nihgwu/hexo-hey</a> 。</p>
-<p>当然也有一个Hexo的admin插件，但是那个插件不支持图片拖拽进来，所以笔者推荐使用hey。安装和使用详情，参见笔者给出的github地址。</p>
-<p>shell脚本自动化（可忽略，只是一个想法）<br>开启Hexo的本地服务或者提交到github pages这些都是一些终端里的Hexo命令，所以笔者写了一些shell脚本，来简化这些操作。所以基本就是用hey可视化写文章，写好了之后，然后点击一键部署的shell脚本，然后就自动发布了（当然这也纯属鸡助，看个人。）。由于shell脚本比较简单，随意网上搜索资料一大堆。再加上笔者自己写的脚本代码也没上传，在此插入一个一键部署的shell脚本代码</p>
-<p>cd Desktop/Hexo<br>hexo clean<br>hexo g<br>hexo d<br>cd到自己的站点目录，然后直接使用hexo命令即可。shell脚本自动化操作就是封装了这些命令而已，在此也只是提供这么一个想法，既然我们都是coder，何不善用自己已有的知识尼。</p>
-<p>写到最后<br>github pages虽然免费，但毕竟是国外的服务器，国内访问可以稍微缓慢，如果是土豪，可去买一个支持Node.js的国内云空间即可。总之github pages + hexo搭建博客还是挺能折腾人的。但毕竟免费，而且身为技术人员不就是该具备折腾的精神吗？（博客地址点此）</p>
-<p>反馈问题<br>具反馈hexo d部署的时候出现了not found问题，如果遇上这问题先输入npm install hexo-deployer-git –save命令，然后在运行hexo d部署尝试。（在这里感谢@LeoLeoHan给出的解决方案）</p>
+<h4 id="Github-Page是什么"><a href="#Github-Page是什么" class="headerlink" title="Github Page是什么"></a>Github Page是什么</h4><p>Github 是全球最大的开源社区，Github Page 是面向用户、组织和项目开放的公共静态页面搭建托管服务，站点可以被免费托管在 Github 上。</p>
+<p>Hexo 是什么<br>你可以将你的静态页面直接放在 Github Page 上，也可以用 Hexo 或者 Jekyll 等博客框架自动生成站点。</p>
+<blockquote>
+<p>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<p>准备</p>
+<ol>
+<li>Github账号：官网：Github</li>
+<li>Git：Git下载安装程序</li>
+<li>Node.js：你可以通过Node.js下载安装程序，也可以用Git Bash安装</li>
+<li>Markdown编辑器：用于写文章，如果你还不知道Markdown，强烈建议你去了解下Markdown的语法</li>
+</ol>
+<h4 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h4><h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>打开Git Bash，输入以下命令安装Hexo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<h5 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h5><p>打开Git Bash，输入命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo init [folder]</span><br></pre></td></tr></table></figure>
+<p><em>[folder] 代表的是你的hexo文件夹名，如果不写，就默认在当前文件夹初始化。<br>然后进入你的hexo文件夹</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd [folder]</span><br><span class="line"><span class="meta">$</span> npm install</span><br></pre></td></tr></table></figure>
+<h5 id="生成静态文件"><a href="#生成静态文件" class="headerlink" title="生成静态文件"></a>生成静态文件</h5><p>需要执行 generate 命令生成静态文件，才能部署到服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo generate #可简写为 hexo g</span><br></pre></td></tr></table></figure>
+<h5 id="启动服务器"><a href="#启动服务器" class="headerlink" title="启动服务器"></a>启动服务器</h5><p>由于还没有配置Github，所以我们先部署到本地服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo server #可简写为 hexo s</span><br></pre></td></tr></table></figure>
+<p>默认情况下，访问网址为： <code>http://localhost:4000/</code><br>在某些情况下，你可能4000的端口被占用，可以选择重设端口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo -p 5000 server</span><br></pre></td></tr></table></figure>
+<p>这样的话地址就变成了<code>http://localhost:5000/</code><br>打开浏览器，输入地址你就可以看到你初始的博客啦。</p>
+<h5 id="上传hexo博客的静态文档到GitHub"><a href="#上传hexo博客的静态文档到GitHub" class="headerlink" title="上传hexo博客的静态文档到GitHub"></a>上传hexo博客的静态文档到GitHub</h5><p>查看hexo插件的版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo -V</span><br></pre></td></tr></table></figure>
+<p>大于 hexo 3.0 的上传到 github 的方法： </p>
+<p>安装部署到 github 插件依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install –save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<h4 id="Github-配置"><a href="#Github-配置" class="headerlink" title="Github 配置"></a>Github 配置</h4><p>接下来，我们来看看如何将 Hexo 部署到 Github Page 上</p>
+<h5 id="创建Github仓库"><a href="#创建Github仓库" class="headerlink" title="创建Github仓库"></a>创建Github仓库</h5><p>创建与你的Github用户名相对应的Github Page仓库，格式必须是username.github.io。 </p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg" alt=""></p>
+<h5 id="建立关联"><a href="#建立关联" class="headerlink" title="建立关联"></a>建立关联</h5><p>进入你刚创建的仓库，复制仓库的地址 </p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwlec4513zj31kw0vlth4.jpg" alt=""></p>
+<p>打开hexo文件夹下的_config.yml文件，拉倒最下面，修改deploy为以下代码，repository后面的是你的仓库地址</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:misakatao/misakatao.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，Github仓库有两种连接方式：<br>- HTTPS：每次上传到仓库都需要输入账号密码<br>- SSH：不用每次上传后输入账号密码，但需要配置SSH Key</p>
+<p>具体的配置方法这里就不再详述了，有兴趣的朋友请参考这条<a href="http://beiyuu.com/github-pages" target="_blank" rel="noopener">链接</a></p>
+<h5 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h5><p>输入以下命令部署到 Github Page</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo deploy #可简写为 hexo d</span><br></pre></td></tr></table></figure>
+<p>然后在浏览器输入<code>username.github.io</code>就可以看到你的博客啦。</p>
+<p>之后的部署就是三步</p>
+<blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span> $ hexo clean</span><br><span class="line"><span class="meta">&gt;</span> $ hexo g</span><br><span class="line"><span class="meta">&gt;</span> $ hexo d</span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h4><p>如果你不喜欢Github Page指定的子域名，你可以选择自己购买域名，然后绑定使用。</p>
+<h5 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h5><p>域名购买水还挺深的，国内的有阿里云（万网），但国内的域名需要备案，你懂的；国外的选择就多了，比较著名的有 GoDaddy，记得用优惠码就是了，就不详细介绍了。</p>
+<h5 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h5><p>用域名供应商提供的域名解析器或者<a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSpod</a>，添加以下记录：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg" alt=""></p>
+<p>其中两条记录A指向的ip地址是Github Page提供的ip，CNAME记录指定的是你在Github创建的仓库。</p>
+<p>等解析生效之后呢，<code>www.username.github.io</code>和<code>username.github.io</code>都会指向你购买的域名。</p>
+<h5 id="绑定域名-1"><a href="#绑定域名-1" class="headerlink" title="绑定域名"></a>绑定域名</h5><p>最后一步，你需要配置你的仓库，使得<code>username.github.io</code>能通过你的域名来访问。在 hexo 的 source 目录下，创建 CNAME 文件，没有后缀，打开文件后输入你的域名，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">misakatao.com</span><br></pre></td></tr></table></figure>
+<p>保存之后部署到服务器，配置就完成了。</p>
+<h4 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h4><h5 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h5><p>如果你不喜欢枯燥的text文本，又对 html 繁杂的标签无从入手，那么笔者推荐你使用 Markdown</p>
+<blockquote>
+<p><strong>Markdown</strong> 是一种轻量级标记语言。它允许人们使用”易读易写”的纯文本格式编写文档，然后转换成有效的HTML文档。</p>
+</blockquote>
+<p>简单来说，Markdown就是带格式的文本，Markdown的<a href="http://wowubuntu.com/markdown/#list" target="_blank" rel="noopener">语法</a>非常简单，”易读易写”，只要你接触过了，相信我，你会对其爱不释手，再也不想去写什么text文本和word文档了。<br>markdown编辑器，推荐<a href="https://typora.io/" target="_blank" rel="noopener">Typora</a>。</p>
+<h5 id="Hexo写作"><a href="#Hexo写作" class="headerlink" title="Hexo写作"></a>Hexo写作</h5><p>Hexo默认使用markdown语法来写作，你可以执行以下命令来创建一篇新文章：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo new [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<p>你可以在[layout]中指定文章的布局，默认是post，hexo默认有三种布局，每种布局的路径不同：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">布局</th>
+<th style="text-align:center">路径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">post</td>
+<td style="text-align:center">source/_posts</td>
+</tr>
+<tr>
+<td style="text-align:center">page</td>
+<td style="text-align:center">source</td>
+</tr>
+<tr>
+<td style="text-align:center">draft</td>
+<td style="text-align:center">source/_drafts</td>
+</tr>
+</tbody>
+</table>
+<p>其中 draft是指草稿，默认不会显示在页面上。</p>
+<p>在新建文件时，Hexo会根据scaffolds目录的模版文件来创建文件，所以你可以修改模版文件来达到更好的初始化效果，如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">categories:</span><br><span class="line"></span><br><span class="line">tags:</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p>上面文件最上方以 <code>---</code> 分隔的区域文本有点特殊，它并不是markdown代码，而是Hexo的Front-matter，用于指定个别文件的变量，如：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">title</td>
+<td style="text-align:center">标题</td>
+</tr>
+<tr>
+<td style="text-align:center">date</td>
+<td style="text-align:center">日期</td>
+</tr>
+<tr>
+<td style="text-align:center">categories</td>
+<td style="text-align:center">分类</td>
+</tr>
+<tr>
+<td style="text-align:center">tags</td>
+<td style="text-align:center">标签</td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是使用categories和tags前需要先生成相应的页面</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> hexo new page tags</span><br><span class="line"><span class="meta">$</span> hexo new page categories</span><br></pre></td></tr></table></figure>
+<p>如何只显示文章的一部分和阅读更多呢？在显示内容后加一个<code>&lt;!--more--&gt;</code>就可以了。</p>
+<h4 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h4><p>一个简单的博客至此就搭建完毕了，如果你想要更个性化的界面和功能的话，就要涉及到主题了，时间有限，这部分内容咱们下篇文章再聊，敬请关注。</p>
+<p>其实搭建一个博客是很简单的事情，坚持总结和写作才是最难的事，别像笔者一样半年才憋出一篇文章，哈哈。</p>
+<p>参考：<br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a></p>
+<p><a href="http://baixin.io/2015/08/HEXO%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">HEXO搭建个人博客</a></p>
+<p><a href="http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/" target="_blank" rel="noopener">如何搭建一个独立博客</a> </p>
 
       
     </div>
@@ -432,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/iOS开发：排序算法在OC中的实现/" rel="next" title="iOS开发：排序算法在OC中的实现">
-                <i class="fa fa-chevron-left"></i> iOS开发：排序算法在OC中的实现
+              <a href="/2018/10/23/UI 界面传值/" rel="next" title="UI 界面传值">
+                <i class="fa fa-chevron-left"></i> UI 界面传值
               </a>
             
           </div>
@@ -442,8 +538,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/10/23/UI 界面传值/" rel="prev" title="UI 界面传值">
-                UI 界面传值 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/23/UIView 动画事务/" rel="prev" title="UIView动画事务">
+                UIView动画事务 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -502,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -587,6 +692,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建个人博客的方法"><span class="nav-number">1.</span> <span class="nav-text">搭建个人博客的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-Page是什么"><span class="nav-number">2.</span> <span class="nav-text">Github Page是什么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hexo"><span class="nav-number">3.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#初始化"><span class="nav-number">3.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生成静态文件"><span class="nav-number">3.3.</span> <span class="nav-text">生成静态文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动服务器"><span class="nav-number">3.4.</span> <span class="nav-text">启动服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#上传hexo博客的静态文档到GitHub"><span class="nav-number">3.5.</span> <span class="nav-text">上传hexo博客的静态文档到GitHub</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github-配置"><span class="nav-number">4.</span> <span class="nav-text">Github 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建Github仓库"><span class="nav-number">4.1.</span> <span class="nav-text">创建Github仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#建立关联"><span class="nav-number">4.2.</span> <span class="nav-text">建立关联</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#部署"><span class="nav-number">4.3.</span> <span class="nav-text">部署</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#绑定域名"><span class="nav-number">5.</span> <span class="nav-text">绑定域名</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#购买域名"><span class="nav-number">5.1.</span> <span class="nav-text">购买域名</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#域名解析"><span class="nav-number">5.2.</span> <span class="nav-text">域名解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绑定域名-1"><span class="nav-number">5.3.</span> <span class="nav-text">绑定域名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写作"><span class="nav-number">6.</span> <span class="nav-text">写作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Markdown"><span class="nav-number">6.1.</span> <span class="nav-text">Markdown</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hexo写作"><span class="nav-number">6.2.</span> <span class="nav-text">Hexo写作</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写在最后"><span class="nav-number">7.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
