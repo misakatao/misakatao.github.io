@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Vultr,SS,">
+  <meta name="keywords" content="iOS,NSArray,">
 
 
 
@@ -79,21 +79,18 @@
 
 
 
-<meta name="description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
-<meta name="keywords" content="Vultr,SS">
+<meta name="description" content="获取数组里的“最大、最小、平均、求和”123456789NSArray *array = @[@&amp;quot;1&amp;quot;,@&amp;quot;3&amp;quot;,@2,@9.5,@&amp;quot;1.2&amp;quot;]; NSNumber *sum = [array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quot;]; NSNumber *avg = [array val">
+<meta name="keywords" content="iOS,NSArray">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vultr 搭建 SS">
-<meta property="og:url" content="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/index.html">
+<meta property="og:title" content="iOS 开发：NSArray 的特殊 KVC">
+<meta property="og:url" content="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/index.html">
 <meta property="og:site_name" content="MisakaTao">
-<meta property="og:description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
+<meta property="og:description" content="获取数组里的“最大、最小、平均、求和”123456789NSArray *array = @[@&amp;quot;1&amp;quot;,@&amp;quot;3&amp;quot;,@2,@9.5,@&amp;quot;1.2&amp;quot;]; NSNumber *sum = [array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quot;]; NSNumber *avg = [array val">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1350692-028db7b4056cd686.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-10-23T07:20:17.346Z">
+<meta property="og:updated_time" content="2018-11-05T03:04:06.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vultr 搭建 SS">
-<meta name="twitter:description" content="以下教程基于 vultr VPS，系统是 ubuntu14.04 一、搭建 SS要使用 SS 需要购买国外的 VPS，这里推荐 vultr 和 linode。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 ubuntu14.04。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS 开发：NSArray 的特殊 KVC">
+<meta name="twitter:description" content="获取数组里的“最大、最小、平均、求和”123456789NSArray *array = @[@&amp;quot;1&amp;quot;,@&amp;quot;3&amp;quot;,@2,@9.5,@&amp;quot;1.2&amp;quot;]; NSNumber *sum = [array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quot;]; NSNumber *avg = [array val">
 
 
 
@@ -123,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
+  <link rel="canonical" href="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
 
 
 
 
 
-  <title>Vultr 搭建 SS | MisakaTao</title>
+  <title>iOS 开发：NSArray 的特殊 KVC | MisakaTao</title>
   
 
 
@@ -266,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ShengtaoLiu">
@@ -283,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vultr 搭建 SS</h1>
+          <h1 class="post-title" itemprop="name headline">iOS 开发：NSArray 的特殊 KVC</h1>
         
 
         <div class="post-meta">
@@ -295,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-23T14:24:07+08:00">
-                2018-10-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-05T10:24:07+08:00">
+                2018-11-05
               </time>
             
 
@@ -318,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/VPN/" itemprop="url" rel="index">
-                    <span itemprop="name">VPN</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -336,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/23/Vultr 搭建 SS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/23/Vultr 搭建 SS/" itemprop="commentCount"></span>
+                <a href="/2018/11/05/iOS 开发：NSArray 的特殊 KVC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/iOS 开发：NSArray 的特殊 KVC/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,33 +362,11 @@
       
 
       
-        <p>以下教程基于 vultr VPS，系统是 ubuntu14.04</p>
-<h2 id="一、搭建-SS"><a href="#一、搭建-SS" class="headerlink" title="一、搭建 SS"></a>一、搭建 SS</h2><p>要使用 SS 需要购买国外的 VPS，这里推荐 <a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.vultr.com%2F" target="_blank" rel="noopener">vultr</a> 和 <a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.linode.com%2F" target="_blank" rel="noopener">linode</a>。因为锐速 serverspeeder 目前只支持 centos 和 ubuntu 的一些内核版本，所以这里建议系统选择 <strong>ubuntu14.04</strong>。购买完成后进入 Ubuntu 系统，一条一条地输入以下命令<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate  https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x shadowsocks.sh</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shadowsocks.sh 2&gt;&amp;1 | tee shadowsocks.log</span><br></pre></td></tr></table></figure>
-<p>安装过程中会要求你输入SS密码、端口号(默认8989)和选择加密算法，选择 <strong>aes-256-cfb</strong> (输入7)就可以了，如图，这样手机上也能使用SS。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1350692-58934c1e68293900.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>等待片刻会显示 SS 的一些信息(如图红色区域)，这些信息我们需要输入到 shadowsocks 中来连接 VPS，所以最好保存下来。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/1350692-028db7b4056cd686.JPG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>安装的SS在服务器根目录，卸载命令为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./shadowsocks.sh uninstall</span><br></pre></td></tr></table></figure>
-<h2 id="二、替换内核"><a href="#二、替换内核" class="headerlink" title="二、替换内核"></a>二、替换内核</h2><p>首先安装3.13.0-24-generic内核文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install linux-image-extra-3.13.0-24-generic</span><br></pre></td></tr></table></figure></p>
-<p>然后查看当前安装的内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l|grep linux-image</span><br></pre></td></tr></table></figure></p>
-<p>接着卸载上一步看到的其他内核<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get purge linux-image-3.13.0-xx-generic linux-image-extra-3.13.0-xx-generic</span><br></pre></td></tr></table></figure></p>
-<p>这里xx替换为上一步看到的其他内核。<br>接着更新grub系统引导文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure></p>
-<p>重启系统<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo reboot</span><br></pre></td></tr></table></figure></p>
-<p>重启后查看内核，显示3.13.0-24-generic就表示成功了！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -r</span><br></pre></td></tr></table></figure></p>
-<h2 id="三、安装锐速"><a href="#三、安装锐速" class="headerlink" title="三、安装锐速"></a>三、安装锐速</h2><p>由于目前锐速(serverspeeder)不再免费，这里使用91提供的破解版。它是<a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2F91yun%2Fserverspeeder" target="_blank" rel="noopener">开源的</a>，所以不用担心有任何其他的目的。<br>安装锐速</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/91yun/serverspeeder/master/serverspeeder-all.sh &amp;&amp; bash serverspeeder-all.sh</span><br></pre></td></tr></table></figure>
-<p>等待片刻就安装好了。<br>关于锐速的其他一些命令<br>卸载锐速</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chattr -i /serverspeeder/etc/apx* &amp;&amp; /serverspeeder/bin/serverSpeeder.sh uninstall -f</span><br></pre></td></tr></table></figure>
-<p>查看锐速的启动状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service serverSpeeder status</span><br></pre></td></tr></table></figure>
-<p>开启/暂停/重启锐速</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service serverSpeeder start | stop | restart</span><br></pre></td></tr></table></figure>
-<p>这里还有91提供的锐速破解版支持的<a href="https://link.jianshu.com?t=https%3A%2F%2Fwww.91yun.co%2Fserverspeeder91yun" target="_blank" rel="noopener">内核列表</a></p>
-<h2 id="四、配置-shadowsocks"><a href="#四、配置-shadowsocks" class="headerlink" title="四、配置 shadowsocks"></a>四、配置 shadowsocks</h2><p>下载 github 上的 <a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fshadowsocks%2Fshadowsocks-windows%2Freleases" target="_blank" rel="noopener">shadowsocks-windows</a>，打开后输入<strong>服务器地址、服务器端口和密码</strong>，加密算法选择 <strong>aes-256-cfb</strong>，确定后托盘纸飞机图标右键<strong>启用系统代理</strong>就可以翻墙啦！<br>安卓可以下载 <a href="https://link.jianshu.com?t=https%3A%2F%2Fgithub.com%2Fshadowsocks%2Fshadowsocks-android%2Freleases" target="_blank" rel="noopener">shadowsocks-android</a>，配置一下就可以了！<br>iOS 商店搜索 Wingy ，配置一下就可以了！</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>以上安装的是Python版的SS，默认创建的是单用户配置。若要创建多用户配置可参考 <a href="https://link.jianshu.com?t=https%3A%2F%2Fteddysun.com%2F392.html" target="_blank" rel="noopener">Shadowsocks-go一键安装脚本</a> 或者 <a href="https://link.jianshu.com?t=https%3A%2F%2Fteddysun.com%2F342.html" target="_blank" rel="noopener">Shadowsocks Python版一键安装脚本</a></p>
+        <h3 id="获取数组里的“最大、最小、平均、求和”"><a href="#获取数组里的“最大、最小、平均、求和”" class="headerlink" title="获取数组里的“最大、最小、平均、求和”"></a>获取数组里的“最大、最小、平均、求和”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;1&quot;,@&quot;3&quot;,@2,@9.5,@&quot;1.2&quot;]; </span><br><span class="line">NSNumber *sum = [array valueForKeyPath:@&quot;@sum.floatValue&quot;]; </span><br><span class="line">NSNumber *avg = [array valueForKeyPath:@&quot;@avg.floatValue&quot;]; </span><br><span class="line">NSNumber *max = [array valueForKeyPath:@&quot;@max.floatValue&quot;]; </span><br><span class="line">NSNumber *min = [array valueForKeyPath:@&quot;@min.floatValue&quot;];  </span><br><span class="line">NSLog(@&quot;sum:%@&quot;,sum); </span><br><span class="line">NSLog(@&quot;avg:%@&quot;,avg);</span><br><span class="line">NSLog(@&quot;max:%@&quot;,max); </span><br><span class="line">NSLog(@&quot;min:%@&quot;,min);</span><br></pre></td></tr></table></figure>
+<h3 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;zxp&quot;, @&quot;aa&quot;]; //返回的是一个新的数组</span><br><span class="line">NSArray *newArray = [array valueForKeyPath:@&quot;@distinctUnionOfObjects.self&quot;]; </span><br><span class="line">NSLog(@&quot;%@&quot;, newArray);</span><br></pre></td></tr></table></figure>
+<h3 id="同样可以嵌套使用，先剔除-name-对应值的重复数据再取值"><a href="#同样可以嵌套使用，先剔除-name-对应值的重复数据再取值" class="headerlink" title="同样可以嵌套使用，先剔除 name 对应值的重复数据再取值"></a>同样可以嵌套使用，先剔除 name 对应值的重复数据再取值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[ @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp2&quot;,@&quot;name&quot;:@&quot;zhangxiaoping2&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping3&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping&quot;&#125;];</span><br><span class="line">//根据name字段，来进行重复删除。</span><br><span class="line">NSArray *newArray = [array valueForKeyPath:@&quot;@distinctUnionOfObjects.name&quot;];</span><br><span class="line">//如果要根据title字段来删除重名的写法为`@distinctUnionOfObjects.title` </span><br><span class="line">NSLog(@&quot;%@&quot;, newArray);</span><br><span class="line">/* print:( zhangxiaoping3, zhangxiaoping2, zhangxiaoping)是一个字符串数组 */</span><br></pre></td></tr></table></figure>
+<h3 id="进行实例方法的调用"><a href="#进行实例方法的调用" class="headerlink" title="进行实例方法的调用"></a>进行实例方法的调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;ZXPing&quot;]; </span><br><span class="line">NSLog(@&quot;%@&quot;, [array valueForKeyPath:@&quot;uppercaseString&quot;]);</span><br></pre></td></tr></table></figure>
+<p>相当于数组中的每个成员执行了<code>uppercaseString</code>方法，然后把返回的对象组成一个新数组返回。既然可以用<code>uppercaseString</code>方法，那么NSString的其他方法也可以，比如<code>[array valueForKeyPath:@&quot;length&quot;]</code>。当然，其他对象的实例方法也可以以此类推来进行调用~！</p>
 
       
     </div>
@@ -409,9 +384,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vultr/" rel="tag"># Vultr</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/SS/" rel="tag"># SS</a>
+            <a href="/tags/NSArray/" rel="tag"># NSArray</a>
           
         </div>
       
@@ -424,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/23/Hexo+Github Pages 搭建博客/" rel="next" title="Hexo+Github Pages 搭建博客">
-                <i class="fa fa-chevron-left"></i> Hexo+Github Pages 搭建博客
+              <a href="/2018/10/24/CocoaPods 大全/" rel="next" title="CocoaPods 大全">
+                <i class="fa fa-chevron-left"></i> CocoaPods 大全
               </a>
             
           </div>
@@ -433,10 +408,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/24/CocoaPods 大全/" rel="prev" title="CocoaPods 大全">
-                CocoaPods 大全 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -467,7 +438,7 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2018/10/23/Vultr 搭建 SS/" data-title="Vultr 搭建 SS" data-url="http://github.com/misakatao/2018/10/23/Vultr 搭建 SS/">
+      <div class="ds-thread" data-thread-key="2018/11/05/iOS 开发：NSArray 的特殊 KVC/" data-title="iOS 开发：NSArray 的特殊 KVC" data-url="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
       </div>
     </div>
 
@@ -598,7 +569,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、搭建-SS"><span class="nav-number">1.</span> <span class="nav-text">一、搭建 SS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、替换内核"><span class="nav-number">2.</span> <span class="nav-text">二、替换内核</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、安装锐速"><span class="nav-number">3.</span> <span class="nav-text">三、安装锐速</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置-shadowsocks"><span class="nav-number">4.</span> <span class="nav-text">四、配置 shadowsocks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">5.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数组里的“最大、最小、平均、求和”"><span class="nav-number">1.</span> <span class="nav-text">获取数组里的“最大、最小、平均、求和”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除重复数据"><span class="nav-number">2.</span> <span class="nav-text">删除重复数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同样可以嵌套使用，先剔除-name-对应值的重复数据再取值"><span class="nav-number">3.</span> <span class="nav-text">同样可以嵌套使用，先剔除 name 对应值的重复数据再取值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进行实例方法的调用"><span class="nav-number">4.</span> <span class="nav-text">进行实例方法的调用</span></a></li></ol></div>
             
 
           </div>
