@@ -83,11 +83,11 @@
 <meta name="keywords" content="iOS,NSArray">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS 开发：NSArray 的特殊 KVC">
-<meta property="og:url" content="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/index.html">
+<meta property="og:url" content="http://github.com/misakatao/2018/11/05/iOS开发：NSArray 的特殊 KVC/index.html">
 <meta property="og:site_name" content="MisakaTao">
 <meta property="og:description" content="获取数组里的“最大、最小、平均、求和”123456789NSArray *array = @[@&amp;quot;1&amp;quot;,@&amp;quot;3&amp;quot;,@2,@9.5,@&amp;quot;1.2&amp;quot;]; NSNumber *sum = [array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quot;]; NSNumber *avg = [array val">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T03:04:06.810Z">
+<meta property="og:updated_time" content="2018-11-05T03:07:32.211Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 开发：NSArray 的特殊 KVC">
 <meta name="twitter:description" content="获取数组里的“最大、最小、平均、求和”123456789NSArray *array = @[@&amp;quot;1&amp;quot;,@&amp;quot;3&amp;quot;,@2,@9.5,@&amp;quot;1.2&amp;quot;]; NSNumber *sum = [array valueForKeyPath:@&amp;quot;@sum.floatValue&amp;quot;]; NSNumber *avg = [array val">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
+  <link rel="canonical" href="http://github.com/misakatao/2018/11/05/iOS开发：NSArray 的特殊 KVC/">
 
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/11/05/iOS开发：NSArray 的特殊 KVC/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ShengtaoLiu">
@@ -333,8 +333,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/05/iOS 开发：NSArray 的特殊 KVC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/iOS 开发：NSArray 的特殊 KVC/" itemprop="commentCount"></span>
+                <a href="/2018/11/05/iOS开发：NSArray 的特殊 KVC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/iOS开发：NSArray 的特殊 KVC/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,6 +363,7 @@
 
       
         <h3 id="获取数组里的“最大、最小、平均、求和”"><a href="#获取数组里的“最大、最小、平均、求和”" class="headerlink" title="获取数组里的“最大、最小、平均、求和”"></a>获取数组里的“最大、最小、平均、求和”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;1&quot;,@&quot;3&quot;,@2,@9.5,@&quot;1.2&quot;]; </span><br><span class="line">NSNumber *sum = [array valueForKeyPath:@&quot;@sum.floatValue&quot;]; </span><br><span class="line">NSNumber *avg = [array valueForKeyPath:@&quot;@avg.floatValue&quot;]; </span><br><span class="line">NSNumber *max = [array valueForKeyPath:@&quot;@max.floatValue&quot;]; </span><br><span class="line">NSNumber *min = [array valueForKeyPath:@&quot;@min.floatValue&quot;];  </span><br><span class="line">NSLog(@&quot;sum:%@&quot;,sum); </span><br><span class="line">NSLog(@&quot;avg:%@&quot;,avg);</span><br><span class="line">NSLog(@&quot;max:%@&quot;,max); </span><br><span class="line">NSLog(@&quot;min:%@&quot;,min);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h3 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;zxp&quot;, @&quot;aa&quot;]; //返回的是一个新的数组</span><br><span class="line">NSArray *newArray = [array valueForKeyPath:@&quot;@distinctUnionOfObjects.self&quot;]; </span><br><span class="line">NSLog(@&quot;%@&quot;, newArray);</span><br></pre></td></tr></table></figure>
 <h3 id="同样可以嵌套使用，先剔除-name-对应值的重复数据再取值"><a href="#同样可以嵌套使用，先剔除-name-对应值的重复数据再取值" class="headerlink" title="同样可以嵌套使用，先剔除 name 对应值的重复数据再取值"></a>同样可以嵌套使用，先剔除 name 对应值的重复数据再取值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[ @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp2&quot;,@&quot;name&quot;:@&quot;zhangxiaoping2&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping3&quot;&#125;, @&#123;@&quot;title&quot;:@&quot;zxp&quot;,@&quot;name&quot;:@&quot;zhangxiaoping&quot;&#125;];</span><br><span class="line">//根据name字段，来进行重复删除。</span><br><span class="line">NSArray *newArray = [array valueForKeyPath:@&quot;@distinctUnionOfObjects.name&quot;];</span><br><span class="line">//如果要根据title字段来删除重名的写法为`@distinctUnionOfObjects.title` </span><br><span class="line">NSLog(@&quot;%@&quot;, newArray);</span><br><span class="line">/* print:( zhangxiaoping3, zhangxiaoping2, zhangxiaoping)是一个字符串数组 */</span><br></pre></td></tr></table></figure>
 <h3 id="进行实例方法的调用"><a href="#进行实例方法的调用" class="headerlink" title="进行实例方法的调用"></a>进行实例方法的调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;name&quot;, @&quot;w&quot;, @&quot;aa&quot;, @&quot;ZXPing&quot;]; </span><br><span class="line">NSLog(@&quot;%@&quot;, [array valueForKeyPath:@&quot;uppercaseString&quot;]);</span><br></pre></td></tr></table></figure>
@@ -438,7 +439,7 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2018/11/05/iOS 开发：NSArray 的特殊 KVC/" data-title="iOS 开发：NSArray 的特殊 KVC" data-url="http://github.com/misakatao/2018/11/05/iOS 开发：NSArray 的特殊 KVC/">
+      <div class="ds-thread" data-thread-key="2018/11/05/iOS开发：NSArray 的特殊 KVC/" data-title="iOS 开发：NSArray 的特殊 KVC" data-url="http://github.com/misakatao/2018/11/05/iOS开发：NSArray 的特殊 KVC/">
       </div>
     </div>
 
