@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="MisakaTao">
 <meta property="og:description" content="搭建个人博客的方法搭建个人博客，一般有三种方法：   Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低；  静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案；  自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://github.com/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
-<meta property="og:image" content="http://github.com/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwlec4513zj31kw0vlth4.jpg">
-<meta property="og:image" content="http://github.com/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg">
-<meta property="og:updated_time" content="2018-11-07T12:18:59.572Z">
+<meta property="og:image" content="http://github.com/misakatao/2018/10/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
+<meta property="og:image" content="http://github.com/misakatao/2018/10/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwlec4513zj31kw0vlth4.jpg">
+<meta property="og:image" content="http://github.com/misakatao/2018/10/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg">
+<meta property="og:updated_time" content="2018-11-07T12:21:50.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo+Github Pages 搭建博客">
 <meta name="twitter:description" content="搭建个人博客的方法搭建个人博客，一般有三种方法：   Wordpress：70%的网站都采用这个方法，商业化成熟，简单门槛低；  静态网页+博客框架：代表是Github Page+Hexo，有一定的技术门槛，好处是不用VPS，本文会详细介绍此方案；  自己编写一个网站：前后端都自己实现，嗯，门槛高又费时间，不提了。">
-<meta name="twitter:image" content="http://github.com/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
+<meta name="twitter:image" content="http://github.com/misakatao/2018/10/images/Hexo+Github%20Pages%20搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg">
 
 
 
@@ -405,9 +405,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> npm install –save hexo-deployer-git</span><br></pre></td></tr></table></figure>
 <h4 id="Github-配置"><a href="#Github-配置" class="headerlink" title="Github 配置"></a>Github 配置</h4><p>接下来，我们来看看如何将 Hexo 部署到 Github Page 上</p>
 <h5 id="创建Github仓库"><a href="#创建Github仓库" class="headerlink" title="创建Github仓库"></a>创建Github仓库</h5><p>创建与你的Github用户名相对应的Github Page仓库，格式必须是username.github.io。 </p>
-<p><img src="/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github Pages 搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg" alt="006tNbRwly1fwledjj79zj31ja0yyn3t"></p>
+<p><img src="../../images/Hexo+Github Pages 搭建博客/006tNbRwly1fwledjj79zj31ja0yyn3t.jpg" alt=""></p>
 <h5 id="建立关联"><a href="#建立关联" class="headerlink" title="建立关联"></a>建立关联</h5><p>进入你刚创建的仓库，复制仓库的地址 </p>
-<p><img src="/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github Pages 搭建博客/006tNbRwly1fwlec4513zj31kw0vlth4.jpg" alt="006tNbRwly1fwlec4513zj31kw0vlth4"></p>
+<p><img src="../../images/Hexo+Github Pages 搭建博客/006tNbRwly1fwlec4513zj31kw0vlth4.jpg" alt=""></p>
 <p>打开hexo文件夹下的_config.yml文件，拉倒最下面，修改deploy为以下代码，repository后面的是你的仓库地址</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:misakatao/misakatao.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 <p>这里需要注意的是，Github仓库有两种连接方式：<br>- HTTPS：每次上传到仓库都需要输入账号密码<br>- SSH：不用每次上传后输入账号密码，但需要配置SSH Key</p>
@@ -422,7 +422,7 @@
 <h4 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h4><p>如果你不喜欢Github Page指定的子域名，你可以选择自己购买域名，然后绑定使用。</p>
 <h5 id="购买域名"><a href="#购买域名" class="headerlink" title="购买域名"></a>购买域名</h5><p>域名购买水还挺深的，国内的有阿里云（万网），但国内的域名需要备案，你懂的；国外的选择就多了，比较著名的有 GoDaddy，记得用优惠码就是了，就不详细介绍了。</p>
 <h5 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h5><p>用域名供应商提供的域名解析器或者<a href="https://www.dnspod.cn/" target="_blank" rel="noopener">DNSpod</a>，添加以下记录：</p>
-<p><img src="/Users/misaka/myworkspace/GitLab/GithubBlogSource/source/images/Hexo+Github Pages 搭建博客/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg" alt="006tNbRwly1fwle8w9jq0j30mv04kt8t"></p>
+<p><img src="../../images/Hexo+Github Pages 搭建博客/006tNbRwly1fwle8w9jq0j30mv04kt8t.jpg" alt=""></p>
 <p>其中两条记录A指向的ip地址是Github Page提供的ip，CNAME记录指定的是你在Github创建的仓库。</p>
 <p>等解析生效之后呢，<code>www.username.github.io</code>和<code>username.github.io</code>都会指向你购买的域名。</p>
 <h5 id="绑定域名-1"><a href="#绑定域名-1" class="headerlink" title="绑定域名"></a>绑定域名</h5><p>最后一步，你需要配置你的仓库，使得<code>username.github.io</code>能通过你的域名来访问。在 hexo 的 source 目录下，创建 CNAME 文件，没有后缀，打开文件后输入你的域名，如</p>
