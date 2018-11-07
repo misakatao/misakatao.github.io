@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[TOC]">
+<meta name="description" content="[TOC] 一、CocoaPods 简介CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。 二、CocoaPods 安装下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行； 因为 Mac 电脑自带 Ruby 环境，我们就只需打开">
 <meta name="keywords" content="CocoaPods">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaPods 大全">
 <meta property="og:url" content="http://github.com/misakatao/2018/10/24/CocoaPods 大全/index.html">
 <meta property="og:site_name" content="MisakaTao">
-<meta property="og:description" content="[TOC]">
+<meta property="og:description" content="[TOC] 一、CocoaPods 简介CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。 二、CocoaPods 安装下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行； 因为 Mac 电脑自带 Ruby 环境，我们就只需打开">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-24T04:05:45.967Z">
+<meta property="og:updated_time" content="2018-11-07T11:55:02.618Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods 大全">
-<meta name="twitter:description" content="[TOC]">
+<meta name="twitter:description" content="[TOC] 一、CocoaPods 简介CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。 二、CocoaPods 安装下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行； 因为 Mac 电脑自带 Ruby 环境，我们就只需打开">
 
 
 
@@ -363,10 +363,10 @@
 
       
         <p>[TOC]</p>
-<a id="more"></a>
 <h3 id="一、CocoaPods-简介"><a href="#一、CocoaPods-简介" class="headerlink" title="一、CocoaPods 简介"></a>一、CocoaPods 简介</h3><p>CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。</p>
 <h3 id="二、CocoaPods-安装"><a href="#二、CocoaPods-安装" class="headerlink" title="二、CocoaPods 安装"></a>二、CocoaPods 安装</h3><p>下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行；</p>
 <p>因为 Mac 电脑自带 Ruby 环境，我们就只需打开终端开始动手。然而又因为默认情况下我们 MacOS 系统自带的 Ruby 环境版本比较低（大概是 2.0.0 或者其他较高版本），但是现在安装 CocoaPods 需要 2.2.2 版本及以上的，所以我们不管三七二十一先直接先升级 Ruby。</p>
+<a id="more"></a>
 <h5 id="1、查看当前Ruby版本"><a href="#1、查看当前Ruby版本" class="headerlink" title="1、查看当前Ruby版本"></a>1、查看当前Ruby版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> ruby -v</span><br></pre></td></tr></table></figure>
 <h5 id="2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）"><a href="#2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）" class="headerlink" title="2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）"></a>2、升级Ruby环境，首先需要安装rvm（第一步要下载一些东西等两分钟左右）</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> curl -L get.rvm.io | bash -s stable </span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> source ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> source ~/.bash_profile</span><br></pre></td></tr></table></figure>
 <h5 id="3、查看rvm版本"><a href="#3、查看rvm版本" class="headerlink" title="3、查看rvm版本"></a>3、查看rvm版本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> rvm -v</span><br></pre></td></tr></table></figure>
@@ -541,8 +541,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/05/iOS开发：NSArray 的特殊 KVC/" rel="prev" title="iOS 开发：NSArray 的特殊 KVC">
-                iOS 开发：NSArray 的特殊 KVC <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/05/iOS开发：KVC 与 KVO/" rel="prev" title="iOS 开发：KVC 与 KVO">
+                iOS 开发：KVC 与 KVO <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -648,7 +648,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

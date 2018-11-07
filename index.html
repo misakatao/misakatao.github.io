@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/11/05/iOS开发：NSArray 的特殊 KVC/">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/11/05/iOS开发：KVC 与 KVO/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ShengtaoLiu">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/05/iOS开发：NSArray 的特殊 KVC/" itemprop="url">iOS 开发：NSArray 的特殊 KVC</a></h1>
+                <a class="post-title-link" href="/2018/11/05/iOS开发：KVC 与 KVO/" itemprop="url">iOS 开发：KVC 与 KVO</a></h1>
         
 
         <div class="post-meta">
@@ -334,8 +334,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/11/05/iOS开发：NSArray 的特殊 KVC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/iOS开发：NSArray 的特殊 KVC/" itemprop="commentCount"></span>
+                <a href="/2018/11/05/iOS开发：KVC 与 KVO/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/11/05/iOS开发：KVC 与 KVO/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -364,10 +364,13 @@
 
       
         
-          <h3 id="获取数组里的“最大、最小、平均、求和”"><a href="#获取数组里的“最大、最小、平均、求和”" class="headerlink" title="获取数组里的“最大、最小、平均、求和”"></a>获取数组里的“最大、最小、平均、求和”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">NSArray *array = @[@&quot;1&quot;,@&quot;3&quot;,@2,@9.5,@&quot;1.2&quot;]; </span><br><span class="line">NSNumber *sum = [array valueForKeyPath:@&quot;@sum.floatValue&quot;]; </span><br><span class="line">NSNumber *avg = [array valueForKeyPath:@&quot;@avg.floatValue&quot;]; </span><br><span class="line">NSNumber *max = [array valueForKeyPath:@&quot;@max.floatValue&quot;]; </span><br><span class="line">NSNumber *min = [array valueForKeyPath:@&quot;@min.floatValue&quot;];  </span><br><span class="line">NSLog(@&quot;sum:%@&quot;,sum); </span><br><span class="line">NSLog(@&quot;avg:%@&quot;,avg);</span><br><span class="line">NSLog(@&quot;max:%@&quot;,max); </span><br><span class="line">NSLog(@&quot;min:%@&quot;,min);</span><br></pre></td></tr></table></figure>
+          <p>[TOC]</p>
+<h2 id="KVC"><a href="#KVC" class="headerlink" title="KVC"></a>KVC</h2><h3 id="Key-Value-Coding-基本原则"><a href="#Key-Value-Coding-基本原则" class="headerlink" title="Key-Value Coding 基本原则"></a>Key-Value Coding 基本原则</h3><h4 id="访问对象属性"><a href="#访问对象属性" class="headerlink" title="访问对象属性"></a>访问对象属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@interface BankAccount: NSobject</span><br><span class="line"></span><br><span class="line">@property (nonatomic) NSNumber *currentBalance; // An attribute</span><br><span class="line">@property (nonatomic) Person *owner; // A to-one relation</span><br><span class="line">@property (nonatomic) NSArray &lt;Transaction *&gt;*transactions; // A to-many relation</span><br><span class="line"></span><br><span class="line">@end</span><br></pre></td></tr></table></figure>
+<p><code>currentBalance</code>/<code>owner</code>/<code>transactions</code> 都是 <code>BankAccount</code> 的属性。<code>owner</code> 属性是一个对象，和<code>BankAccount</code>构成一对一的关系，owner对象中的属性改变后并不会影响到owner本身。</p>
+<p>为了保持封装，对象通常为其接口上的属性提供访问器方法（accessor methods）。在使用访问器方法时必须在编译之前将属性名称写入代码中。访问器方法的名称成为使用它的代码的静态部分。例如： <code>[myAccount setCurrentBalance:@(100.0)];</code> 这样缺乏灵活性，KVC提供了使用字符串标识符访问对象属性的更通用的机制。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/05/iOS开发：NSArray 的特殊 KVC/#more" rel="contents">
+            <a class="btn" href="/2018/11/05/iOS开发：KVC 与 KVO/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -521,6 +524,9 @@
       
         
           <p>[TOC]</p>
+<h3 id="一、CocoaPods-简介"><a href="#一、CocoaPods-简介" class="headerlink" title="一、CocoaPods 简介"></a>一、CocoaPods 简介</h3><p>CocoaPods 是一个用 Ruby 写的、负责管理iOS项目中第三方开源库的工具，CocoaPods 能让我们集中的、统一管理第三方开源库，为我们节省设置和更新第三方开源库的时间。</p>
+<h3 id="二、CocoaPods-安装"><a href="#二、CocoaPods-安装" class="headerlink" title="二、CocoaPods 安装"></a>二、CocoaPods 安装</h3><p>下面就正式开始安装 CocoaPods，命令中间可能有空格看不出来，建议直接复制粘贴执行；</p>
+<p>因为 Mac 电脑自带 Ruby 环境，我们就只需打开终端开始动手。然而又因为默认情况下我们 MacOS 系统自带的 Ruby 环境版本比较低（大概是 2.0.0 或者其他较高版本），但是现在安装 CocoaPods 需要 2.2.2 版本及以上的，所以我们不管三七二十一先直接先升级 Ruby。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/10/24/CocoaPods 大全/#more" rel="contents">
@@ -1924,7 +1930,7 @@ alpha：设置视图的透明度
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
