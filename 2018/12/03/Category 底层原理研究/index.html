@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="MisakaTao">
 <meta property="og:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  中提到，_objc_init这个函数是runtime的初始化函数，于是可以从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);    └── void m">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-03T09:15:13.638Z">
+<meta property="og:updated_time" content="2018-12-03T09:41:20.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Category 底层原理研究">
 <meta name="twitter:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  中提到，_objc_init这个函数是runtime的初始化函数，于是可以从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);    └── void m">
@@ -437,7 +437,9 @@
 </blockquote>
 <h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><h4 id="load-源码分析"><a href="#load-源码分析" class="headerlink" title="load 源码分析"></a>load 源码分析</h4><p>通过 <a href="https://opensource.apple.com/tarballs/objc4/" target="_blank" rel="noopener">objc4</a> 中的源码进行分析， <code>load</code> 加载过程中的函数调用顺序如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void _objc_init(void);</span><br><span class="line">└── void load_images(...);</span><br><span class="line">    └── void call_load_methods(...);</span><br><span class="line">        └── void call_class_loads(...);</span><br></pre></td></tr></table></figure>
-<p>在 <code>static void call_class_loads(void)</code> 函数中循环调用所有类的 <code>+load</code> 方法。注意，这里是（调用分类的 <code>+load</code> 方法也是如此）直接使用函数内存地址的方式 <code>(*load_method)(cls, SEL_load);</code> 对 <code>+load</code> 方法进行调用的，而不是使用发送消息 <code>objc_msgSend</code> 的方式。</p>
+<p>在 <code>load_images</code> 函数中核心逻辑是调用 <code>prepare_load_methods</code> 与 <code>call_load_methods</code>。</p>
+<p><code>prepare_load_methods</code> 函数的作用就是提前准备好满足 <code>+load</code> 方法调用条件的类和分类，以供接下来的调用。 然后在这个类中调用了<code>schedule_class_load(Class cls)</code>方法，并且在入参时对父类递归的调用了，确保父类优先的顺序。</p>
+<p> <code>call_load_methods</code> 函数中循环调用所有类的 <code>+load</code> 方法。注意，这里是（调用分类的 <code>+load</code> 方法也是如此）直接使用函数内存地址的方式 <code>(*load_method)(cls, SEL_load);</code> 对 <code>+load</code> 方法进行调用的，而不是使用发送消息 <code>objc_msgSend</code> 的方式。</p>
 <ul>
 <li>分析 <code>call_load_methods</code> 源码</li>
 </ul>
