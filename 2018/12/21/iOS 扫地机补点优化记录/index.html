@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-tao.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-tao.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo-tao.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,CGContext,opencv,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景陀螺仪扫地机数据结构是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。 iOS 端之前绘制地图采用 CAShapeLayer + UIbezierPath 实现，CAShapeLayer 是一个通过矢量图形而不是 bitmap 来绘制的图层子类，采用这种方式有一下几个优点：   渲染快速，CAShapeLaye">
+<meta name="keywords" content="iOS,CGContext,opencv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扫地机补点优化采坑记录">
+<meta property="og:url" content="http://github.com/misakatao/2018/12/21/iOS 扫地机补点优化记录/index.html">
+<meta property="og:site_name" content="MisakaTao">
+<meta property="og:description" content="背景陀螺仪扫地机数据结构是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。 iOS 端之前绘制地图采用 CAShapeLayer + UIbezierPath 实现，CAShapeLayer 是一个通过矢量图形而不是 bitmap 来绘制的图层子类，采用这种方式有一下几个优点：   渲染快速，CAShapeLaye">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-21T14:48:39.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="扫地机补点优化采坑记录">
+<meta name="twitter:description" content="背景陀螺仪扫地机数据结构是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。 iOS 端之前绘制地图采用 CAShapeLayer + UIbezierPath 实现，CAShapeLayer 是一个通过矢量图形而不是 bitmap 来绘制的图层子类，采用这种方式有一下几个优点：   渲染快速，CAShapeLaye">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://github.com/misakatao/2018/12/21/iOS 扫地机补点优化记录/">
+
+
+
+
+
+  <title>扫地机补点优化采坑记录 | MisakaTao</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MisakaTao</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">爆裂吧现实，粉碎吧精神，放逐这个世界！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://github.com/misakatao/2018/12/21/iOS 扫地机补点优化记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ShengtaoLiu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MisakaTao">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">扫地机补点优化采坑记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-21T22:47:00+08:00">
+                2018-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/21/iOS 扫地机补点优化记录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/12/21/iOS 扫地机补点优化记录/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>陀螺仪扫地机数据结构是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。</p>
+<p>iOS 端之前绘制地图采用 CAShapeLayer + UIbezierPath 实现，CAShapeLayer 是一个通过矢量图形而不是 bitmap 来绘制的图层子类，采用这种方式有一下几个优点：</p>
+<blockquote>
+<ul>
+<li><p>渲染快速，CAShapeLayer 使用了硬件加速，绘制同一图形会比用 Core Graphics 快很多。</p>
+</li>
+<li><p>高效使用内存，一个 CAShapeLayer 不需要像普通 CALayer 一样创建一个寄宿图形，所以无论有多大，都不会占用太多的内存。</p>
+</li>
+<li><p>不会被图层边界剪裁掉，一个 CAShapeLayer 可以在边界之外绘制。绘制的图层路径不会像在使用 Core Graphics 的普通 CALayer 一样被剪裁掉。</p>
+</li>
+<li><p>不会出现像素化，给 CAShapeLayer 做 3D 变换时，它不会像一个有寄宿图的普通 CALayer 图层一样变得像素化。</p>
+</li>
+</ul>
+</blockquote>
+<p>但是在补点优化的需求中，要求通过一个位图的像素内存信息来查找图形中的轮廓，那么之前 CAShapeLayer 绘制的方式将不可用，需要转换为位图绘制方式。</p>
+<a id="more"></a>
+<h3 id="补点方案"><a href="#补点方案" class="headerlink" title="补点方案"></a>补点方案</h3><p>扫地机地图补点方案是通过绘制一张 bitmap，然后将 bitmap 的像素点内存信息通过 opencv 的轮廓查找方法找出当前已绘制地图的所有轮廓，最后根据轮廓点信息重新填充到原始图像中，达到补点效果。</p>
+<p>1、iOS 端使用位图绘制图像，从中获取像素点内存信息；</p>
+<p>2、绘制的图像为 ARGB 格式，需要转换为灰度图；</p>
+<p>3、对灰度图的内存信息二值化；</p>
+<p>4、通过二值化的结果进行轮廓提取；</p>
+<p>5、对提取出来的轮廓进行拣选；</p>
+<p>6、对拣选后的结果判断，并填充回原始图像中。</p>
+<h3 id="绘制位图的方法"><a href="#绘制位图的方法" class="headerlink" title="绘制位图的方法"></a>绘制位图的方法</h3><h4 id="位图绘制"><a href="#位图绘制" class="headerlink" title="位图绘制"></a>位图绘制</h4><p>位图的绘制是基于 Quartz 2D，Quartz 2D 的 API 是纯 C 语言的，它是一个二维绘图引擎，同时支持 iOS 和 Mac 系统。Quartz 2D 的 API 来自于 Core Graphics 框架，数据类型和函数基本都以 CG 作为前缀。在 UIKit 中有能做到这一点的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">UIBezierPath *path = [UIBezierPath bezierPath];</span><br><span class="line">[path moveToPoint:CGPointMake(0, 0)];</span><br><span class="line">[path addLineToPoint:CGPointMake(10, 0)];</span><br><span class="line">[path addLineToPoint:CGPointMake(10, 10)];</span><br><span class="line">[path addLineToPoint:CGPointMake(0, 10)];</span><br><span class="line">[path closePath];</span><br><span class="line">path.lineWidth = 1;</span><br><span class="line">[[UIColor redColor] setStroke];</span><br><span class="line">[path stroke];</span><br></pre></td></tr></table></figure>
+<p>对应到 Core Graphics 中的方式是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CGContextBeginPath(ctx);</span><br><span class="line">CGContextMoveToPoint(ctx, 0, 0);</span><br><span class="line">CGContextAddLineToPoint(ctx, 10, 0);</span><br><span class="line">CGContextAddLineToPoint(ctx, 10, 10);</span><br><span class="line">CGContextAddLineToPoint(ctx, 0, 10);</span><br><span class="line">CGContextClosePath(ctx);</span><br><span class="line">CGContextSetLineWidth(ctx, 1);</span><br><span class="line">CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);</span><br><span class="line">CGContextStrokePath(ctx);</span><br></pre></td></tr></table></figure>
+<p>这两种绘制的方式都是基于 Quartz 2D，那么有个问题，这些绘制的内容到哪去了？这里就又一个 CGContext 上下文的东西，这里定义了我们需要绘制的地方。开启一个上下文的方式有多种，这里介绍几种常用的。</p>
+<p>首先在 UIKit 中，实现这个 <code>- (void)drawRect:(CGRect)rect</code> 方法就可以直接使用上下文了，用 <code>UIGraphicsGetCurrentContext()</code> 获取当前上下文，通常我们都是继承一个 <code>UIView</code> 的子类，然后实现该函数，在当前上下文中绘制自定义图形。</p>
+<p>另外还可以使用 <code>UIGraphicsBeginImageContextWithOptions()</code> 和 <code>UIGraphicsEndImageContext()</code> 组合，创建一个位图上下文。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * 参数一: 指定将来创建出来的 bitmap 的大小</span><br><span class="line"> * 参数二: 设置透明 YES 代表透明，NO 代表不透明</span><br><span class="line"> * 参数三: 代表缩放, 0 代表使用系统自动缩放</span><br><span class="line"> */</span><br><span class="line">UIGraphicsBeginImageContextWithOptions(CGSizeMake(375, 375), NO, 0);</span><br><span class="line">CGContextRef ctx = UIGraphicsGetCurrentContext();</span><br><span class="line">...</span><br><span class="line">UIImage *image = UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">UIGraphicsEndImageContext();</span><br></pre></td></tr></table></figure>
+<p>在该上下文中进行一系列的绘制操作后，最后通过 <code>UIGraphicsGetImageFromCurrentImageContext()</code> 函数从当前上下文环境中得到一个 UIImage。</p>
+<h4 id="获取像素点内存信息"><a href="#获取像素点内存信息" class="headerlink" title="获取像素点内存信息"></a>获取像素点内存信息</h4><p>绘制完一张 位图之后，如果获取其中像素点的内存信息呢？这里首先需要明白像素的概念。</p>
+<p>屏幕上的像素是由红，绿，蓝三种颜色组件构成的。因此，位图数据有时也被叫做 RGB 数据。数据在内存中有很多种不同的方式展现 RGB 位图数据。</p>
+<p>这里先看一下 RGB 位图数据，我们可以从颜色组件: 红(R)，绿(G)，蓝(B)中得到一个值。而大多数情况下，我们有第四个组件:透明度(Alpha)。最终我们从每个像素中得到四个单独的值。</p>
+<p>其中最常见的格式就是 32 bits-per-pixel(bpp)， 8 bits-per-componet(bpc)，透明度会首先被乘以到像素值上(就像上文中提到的那个公式一样),在内存中，像下面这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  A   R   G   B   A   R   G   B   A   R   G   B  </span><br><span class="line">| pixel 0       | pixel 1       | pixel 2   </span><br><span class="line">  0   1   2   3   4   5   6   7   8   9   10  11 ...</span><br></pre></td></tr></table></figure>
+<p>这个格式经常被叫做 ARGB。每个像素占用 4 字节(32bpp)，每一个颜色组件是1字节(8bpc)。每个像素有一个 alpha 值，这个值总是最先得到的(在RGB值之前)，最终红、绿、蓝的值都会被预先乘以 alpha 的值，预乘的意思就是 alpha 值被烘烤到红、绿、蓝的组件中。</p>
+<p>另一个常见的格式也是 32 bpp，8 bpc，叫做 xRGB，跳过第一个 alpha 值，看起来像下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  x   R   G   B   x   R   G   B   x   R   G   B  </span><br><span class="line">| pixel 0       | pixel 1       | pixel 2   </span><br><span class="line">  0   1   2   3   4   5   6   7   8   9   10  11 ...</span><br></pre></td></tr></table></figure>
+<p>当处理 RGB 数据时，Core Graphics 也需要支持把alpha 值放到最后(另外还要支持跳过)。有时候也分别称为 RGBA 和 RGBx，假定是 8bpc，并且预乘了 alpha 值。</p>
+<p>简单了解了像素概念之后，接下来就是如何从一个 UIImage 对象来获取像素点的内存信息。这里我们可以通过 <code>CGBitmapContextCreate</code> 或者  <code>CGImageCreate</code> 来创建一个 bitmap 上下文环境，然后通过 <code>CGContextDrawImage</code> 将图像数据绘制到上下文中，在这个过程中，我们最开始会分配一块合适的内存空间，在图像绘制完成后，像素点的信息填充到之前分配的内存空间上。</p>
+<p>这里简单看下图像生成上下文的 <code>CGBitmapContextCreate</code> 函数的原型及参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*  @param data                 指向要渲染的绘制内存的地址。这个内存块的大小至少是（bytesPerRow*height）个字节</span><br><span class="line">*  @param width                bitmap的宽度,单位为像素</span><br><span class="line">*  @param height               bitmap的高度,单位为像素</span><br><span class="line">*  @param bitsPerComponent     内存中像素的每个组件的位数.例如，对于32位像素格式和RGB颜色空间，应该将这个值设为8.</span><br><span class="line">*  @param bytesPerRow          bitmap的每一行在内存所占的比特数</span><br><span class="line">*  @param space                bitmap上下文使用的颜色空间</span><br><span class="line">*  @param bitmapInfo           指定bitmap是否包含alpha通道，像素中alpha通道的相对位置，像素组件是整形还是浮点型等信息的字符串。</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">CGContextRef CGBitmapContextCreate(void *data, size_t width, size_t height, size_t bitsPerComponent, size_t bytesPerRow, CGColorSpaceRef colorspace, CGBitmapInfo bitmapInfo);</span><br></pre></td></tr></table></figure>
+<p>使用该函数可以将之前绘制的 UIImage 对象转换成 RGBA，这里传入的各个像素点格式的信息使用 32bpp，8bpc 的 ARGB 格式，这其中的参数都比较容易理解，除了最后一个 <code>bitmapInfo</code>。这里 <code>bitmapInfo</code> 选择的方式，需要对应之前绘制 UIImage 时所绘制的方式，在 <code>UIGraphicsBeginImageContextWithOptions</code> 的官方文档中有说明：</p>
+<p>如果 <code>opaque</code> 设为 <code>true</code> ，那么绘制的图像就是完全不透明的，即不包含 alpha 通道的，对应的</p>
+<p> <code>CGBitmapInfo bitmapInfo = (kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Host)</code>；</p>
+<p>相反，如果 <code>opaque</code> 设为 <code>false</code>，那么绘制的图像就是包含 alpha 通道的，对应的</p>
+<p>  <code>CGBitmapInfo bitmapInfo = (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host)</code>。</p>
+<p>对应的完整代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">- (unsigned char *)pixelARGBBytesFromImageRef:(CGImageRef)imageRef &#123;</span><br><span class="line">    </span><br><span class="line">    size_t width = CGImageGetWidth(imageRef);</span><br><span class="line">    size_t height = CGImageGetHeight(imageRef);</span><br><span class="line">    </span><br><span class="line">    size_t bitsPerPixel = 32;</span><br><span class="line">    size_t bitsPerComponent = 8;</span><br><span class="line">    size_t bytesPerPixel = bitsPerPixel / bitsPerComponent;</span><br><span class="line">    </span><br><span class="line">    size_t bytesPerRow = width * bytesPerPixel;</span><br><span class="line">    size_t bufferLength = bytesPerRow * height;</span><br><span class="line">    </span><br><span class="line">    unsigned char *imageBytes = (unsigned char *)malloc(bufferLength);</span><br><span class="line">    </span><br><span class="line">    CGBitmapInfo bitmapInfo = (kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host);</span><br><span class="line">    </span><br><span class="line">    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();</span><br><span class="line">    </span><br><span class="line">    CGContextRef context = CGBitmapContextCreate(imageBytes,</span><br><span class="line">                                                 width,</span><br><span class="line">                                                 height,</span><br><span class="line">                                                 bitsPerComponent,</span><br><span class="line">                                                 bytesPerRow,</span><br><span class="line">                                                 colorspace,</span><br><span class="line">                                                 bitmapInfo);</span><br><span class="line">    </span><br><span class="line">    CGRect rect = CGRectMake(0 , 0 , width , height);</span><br><span class="line">    CGContextDrawImage(context, rect, imageRef);</span><br><span class="line">    CGColorSpaceRelease(colorspace);</span><br><span class="line">    CGContextRelease(context);</span><br><span class="line">    CGImageRelease(imageRef);</span><br><span class="line">    </span><br><span class="line">    return imageBytes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="转灰度图"><a href="#转灰度图" class="headerlink" title="转灰度图"></a>转灰度图</h4><p>从上面的方法，最后可以获取一个 ARGB 格式的位图的像素点内存信息，接下来我们需要通过修改内存信息，来将 ARGB 转换为灰度图。这里图片灰度转换算法的实现有多种方式，最终采用的是 opencv 中的颜色空间转换方法来实现的。这里为了更方便使用，上一步获取像素点信息的实现方式也对应改为 UIImage -&gt; cv::Mat 矩阵：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// UIImage to cvMat</span><br><span class="line">+ (cv::Mat)cvMatFromUIImage:(UIImage *)image</span><br><span class="line">&#123;</span><br><span class="line">    CGImageRef imageRef = [image CGImage];</span><br><span class="line">    </span><br><span class="line">    CGFloat cols = image.size.width;</span><br><span class="line">    CGFloat rows = image.size.height;</span><br><span class="line">    </span><br><span class="line">    CGBitmapInfo bitmapInfo = kCGImageAlphaPremultipliedFirst | kCGBitmapByteOrder32Host;</span><br><span class="line">    </span><br><span class="line">    CGColorSpaceRef colorSpace = CGImageGetColorSpace(imageRef);</span><br><span class="line">    </span><br><span class="line">    cv::Mat cvMat(rows, cols, CV_8UC4); // 8 bits per component, 4 channels</span><br><span class="line">    </span><br><span class="line">    CGContextRef contextRef = CGBitmapContextCreate(cvMat.data,                 // Pointer to  data</span><br><span class="line">                                                    cols,                       // Width of bitmap</span><br><span class="line">                                                    rows,                       // Height of bitmap</span><br><span class="line">                                                    8,                          // Bits per component</span><br><span class="line">                                                    cvMat.step[0],              // Bytes per row</span><br><span class="line">                                                    colorSpace,                 // Colorspace</span><br><span class="line">                                                    bitmapInfo);                // Bitmap info flags</span><br><span class="line">    </span><br><span class="line">    CGContextDrawImage(contextRef, CGRectMake(0, 0, cols, rows), imageRef);</span><br><span class="line">    CGContextRelease(contextRef);</span><br><span class="line">    CGColorSpaceRelease(colorSpace);</span><br><span class="line">    </span><br><span class="line">    return cvMat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后将得到的矩阵数据进行灰度处理：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 得到矩阵</span></span><br><span class="line">cv::Mat matImage = cvMat;</span><br><span class="line">cv::Mat matGrey;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 将图像转化为灰度图</span></span><br><span class="line">cv::cvtColor(matImage, matGrey, cv::COLOR_BGRA2GRAY);</span><br></pre></td></tr></table></figure>
+<h4 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h4><p>二值化是图像分割的一种最简单方式，可以把灰度图像转换为二值图像，把大于某个<strong>临界灰度值</strong>的像素灰度设为灰度极大值，把小于这个值的像素灰度设为灰度极小值，从而实现二值化。根据阈值选取的不同，二值化的算法分为<strong>固定阈值</strong>和<strong>自适应阈值</strong>。 比较常用的二值化方法则有：<strong>双峰法</strong>、<strong>P参数法</strong>、<strong>迭代法</strong>和<strong>OTSU法</strong>等。</p>
+<p>这里直接使用<strong>固定阈值：127</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二值化</span></span><br><span class="line">cv::Mat matBinary;</span><br><span class="line">cv::threshold(matGrey, matBinary, <span class="number">127</span>, <span class="number">255</span>, cv::THRESH_BINARY);</span><br></pre></td></tr></table></figure>
+<h4 id="轮廓提取"><a href="#轮廓提取" class="headerlink" title="轮廓提取"></a>轮廓提取</h4><p>将上一步二值化后的结果，通过 <code>cv::findContours</code> 进行轮廓提取：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cv::<span class="function">Mat <span class="title">binary_image</span><span class="params">((<span class="keyword">int</span>)image.size.height, (<span class="keyword">int</span>)image.size.width, CV_8UC1, matBinary.data)</span></span>;</span><br><span class="line">    </span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Point&gt; &gt; contours;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;cv::Vec4i&gt; hierarchy;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 轮廓提取</span></span><br><span class="line">cv::findContours(binary_image, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);</span><br></pre></td></tr></table></figure>
+<h4 id="轮廓拣选"><a href="#轮廓拣选" class="headerlink" title="轮廓拣选"></a>轮廓拣选</h4><p>这一步是将提取的所有轮廓进行一次拣选，并生成三个 vector 容器存放拣选后的结果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;TYPoint&gt; &gt; out_contours;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; out_hierarchy;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">float</span>&gt; areas;</span><br><span class="line"></span><br><span class="line">out_contours.resize(contours.size());</span><br><span class="line">out_hierarchy.resize(hierarchy.size());</span><br><span class="line">areas.resize(contours.size());</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; contours.size(); ++i) &#123;</span><br><span class="line">    out_contours[i].resize(contours[i].size());</span><br><span class="line">    out_hierarchy[i].resize(<span class="number">4</span>);</span><br><span class="line"></span><br><span class="line">    areas[i] = cv::contourArea(contours[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; contours[i].size(); ++j) &#123;</span><br><span class="line">        TYPoint pt;</span><br><span class="line">        pt.x = contours[i][j].x;</span><br><span class="line">        pt.y = contours[i][j].y;</span><br><span class="line">        out_contours[i][j] = pt;</span><br><span class="line">    &#125;</span><br><span class="line">    out_hierarchy[i][<span class="number">0</span>] = hierarchy[i][<span class="number">0</span>];</span><br><span class="line">    out_hierarchy[i][<span class="number">1</span>] = hierarchy[i][<span class="number">1</span>];</span><br><span class="line">    out_hierarchy[i][<span class="number">2</span>] = hierarchy[i][<span class="number">2</span>];</span><br><span class="line">    out_hierarchy[i][<span class="number">3</span>] = hierarchy[i][<span class="number">3</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们可以将 <code>std::vector</code> 类型的容器转换为 OC 中的 NSArray。</p>
+<h4 id="补点填充"><a href="#补点填充" class="headerlink" title="补点填充"></a>补点填充</h4><p>上面一系列的操作均依赖 opencv2 框架，opencv2 原始框架很大，这里有 opencv2 进行一次精炼，只取需要的源码部分，然后将这一部分的 c++代码打包成静态库，最后集成到实际项目中使用，这里是直接使用 Xcode 来制作的静态库，比较简单。</p>
+<p>制作静态库的工程中会将上面一系列操作封装为一个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ (TYFindContourResult *)findContoursFromImage:(UIImage *)image;</span><br></pre></td></tr></table></figure>
+<p>通过这个方法，我们只需要传入一个在上下文环境中绘制好的 UIImage，就能得到该图像内包含的轮廓信息，最后将合适的轮廓信息，绘制到原始图像中，这里取得的轮廓信息依赖于 iOS 中的像素点对齐的问题，如果出现像素不对齐，那么渲染系统会进行一次<strong>插值</strong>处理，处理后的结果会导致轮廓图的提取失败。所以为了保证能正确得到绘制的位图的轮廓信息，必须保证绘图时<strong>像素对齐</strong>。</p>
+<h4 id="最后简单介绍下像素对齐"><a href="#最后简单介绍下像素对齐" class="headerlink" title="最后简单介绍下像素对齐"></a>最后简单介绍下像素对齐</h4><p>iOS 设备上，有逻辑像素（point）和 物理像素（pixel)之分，像素对齐指的是<strong>物理像素对齐</strong>，对齐就是像素点的值是整数，如某视图的宽高是100pixel * 100 pixel。point 和 pixel 的比例是通过 <code>[[UIScreen mainScreen] scale]</code> 来制定的。在没有视网膜屏之前，1point = 1pixel；但是 @2x 和 @3x 的视网膜屏出来之后，1point等于2pixel 或 3pixel。</p>
+<p>通常来说，<strong>逻辑像素（point）</strong>乘以2（2x的视网膜屏） 或3（3x的视网膜屏）得到整数值，或者说得到的浮点数且小数点后都是0的，这就<strong>像素对齐</strong>了，否则就是<strong>像素不对齐</strong>。出现像素不对齐的情况，会导致在 GPU 渲染时，对没对齐的边缘，需要进行插值计算，这个插值计算的过程会有<strong>性能损耗</strong>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/CGContext/" rel="tag"># CGContext</a>
+          
+            <a href="/tags/opencv/" rel="tag"># opencv</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/03/Category 底层原理研究/" rel="next" title="Category 底层原理研究">
+                <i class="fa fa-chevron-left"></i> Category 底层原理研究
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/12/21/iOS 扫地机补点优化记录/" data-title="扫地机补点优化采坑记录" data-url="http://github.com/misakatao/2018/12/21/iOS 扫地机补点优化记录/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ShengtaoLiu</p>
+              <p class="site-description motion-element" itemprop="description">Write the Code, Change the World.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/misakatao" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:misakatao@yahoo.co.jp.com" target="_blank" title="E-Mail">
+                      E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/98a0127b88fa" target="_blank" title="简书">
+                      简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/5a307bd5f265da4310485c1b" target="_blank" title="掘金">
+                      掘金</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补点方案"><span class="nav-number">2.</span> <span class="nav-text">补点方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绘制位图的方法"><span class="nav-number">3.</span> <span class="nav-text">绘制位图的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#位图绘制"><span class="nav-number">3.1.</span> <span class="nav-text">位图绘制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取像素点内存信息"><span class="nav-number">3.2.</span> <span class="nav-text">获取像素点内存信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转灰度图"><span class="nav-number">3.3.</span> <span class="nav-text">转灰度图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二值化"><span class="nav-number">3.4.</span> <span class="nav-text">二值化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮廓提取"><span class="nav-number">3.5.</span> <span class="nav-text">轮廓提取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#轮廓拣选"><span class="nav-number">3.6.</span> <span class="nav-text">轮廓拣选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补点填充"><span class="nav-number">3.7.</span> <span class="nav-text">补点填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后简单介绍下像素对齐"><span class="nav-number">3.8.</span> <span class="nav-text">最后简单介绍下像素对齐</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ShengtaoLiu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"droidlover"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
