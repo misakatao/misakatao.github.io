@@ -364,7 +364,7 @@
 
       
         
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>陀螺仪扫地机数据结构是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。</p>
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>首先介绍一下，陀螺仪扫地机面板中的地图绘制方式，APP 端接受到的数据是面板传过来一个数组，里面包含扫地机上报的所有点的坐标信息，APP 端对每一个坐标点绘制一个方块或者圆，最后填充成一个扫地机清扫面积。</p>
 <p>iOS 端之前绘制地图采用 CAShapeLayer + UIbezierPath 实现，CAShapeLayer 是一个通过矢量图形而不是 bitmap 来绘制的图层子类，采用这种方式有一下几个优点：</p>
 <blockquote>
 <ul>
@@ -378,7 +378,7 @@
 </li>
 </ul>
 </blockquote>
-<p>但是在补点优化的需求中，要求通过一个位图的像素内存信息来查找图形中的轮廓，那么之前 CAShapeLayer 绘制的方式将不可用，需要转换为位图绘制方式。</p>
+<p>在实现了基本的地图显示之后，前线反馈绘制的地图中间会有缺口，这是由于扫地机自身的原因，在数据上报过程中有遗漏的情况，这种时候需要人为地“补上”，APP 端需要做的事就是在绘制完地图后，从图像学的角度去弥补这些缺口。那么问题来了， iOS 端使用 CAShapeLayer 画出来的图没法做这件事，因其要求通过一个位图的像素内存信息来查找图形中的轮廓，所以 iOS 端就需要转换为位图绘制方式。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/21/iOS 扫地机补点优化记录/#more" rel="contents">
@@ -534,7 +534,7 @@
 
       
         
-          <h4 id="Category-的加载处理过程"><a href="#Category-的加载处理过程" class="headerlink" title="Category 的加载处理过程"></a>Category 的加载处理过程</h4><p>在这篇博客 <a href="https://blog.sunnyxx.com/2014/08/30/objc-pre-main/" target="_blank" rel="noopener">iOS 程序 main 函数之前发生了什么 </a> 中提到，<code>_objc_init</code>这个函数是runtime的初始化函数，于是可以从 <code>_objc_init</code> 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下：</p>
+          <h4 id="Category-的加载处理过程"><a href="#Category-的加载处理过程" class="headerlink" title="Category 的加载处理过程"></a>Category 的加载处理过程</h4><p>在这篇博客 <a href="https://blog.sunnyxx.com/2014/08/30/objc-pre-main/" target="_blank" rel="noopener">iOS 程序 main 函数之前发生了什么 </a> 有中提到，<code>_objc_init</code> 这个函数是 runtime 系统的初始化函数，于是我们可以直接从 <code>_objc_init</code> 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void _objc_init(void);</span><br><span class="line">└── void map_images(...);</span><br><span class="line">    └── void map_images_nolock(...);</span><br><span class="line">        └── void _read_images(...);</span><br><span class="line">            └── static void addUnattachedCategoryForClass(...);</span><br><span class="line">                └── static void remethodizeClass(Class cls);</span><br><span class="line">                    └── static void attachCategories(Class cls, category_list *cats, bool flush_caches);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">

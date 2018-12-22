@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  中提到，_objc_init这个函数是runtime的初始化函数，于是可以从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);    └── void m">
+<meta name="description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  有中提到，_objc_init 这个函数是 runtime 系统的初始化函数，于是我们可以直接从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);">
 <meta name="keywords" content="iOS,objc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Category 底层原理研究">
 <meta property="og:url" content="http://github.com/misakatao/2018/12/03/Category 底层原理研究/index.html">
 <meta property="og:site_name" content="MisakaTao">
-<meta property="og:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  中提到，_objc_init这个函数是runtime的初始化函数，于是可以从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);    └── void m">
+<meta property="og:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  有中提到，_objc_init 这个函数是 runtime 系统的初始化函数，于是我们可以直接从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-21T14:53:41.846Z">
+<meta property="og:updated_time" content="2018-12-22T09:53:08.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Category 底层原理研究">
-<meta name="twitter:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  中提到，_objc_init这个函数是runtime的初始化函数，于是可以从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);    └── void m">
+<meta name="twitter:description" content="Category 的加载处理过程在这篇博客 iOS 程序 main 函数之前发生了什么  有中提到，_objc_init 这个函数是 runtime 系统的初始化函数，于是我们可以直接从 _objc_init 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下： 1234567void _objc_init(void);└── void map_images(...);">
 
 
 
@@ -362,7 +362,7 @@
       
 
       
-        <h4 id="Category-的加载处理过程"><a href="#Category-的加载处理过程" class="headerlink" title="Category 的加载处理过程"></a>Category 的加载处理过程</h4><p>在这篇博客 <a href="https://blog.sunnyxx.com/2014/08/30/objc-pre-main/" target="_blank" rel="noopener">iOS 程序 main 函数之前发生了什么 </a> 中提到，<code>_objc_init</code>这个函数是runtime的初始化函数，于是可以从 <code>_objc_init</code> 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下：</p>
+        <h4 id="Category-的加载处理过程"><a href="#Category-的加载处理过程" class="headerlink" title="Category 的加载处理过程"></a>Category 的加载处理过程</h4><p>在这篇博客 <a href="https://blog.sunnyxx.com/2014/08/30/objc-pre-main/" target="_blank" rel="noopener">iOS 程序 main 函数之前发生了什么 </a> 有中提到，<code>_objc_init</code> 这个函数是 runtime 系统的初始化函数，于是我们可以直接从 <code>_objc_init</code> 这个函数开始进行分析， Category 加载过程中的函数调用顺序如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void _objc_init(void);</span><br><span class="line">└── void map_images(...);</span><br><span class="line">    └── void map_images_nolock(...);</span><br><span class="line">        └── void _read_images(...);</span><br><span class="line">            └── static void addUnattachedCategoryForClass(...);</span><br><span class="line">                └── static void remethodizeClass(Class cls);</span><br><span class="line">                    └── static void attachCategories(Class cls, category_list *cats, bool flush_caches);</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <table>
