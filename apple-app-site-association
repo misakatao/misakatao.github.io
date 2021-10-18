@@ -1,0 +1,19 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "5VNYFS5E7K.com.tao.misaka.app",
+                "paths": [
+                    "*",
+                    "/qq_conn/111110399632323/*"
+                ]
+            }
+        ]
+    },
+    "webcredentials": {
+        "apps": [
+            "94JFPTRDN5.com.tuya.smart"
+        ]
+    }
+}
